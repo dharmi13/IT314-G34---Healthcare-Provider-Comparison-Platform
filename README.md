@@ -3,6 +3,7 @@ Healthcare Provider Comparison Platform
 The Healthcare Provider Comparison Platform is designed to help patients efficiently compare and choose healthcare providers, manage appointments, and interact with various medical services. It offers a user-friendly interface and functionalities for patients, doctors, hospitals, and administrators. This platform streamlines processes such as appointment booking, specialist search, medicine orders, report generation, and payment processing.
 
 **Key Features:**
+
 Login & Registration: Patients can securely create accounts, log in, and manage their profiles.
 
 Search Specialists: Patients can search and filter doctors by specialty, location, and ratings.
