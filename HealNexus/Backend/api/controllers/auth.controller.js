@@ -2,7 +2,7 @@ import getErrorDetails from '../../Utilites/errorCodes.js';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import User from '../../data/models/user.model.js';
-import { userRole, userGender } from '../../Utilites/options.js';
+import { userRole } from '../../Utilites/options.js';
 import GenerateVerificationCode from '../../Utilites/generateVerificationCode.js';
 import GenerateJWTTokenAndCookie from '../../Utilites/generateJWTTokenAndCookie.js';
 import SendVerificationCode from '../../Nodemailer/sendVerificationCode.js';
@@ -12,7 +12,7 @@ import SendResetSuccessfulMail from '../../Nodemailer/sendResetSuccessfulMail.js
 
 const signup = async (req, res) => {
   try {
-    const { userName, email, password, confirmPassword, role, fullName, phone, address, age, gender, healthConditions } = req.body;
+    const { userName, email, password, confirmPassword, role } = req.body;
 
     const EmailalreadyExists = await User.findOne({email});
     if(EmailalreadyExists) {
@@ -26,12 +26,7 @@ const signup = async (req, res) => {
     }   
     
     if(!Object.values(userRole).includes(role)) {
-      const error = getErrorCode('BAD_REQUEST', 'Invalid User role!');
-      return res.status(error.code).json({ message: error.message });
-    }
-
-    if(!Object.values(userGender).includes(gender)) {
-      const error = getErrorDetails('BAD_REQUEST', 'Invalid User gender!');
+      const error = getErrorDetails('BAD_REQUEST', 'Invalid User role!');
       return res.status(error.code).json({ message: error.message });
     }
 
@@ -44,14 +39,6 @@ const signup = async (req, res) => {
       email,
       password: hashedPassword,
       role,
-      profile: {
-        fullName,
-        phone,
-        address,
-        age,
-        gender,
-        healthConditions
-      },
       verificationCode,
       verificationCodeExpiresAt: Date.now() +  15 * 60 * 1000
     });
@@ -63,12 +50,12 @@ const signup = async (req, res) => {
       username: newUser.userName,
       email: newUser.email,
       role: newUser.role,
-      profile: newUser.profile 
     });
     await SendVerificationCode(newUser.userName, newUser.email, verificationCode);
 
   } catch (error) {
     const error_response = getErrorDetails('INTERNAL_SERVER_ERROR', 'Error in Signup');
+    console.log(error)
     return res.status(error_response.code).json({message : error_response.message});
   }
 };

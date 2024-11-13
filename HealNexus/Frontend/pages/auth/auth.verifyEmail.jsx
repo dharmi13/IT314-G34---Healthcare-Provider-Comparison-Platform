@@ -1,9 +1,36 @@
-import React, { useState } from 'react';
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
-export function Verifymail() {
+const VerifyEmail = () => {
   const [otp, setOtp] = useState(new Array(6).fill(""));
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  // Function to handle OTP input change
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const ReceivedCode = otp.join("");
+
+    setLoading(true);  
+    try {
+        const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/verify-email`, { ReceivedCode }, {
+          withCredentials: true
+        });
+        if(response.status === 200) {
+          toast.success("Email verified successfully");
+          setTimeout(() => {navigate('/login')}, 1000);
+        }
+
+    } catch (error) {
+        console.error('Error logging in:', error.response?.data || error.message);
+        const errorMessage = error.response?.data?.error || "An error occurred. Please try again.";
+        toast.error(errorMessage);
+    } finally {
+      setLoading(false); 
+    }
+  };
+
   const handleChange = (element, index) => {
     if (isNaN(element.value)) return;
 
@@ -12,29 +39,25 @@ export function Verifymail() {
 
     setOtp(newOtp);
 
-    // Move to the next field if the current one is filled
     if (element.value && element.nextSibling) {
       element.nextSibling.focus();
     }
   };
 
-  // Function to handle backspace
   const handleBackspace = (element, index) => {
     if (element.value === "" && element.previousSibling) {
       element.previousSibling.focus();
     }
   };
 
-  // Function to handle paste
   const handlePaste = (e) => {
     e.preventDefault();
-    const pasteData = e.clipboardData.getData("text").slice(0, 6); // Get only first 6 characters
+    const pasteData = e.clipboardData.getData("text").slice(0, 6); 
 
     if (/^\d+$/.test(pasteData)) {
       const newOtp = pasteData.split("").concat(new Array(6 - pasteData.length).fill(""));
       setOtp(newOtp);
 
-      // Focus the next empty box after the last pasted digit
       const nextInputIndex = pasteData.length < 6 ? pasteData.length : 5;
       const nextInput = document.getElementById(`otp-${nextInputIndex}`);
       if (nextInput) nextInput.focus();
@@ -47,7 +70,7 @@ export function Verifymail() {
         <h1 className="text-3xl font-semibold text-purple-700 mb-4">Heal Nexus</h1>
         <h2 className="text-xl font-semibold text-gray-800 mb-2">Please check your email</h2>
         <p className="text-gray-600 mb-6">
-          We’ve sent a code to <strong>mail</strong>
+          We've sent a code to <strong>mail</strong>
         </p>
 
         <div className="flex justify-center space-x-2 mb-6">
@@ -71,14 +94,17 @@ export function Verifymail() {
         <button
           type="button"
           className="w-full bg-purple-600 text-white py-2 rounded-md font-medium hover:bg-purple-700 focus:outline-none"
+          onClick={handleSubmit}
         >
-          Verify
+          {loading ? "Verifying..." : "Verify"}
         </button>
 
         <p className="text-gray-600 mt-4">
-          Didn’t receive an email? <span className="text-purple-600 cursor-pointer hover:underline">Resend</span>
+          Didn't receive an email? <span className="text-purple-600 cursor-pointer hover:underline">Resend</span>
         </p>
       </div>
     </div>
   );
 }
+
+export default VerifyEmail;
