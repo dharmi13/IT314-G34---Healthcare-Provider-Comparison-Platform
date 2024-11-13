@@ -12,7 +12,7 @@ import SendResetSuccessfulMail from '../../Nodemailer/sendResetSuccessfulMail.js
 
 const signup = async (req, res) => {
   try {
-    const { userName, email, password, confirmPassword, role, fullName, phone, address, age, gender, healthConditions } = req.body;
+    const { userName, email, password, confirmPassword, role } = req.body;
 
     const EmailalreadyExists = await User.findOne({email});
     if(EmailalreadyExists) {
@@ -30,11 +30,6 @@ const signup = async (req, res) => {
       return res.status(error.code).json({ message: error.message });
     }
 
-    if(!Object.values(userGender).includes(gender)) {
-      const error = getErrorDetails('BAD_REQUEST', 'Invalid User gender!');
-      return res.status(error.code).json({ message: error.message });
-    }
-
     const salt = await bcrypt.genSalt(10);  
     const hashedPassword = await bcrypt.hash(password, salt);
     const verificationCode = GenerateVerificationCode();
@@ -44,14 +39,6 @@ const signup = async (req, res) => {
       email,
       password: hashedPassword,
       role,
-      profile: {
-        fullName,
-        phone,
-        address,
-        age,
-        gender,
-        healthConditions
-      },
       verificationCode,
       verificationCodeExpiresAt: Date.now() +  15 * 60 * 1000
     });
@@ -63,12 +50,12 @@ const signup = async (req, res) => {
       username: newUser.userName,
       email: newUser.email,
       role: newUser.role,
-      profile: newUser.profile 
     });
     await SendVerificationCode(newUser.userName, newUser.email, verificationCode);
 
   } catch (error) {
     const error_response = getErrorDetails('INTERNAL_SERVER_ERROR', 'Error in Signup');
+    console.log(error)
     return res.status(error_response.code).json({message : error_response.message});
   }
 };
