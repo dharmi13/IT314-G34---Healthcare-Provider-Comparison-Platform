@@ -2,7 +2,7 @@ import getErrorDetails from '../../Utilites/errorCodes.js';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import User from '../../data/models/user.model.js';
-import { userRole, userGender } from '../../Utilites/options.js';
+import { userRole } from '../../Utilites/options.js';
 import GenerateVerificationCode from '../../Utilites/generateVerificationCode.js';
 import GenerateJWTTokenAndCookie from '../../Utilites/generateJWTTokenAndCookie.js';
 import SendVerificationCode from '../../Nodemailer/sendVerificationCode.js';
@@ -26,7 +26,7 @@ const signup = async (req, res) => {
     }   
     
     if(!Object.values(userRole).includes(role)) {
-      const error = getErrorCode('BAD_REQUEST', 'Invalid User role!');
+      const error = getErrorDetails('BAD_REQUEST', 'Invalid User role!');
       return res.status(error.code).json({ message: error.message });
     }
 
