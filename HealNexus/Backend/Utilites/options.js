@@ -3,7 +3,7 @@ const userRole = {
   PATIENT: 'Patient',
   DOCTOR: 'Doctor',
   PHARMACIST: 'Pharmacist',
-  LAB_TECHNICIAN: 'Lab Technician',
+  LAB_TECHNICIAN: 'Lab-Technician',
 };
 
 const userGender = {

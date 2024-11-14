@@ -83,8 +83,7 @@ const verifyEmail = async (req, res) => {
     return res.status(error.code).send({
       sucesss: true,
       message: "Email Verified Successfully",
-      username: user.userName,
-      email: user.email
+      role: user.role,
     });
 
   } catch (error) {

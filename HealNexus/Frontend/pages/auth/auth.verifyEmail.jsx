@@ -19,7 +19,7 @@ const VerifyEmail = () => {
         });
         if(response.status === 200) {
           toast.success("Email verified successfully");
-          setTimeout(() => {navigate('/login')}, 1000);
+          setTimeout(() => {navigate(`/profile/${response.data.role.toLowerCase()}`)}, 1000);
         }
 
     } catch (error) {

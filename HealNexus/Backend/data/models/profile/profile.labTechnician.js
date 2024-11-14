@@ -1,7 +1,7 @@
 import { model, Schema, Types } from 'mongoose';
 
 const labTechnicianSchema = new Schema({
-  userid: { type: Types.ObjectId, ref: 'User' },
+  userID: { type: Types.ObjectId, ref: 'User' },
   qualifications: { type: [String], required: true },
   associatedLab: { type: String, required: true },
   specialization: { type: [String], default: [] },
