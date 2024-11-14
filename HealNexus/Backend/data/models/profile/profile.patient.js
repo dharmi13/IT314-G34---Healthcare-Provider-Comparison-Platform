@@ -1,7 +1,7 @@
 import { model, Schema, Types } from 'mongoose';
 
 const patientSchema = new Schema({
-  userid: { type: Types.ObjectId, ref: 'User' },
+  userID: { type: Types.ObjectId, ref: 'User' },
   age: { type: Number, required: true },
   gender: { type: String, enum: ['Male', 'Female', 'Other'], required: true },
   contactNumber: { type: String },

@@ -1,4 +1,3 @@
-import jwt from "jsonwebtoken";
 import getErrorDetails from '../../Utilites/errorCodes.js';
 import AdminProfile from '../../data/models/profile/profile.admin.js';
 import PatientProfile from '../../data/models/profile/profile.patient.js';
@@ -8,18 +7,11 @@ import PharmacistProfile from '../../data/models/profile/profile.pharmacist.js';
 
 export const createAdminProfile = async (req, res) => {
   try {
-    const token = req.headers.authorization?.split(' ')[1];
-    if (!token) {
-      const authorizationError = getErrorDetails('UNAUTHORIZED');
-      return res.status(authorizationError.code).json(authorizationError.message);
-    }
-
-    const decoded = jwt.verify(token, process.env.SECRET_JWT_KEY); 
-    const { userid } = decoded;
-
     const { address, permissions = ['manageUsers', 'viewReports'] } = req.body;
+    const { userID } = req;
+
     const adminProfile = new AdminProfile({
-      userid,
+      userID,
       permissions,
       address
     });
@@ -84,18 +76,11 @@ export const updateAdminProfile = async (req, res) => {
 
 export const createPatientProfile = async (req, res) => {
   try {
-    const token = req.headers.authorization?.split(' ')[1];
-    if (!token) {
-      const authorizationError = getErrorDetails('UNAUTHORIZED');
-      return res.status(authorizationError.code).json(authorizationError.message);
-    }
-
-    const decoded = jwt.verify(token, process.env.SECRET_JWT_KEY); 
-    const { userid } = decoded;
-
     const { age, gender, contactNumber, emergencyContact, address, medicalHistory } = req.body;
+    const { userID } = req;
+
     const patientProfile = new PatientProfile({
-      userid,
+      userID,
       age,
       gender,
       contactNumber,
@@ -170,18 +155,11 @@ export const updatePatientProfile = async (req, res) => {
 
 export const createDoctorProfile = async (req, res) => {
   try {
-    const token = req.headers.authorization?.split(' ')[1];
-    if (!token) {
-      const authorizationError = getErrorDetails('UNAUTHORIZED');
-      return res.status(authorizationError.code).json(authorizationError.message);
-    }
-
-    const decoded = jwt.verify(token, process.env.SECRET_JWT_KEY); 
-    const { userid } = decoded;
-
     const { specialty, qualifications, experience, contactNumber, clinicAddress, ratings, biography, consultationFee } = req.body;
+    const { userID } = req;
+
     const doctorProfile = new DoctorProfile({
-      userid,
+      userID,
       specialty,
       qualifications,
       experience,
@@ -199,7 +177,7 @@ export const createDoctorProfile = async (req, res) => {
     });
 
   } catch (error) {
-    const error_response = getErrorDetails('INTERNAL_SERVER_ERROR', 'Error in creating the profile for Doctor');
+    const error_response = getErrorDetails('INTERNAL_SERVER_ERROR', 'Error in creating the profile for Doctor');   
     return res.status(error_response.code).json({message : error_response.message});
   }
 };
@@ -262,18 +240,11 @@ export const updateDoctorProfile = async (req, res) => {
 
 export const createPharmacistProfile = async (req, res) => {
   try {
-    const token = req.headers.authorization?.split(' ')[1];
-    if (!token) {
-      const authorizationError = getErrorDetails('UNAUTHORIZED');
-      return res.status(authorizationError.code).json(authorizationError.message);
-    }
-
-    const decoded = jwt.verify(token, process.env.SECRET_JWT_KEY); 
-    const { userid } = decoded;
-
     const { certification, pharmacyName, pharmacyLocation, contactNumber, yearsOfExperience } = req.body;
+    const { userID } = req;
+
     const pharmacistProfile = new PharmacistProfile({
-      userid,
+      userID,
       certification,
       pharmacyName,
       pharmacyLocation,
@@ -289,6 +260,7 @@ export const createPharmacistProfile = async (req, res) => {
 
   } catch (error) {
     const error_response = getErrorDetails('INTERNAL_SERVER_ERROR', 'Error in creating the profile for Pharmacist');
+    console.log(error);
     return res.status(error_response.code).json({message : error_response.message});
   }
 };
@@ -346,18 +318,11 @@ export const updatePharmacistProfile = async (req, res) => {
 
 export const createLabTechnicianProfile = async (req, res) => {
   try {
-    const token = req.headers.authorization?.split(' ')[1];
-    if (!token) {
-      const authorizationError = getErrorDetails('UNAUTHORIZED');
-      return res.status(authorizationError.code).json(authorizationError.message);
-    }
-
-    const decoded = jwt.verify(token, process.env.SECRET_JWT_KEY); 
-    const { userid } = decoded;
-
     const { qualifications, associatedLab, specialization, contactNumber, address, certifications, yearsOfExperience } = req.body;
+    const { userID } = req;
+
     const labTechnicianProfile = new LabTechnicianProfile({
-      userid,
+      userID,
       qualifications,
       associatedLab,
       specialization,
@@ -406,9 +371,11 @@ export const getLabTechnicianProfile = async (req, res) => {
 
 export const updateLabTechnicianProfile = async (req, res) => {
   try {
-    const { userid, qualifications, associatedLab, specialization, contactNumber, address, certifications, yearsOfExperience } = req.body;
+    const { qualifications, associatedLab, specialization, contactNumber, address, certifications, yearsOfExperience } = req.body;
+    const { userID } = req;
+
     const oldLabTechnicianProfile = {
-      userid,
+      userID,
       qualifications,
       associatedLab,
       specialization,

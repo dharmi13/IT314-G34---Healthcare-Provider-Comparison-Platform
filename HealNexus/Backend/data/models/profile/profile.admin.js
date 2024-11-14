@@ -1,7 +1,7 @@
 import { model, Schema, Types } from 'mongoose';
 
 const adminSchema = new Schema({
-  userid: { type: Types.ObjectId, ref: 'User' },
+  userID: { type: Types.ObjectId, ref: 'User' },
   permissions: { type: [String], default: ['manageUsers', 'viewReports'] },
   address: {
     street: { type: String, required: true },
