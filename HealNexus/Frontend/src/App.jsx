@@ -5,9 +5,9 @@ import { ProfileRoute } from '../routes/profile.routes.jsx';
 const App = () => {
   return (
     <div>
+      <Toaster />
       <AuthRoutes />
       <ProfileRoute/>
-      <Toaster />
     </div>
   )
 }
