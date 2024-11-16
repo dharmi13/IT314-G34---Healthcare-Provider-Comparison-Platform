@@ -17,6 +17,7 @@ import {
   updatePharmacistProfile,
   getPharmacistProfile,
 } from '../controllers/profile.controller.js';
+import upload from '../../middleware/multer.js';
 
 const router = express.Router();
 
@@ -24,7 +25,7 @@ router.post('/create-admin', verifyToken, createAdminProfile);
 router.put('/update-admin/:id', verifyToken, updateAdminProfile);
 router.get('/get-admin/:id', verifyToken, getAdminProfile);
 
-router.post('/create-patient', verifyToken, createPatientProfile);
+router.post('/create-patient', verifyToken, upload.single('image'), createPatientProfile);
 router.put('/update-patient/:id', verifyToken, updatePatientProfile);
 router.get('/get-patient/:id', verifyToken, getPatientProfile);
 

@@ -21,9 +21,6 @@ const SendWelcomeMail = async (email, userName) => {
     };
 
     await transporter.sendMail(mailDetails);
-    const code = getErrorDetails('SUCCESS', `${email} verifed successfully!`)
-    console.log(code);
-
   } catch (error) {
     const code = getErrorDetails('INTERNAL_SERVER_ERROR', `(Welcome Email) ${error}`)
     console.error(code);

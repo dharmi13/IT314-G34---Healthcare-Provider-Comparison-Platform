@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function LandingPage() {
   return (
     <div>
       <Appbar />
-      <AppointmentSection/>
-      <SpecialitySection/>
-      <AppointmentCTA/>
-      <Footer/>
+      <AppointmentSection />
+      <SpecialitySection />
+      <AppointmentCTA />
+      <Footer />
     </div>
   );
 }
@@ -20,6 +21,7 @@ export default LandingPage;
 
 export function Appbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
 
   // Monitor scroll event to trigger sticky behavior
   useEffect(() => {
@@ -32,7 +34,7 @@ export function Appbar() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    
+
     // Cleanup event listener on component unmount
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -41,15 +43,14 @@ export function Appbar() {
 
   return (
     <div
-      className={`flex justify-between items-center px-4 py-4 bg-white border-b border-gray-400 mx-2 transition-all duration-300 ${
-        isScrolled ? "fixed top-0 left-0 w-full shadow-lg z-50" : ""
-      }`}
+      className={`flex justify-between items-center px-4 py-4 bg-white border-b border-gray-400 mx-2 transition-all duration-300 ${isScrolled ? "fixed top-0 left-0 w-full shadow-lg z-50" : ""
+        }`}
       style={{ height: "80px" }}
     >
       {/* Logo and Text */}
       <div className="flex items-center justify-between">
         <img src="/assets/heal_logo.png" alt="Logo" className="w-25 h-20" />
-        
+
         {/* Center the text on small screens */}
         <div className="text-2xl font-bold text-gray-800 sm:text-left text-center w-full sm:w-auto">
           HealNexus
@@ -63,20 +64,19 @@ export function Appbar() {
         <Link to="/about" className="hover:text-blue-600 hover:border-b-2 border-blue-600">ABOUT</Link>
         <Link to="/contact" className="hover:text-blue-600 hover:border-b-2 border-blue-600">CONTACT</Link>
       </div>
-      
+
       {/* Action Buttons */}
       <div className="flex items-center space-x-4">
-      <button
-          className={`hidden sm:flex px-4 py-2 text-gray-800 border border-gray-300 rounded-full hover:bg-gray-100 transform transition-all duration-300 ${
-            isScrolled ? "translate-y-[-5px] scale-105" : ""
-          } hover:translate-y-[-5px] hover:scale-105`}
+        <button
+          className={`hidden sm:flex px-4 py-2 text-gray-800 border border-gray-300 rounded-full hover:bg-gray-100 transform transition-all duration-300 ${isScrolled ? "translate-y-[-5px] scale-105" : ""
+            } hover:translate-y-[-5px] hover:scale-105`}
         >
           Admin Panel
         </button>
         <button
-          className={`px-4 py-2 text-white bg-blue-600 rounded-full hover:bg-blue-700 transform transition-all duration-300 ${
-            isScrolled ? "translate-y-[-5px] scale-105" : ""
-          } hover:translate-y-[-5px] hover:scale-105`}
+          className={`px-4 py-2 text-white bg-blue-600 rounded-full hover:bg-blue-700 transform transition-all duration-300 ${isScrolled ? "translate-y-[-5px] scale-105" : ""
+            } hover:translate-y-[-5px] hover:scale-105`}
+          onClick={() => {navigate('/signup')}}
         >
           Create account
         </button>
@@ -102,11 +102,11 @@ function AppointmentSection() {
             Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
           </p>
           <button className="bg-white text-blue-500 font-semibold py-3 px-6 rounded-full shadow-md hover:bg-gray-200 hover:scale-105 hover:translate-y-1 transition-all duration-300 ease-in-out">
-              Book appointment<span className="hidden sm:inline"> →</span>
+            Book appointment<span className="hidden sm:inline"> →</span>
           </button>
         </div>
       </div>
-      
+
       {/* Right Section with Image */}
       <div className="">
         <img src='/assets/header_img.png' className="self-end" alt="Doctor" />
@@ -148,12 +148,14 @@ function SpecialitySection() {
 
 
 const AppointmentCTA = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-white sm:bg-blue-500 text-white mx-2 px-10 rounded-lg flex flex-col items-center md:justify-center md:text-center lg:flex-row lg:justify-between">
       {/* Text Section - Only visible on small screens */}
       <div className="w-full sm:block md:hidden text-center flex justify-center items-center">
         {/* Button - Only visible on small screens */}
-        <button className="bg-blue-500 sm:bg-white text-white sm:text-blue-500 font-semibold py-3 px-6 rounded-full hover:bg-blue-700 transform transition-all duration-300 hover:translate-y-[-5px] hover:scale-105">
+        <button onClick={() => {navigate('/signup')}} className="bg-blue-500 sm:bg-white text-white sm:text-blue-500 font-semibold py-3 px-6 rounded-full hover:bg-blue-700 transform transition-all duration-300 hover:translate-y-[-5px] hover:scale-105">
           Create account
         </button>
       </div>
@@ -162,11 +164,11 @@ const AppointmentCTA = () => {
       <div className="w-full lg:w-2/3 mb-6 lg:mb-0 text-center md:block hidden">
         {/* Heading - Only visible on medium and larger screens */}
         <h2 className="text-3xl font-bold mb-4 hidden md:block">
-          Book Appointment With 100+ Trusted Doctors 
+          Book Appointment With 100+ Trusted Doctors
         </h2>
 
         {/* Button - Only visible on medium and larger screens */}
-        <button className=" bg-white text-blue-500 font-semibold py-3 px-6 rounded-full hover:bg-gray-200 transform transition-all duration-300 hover:translate-y-[-5px] hover:scale-105">
+        <button onClick={() => {navigate('/signup')}} className=" bg-white text-blue-500 font-semibold py-3 px-6 rounded-full hover:bg-gray-200 transform transition-all duration-300 hover:translate-y-[-5px] hover:scale-105">
           Create account
         </button>
       </div>
@@ -214,9 +216,9 @@ const Footer = () => {
       {/* Copyright */}
       <div className="text-center mt-8 border-t pt-4 text-gray-600">
         © 2024 @ Group_34 @ Made with{' '}
-        <img 
-          src="assets/Love_Heart_SVG.svg" 
-          alt="icon" 
+        <img
+          src="assets/Love_Heart_SVG.svg"
+          alt="icon"
           className="inline-block w-4 h-4 align-middle"
         />{' '}
         - All Rights Reserved.

@@ -21,9 +21,6 @@ const SendVerificationCode = async (username, email, verificationCode) => {
     };
 
     await transporter.sendMail(mailDetails);
-    const code = getErrorDetails('SUCCESS', `Verification email sent to ${email}`)
-    console.log(code);
-
   } catch (error) {
     const code = getErrorDetails('INTERNAL_SERVER_ERROR', `(Email code Verification) ${error}`)
     console.error(code);

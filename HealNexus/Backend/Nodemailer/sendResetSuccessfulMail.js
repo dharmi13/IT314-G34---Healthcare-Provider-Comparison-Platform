@@ -21,9 +21,6 @@ const SendResetSuccessfulMail = async (userName, email) => {
     };
 
     await transporter.sendMail(mailDetails);
-    const code = getErrorDetails('SUCCESS', `Password Reset successful for ${email}`)
-    console.log(code);
-
   } catch (error) {
     const code = getErrorDetails('INTERNAL_SERVER_ERROR', `(Resetting password) ${error}`)
     console.error(code);

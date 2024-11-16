@@ -1,21 +1,42 @@
 import React from 'react'
-
-// import {Footer} from './landingPage'
-import { useState,useEffect } from 'react';
-import {Link} from 'react-router-dom'
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import { FaMapMarkerAlt, FaSearch } from 'react-icons/fa';
 
 const DashBoard = () => {
+  const [userDetails, setUserDetails] = useState('User');
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/auth/get-user-details`, {
+          withCredentials: true
+        });
+
+        if (response.status === 200) {
+          setUserDetails(response.data.userName);
+        } else {
+          console.error('Unexpected response status:', response.status);
+        }
+      } catch (error) {
+        console.error('Failed to fetch user details:', error);
+      }
+    };
+
+    fetchUserDetails();
+  }, []);
+
   return (
-   <div>
-    <Appbar/>
-    <HeroSection/>
-    <Services/>
-    <SpecialitySection/>
-    <Footer/>
+    <div>
+      <Appbar />
+      <HeroSection userDetails={userDetails}/>
+      <Services />
+      <SpecialitySection />
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
 export default DashBoard;
 
@@ -33,7 +54,7 @@ export function Appbar() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    
+
     // Cleanup event listener on component unmount
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -42,15 +63,14 @@ export function Appbar() {
 
   return (
     <div
-      className={`flex justify-between items-center px-4 py-4 bg-white border-b border-gray-400 mx-2 transition-all duration-300 ${
-        isScrolled ? "fixed top-0 left-0 w-full shadow-lg z-50" : ""
-      }`}
+      className={`flex justify-between items-center px-4 py-4 bg-white border-b border-gray-400 mx-2 transition-all duration-300 ${isScrolled ? "fixed top-0 left-0 w-full shadow-lg z-50" : ""
+        }`}
       style={{ height: "80px" }}
     >
       {/* Logo and Text */}
       <div className="flex items-center justify-between">
         <img src="/assets/heal_logo.png" alt="Logo" className="w-25 h-20" />
-        
+
         {/* Center the text on small screens */}
         <div className="text-2xl font-bold text-gray-800 sm:text-left text-center w-full sm:w-auto">
           HealNexus
@@ -64,14 +84,13 @@ export function Appbar() {
         <Link to="/about" className="hover:text-blue-600 hover:border-b-2 border-blue-600">ABOUT</Link>
         <Link to="/contact" className="hover:text-blue-600 hover:border-b-2 border-blue-600">CONTACT</Link>
       </div>
-      
+
       {/* Action Buttons */}
       <div className="flex items-center space-x-4">
-      
+
         <button
-          className={`px-4 py-2 text-white bg-blue-600 rounded-full hover:bg-blue-700 transform transition-all duration-300 ${
-            isScrolled ? "translate-y-[-5px] scale-105" : ""
-          } hover:translate-y-[-5px] hover:scale-105`}
+          className={`px-4 py-2 text-white bg-blue-600 rounded-full hover:bg-blue-700 transform transition-all duration-300 ${isScrolled ? "translate-y-[-5px] scale-105" : ""
+            } hover:translate-y-[-5px] hover:scale-105`}
         >
           Profile
         </button>
@@ -79,11 +98,11 @@ export function Appbar() {
     </div>
   );
 }
-export function HeroSection() {
+export function HeroSection({userDetails}) {
   return (
     <div className="bg-white py-10">
       <div className="container mx-auto text-center">
-        
+
         {/* Location and Search Inputs */}
         <div className="flex justify-center items-center border border-gray-300 rounded-lg overflow-hidden w-2/3 md:w-1/2 mx-auto">
           {/* Location Input */}
@@ -109,30 +128,22 @@ export function HeroSection() {
         </div>
 
         {/* Service Options */}
-        <div className="bg-blue-500 mx-8 rounded-lg rounded-lg mt-6">
+        <div className="bg-blue-500 mx-8 rounded-lg mt-6">
           <div className="flex justify-between items-center max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 ">
-          
-            <h2 className="text-3xl text-left font-semibold text-white">Welcome User</h2>
-           
-          
-          
-                <img
-                src="assets/doc13.png" // Replace with your image path
-                alt="Doctor pointing"
-                className="max-w-full h-auto self-end"
-                />
-            
+
+            <h2 className="text-3xl text-left font-semibold text-white">Welcome {userDetails || 'User'}</h2>
+            <img
+              src="assets/doc13.png" // Replace with your image path
+              alt="Doctor pointing"
+              className="max-w-full h-auto self-end"
+            />
+
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-
-
-
-
 
 export function Services() {
   const services = [
@@ -190,7 +201,7 @@ export function SpecialitySection() {
     <div className="py-16 px-4 md:px-8 lg:px-16 text-center mx-2">
       <h2 className="text-3xl font-bold text-gray-800 mb-4">Book an appointment for an in-clinic consultation</h2>
       <p className="text-gray-600 mb-12">
-      Find experienced doctors across all specialties
+        Find experienced doctors across all specialties
       </p>
       <div className="flex flex-wrap justify-center gap-8">
         {specialities.map((speciality, index) => (
@@ -234,9 +245,9 @@ const Footer = () => {
       {/* Copyright */}
       <div className="text-center mt-8 border-t pt-4 text-gray-600">
         © 2024 @ Group_34 @ Made with{' '}
-        <img 
-          src="assets/Love_Heart_SVG.svg" 
-          alt="icon" 
+        <img
+          src="assets/Love_Heart_SVG.svg"
+          alt="icon"
           className="inline-block w-4 h-4 align-middle"
         />{' '}
         - All Rights Reserved.
