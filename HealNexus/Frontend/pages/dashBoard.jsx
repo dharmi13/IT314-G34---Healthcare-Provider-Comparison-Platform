@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { FaMapMarkerAlt, FaSearch ,FaUserCircle} from 'react-icons/fa';
 
+/* Assuming Appbar is fixed */
+
 
 const DashBoard = () => {
   const [userDetails, setUserDetails] = useState('User');
@@ -40,7 +42,6 @@ const DashBoard = () => {
 };
 
 export default DashBoard;
-
 export function Appbar() {
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -69,51 +70,66 @@ export function Appbar() {
   };
 
   return (
-    <div
-      className={`flex justify-between items-center px-4 py-4 bg-white border-b border-gray-400 mx-2 transition-all duration-300 ${isScrolled ? "fixed top-0 left-0 w-full shadow-lg z-50" : ""
-        }`}
-      style={{ height: "80px" }}
-    >
-      {/* Logo and Text */}
-      <div className="flex items-center justify-between">
-        <img src="/assets/heal_logo.png" alt="Logo" className="w-25 h-20" />
+    <>
+      {/* Appbar */}
+      <div
+        className={`flex justify-between items-center px-4 py-4 bg-white border-b border-gray-400 mx-2 transition-all duration-300 ${isScrolled ? "fixed top-0 left-0 w-full shadow-lg z-50" : ""}`}
+        style={{ height: "80px", transition: "top 0.3s ease-in-out" }}
+      >
+        {/* Logo and Text */}
+        <div className="flex items-center justify-between">
+          <img src="/assets/heal_logo.png" alt="Logo" className="w-25 h-20" />
 
-        {/* Center the text on small screens */}
-        <div className="text-2xl font-bold text-gray-800 sm:text-left text-center w-full sm:w-auto">
-          HealNexus
+          {/* Center the text on small screens */}
+          <div className="hidden sm:block text-2xl font-bold text-gray-800 sm:text-left text-center w-full sm:w-auto">
+            HealNexus
+          </div>
+        </div>
+
+        {/* Navigation Links (only visible on medium and up) */}
+        <div className="hidden lg:flex space-x-8 text-gray-800 font-semibold">
+          <Link to="/dashboard" className="hover:text-blue-600 hover:border-b-2 border-blue-600">DASHBOARD</Link>
+          <Link to="/all-doctors" className="hover:text-blue-600 hover:border-b-2 border-blue-600">ALL DOCTORS</Link>
+          <Link to="/about" className="hover:text-blue-600 hover:border-b-2 border-blue-600">ABOUT</Link>
+          <Link to="/contact" className="hover:text-blue-600 hover:border-b-2 border-blue-600">CONTACT</Link>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex items-center space-x-4">
+          {/* Appointments Button */}
+          <button
+            onClick={() => navigate("/appointments")}
+            className={`px-4 py-2 text-gray-800 border border-gray-300 rounded-full hover:bg-gray-100 transition-all duration-300 ${isScrolled ? "scale-105" : ""}`}
+          >
+            Appointments
+          </button>
+
+          {/* Logout Button */}
+          <button
+            onClick={handleLogout}
+            className={`px-4 py-2 text-white bg-red-600 rounded-full hover:bg-red-700 transition-all duration-300 ${isScrolled ? "scale-105" : ""}`}
+          >
+            Logout
+          </button>
+
+          {/* Profile Icon */}
+          <button
+            className={`p-2 text-blue-600 hover:text-blue-700 transition-all duration-300 ${isScrolled ? "scale-105" : ""}`}
+          >
+            <FaUserCircle className="w-8 h-8" /> {/* User icon */}
+          </button>
         </div>
       </div>
 
-      {/* Navigation Links (only visible on medium and up) */}
-      <div className="hidden lg:flex space-x-8 text-gray-800 font-semibold">
-        <Link to="/dashboard" className="hover:text-blue-600 hover:border-b-2 border-blue-600">DASHBOARD</Link>
-        <Link to="/all-doctors" className="hover:text-blue-600 hover:border-b-2 border-blue-600">ALL DOCTORS</Link>
-        <Link to="/about" className="hover:text-blue-600 hover:border-b-2 border-blue-600">ABOUT</Link>
-        <Link to="/contact" className="hover:text-blue-600 hover:border-b-2 border-blue-600">CONTACT</Link>
+      {/* Content below the Appbar (to prevent layout jump) */}
+      <div style={{ marginTop: isScrolled ? "80px" : "0" }}>
+        {/* Page content here */}
       </div>
-
-      {/* Action Buttons */}
-      <div className="flex items-center space-x-4">
-        {/* Logout Button */}
-        <button
-          onClick={handleLogout}
-          className={`px-4 py-2 text-white bg-red-600 rounded-full hover:bg-red-700 transform transition-all duration-300 ${isScrolled ? "translate-y-[-5px] scale-105" : ""
-            } hover:translate-y-[-5px] hover:scale-105`}
-        >
-          Logout
-        </button>
-
-        {/* Profile Icon */}
-        <button
-          className={`p-2 text-blue-600 hover:text-blue-700 transform transition-all duration-300 ${isScrolled ? "translate-y-[-5px] scale-105" : ""
-            } hover:translate-y-[-5px] hover:scale-105`}
-        >
-          <FaUserCircle className="w-8 h-8" /> {/* User icon */}
-        </button>
-      </div>
-    </div>
+    </>
   );
 }
+
+
 
 
 export function HeroSection({userDetails}) {
