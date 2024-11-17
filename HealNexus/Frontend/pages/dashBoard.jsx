@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'
+import { Link ,useNavigate} from 'react-router-dom'
 import { FaMapMarkerAlt, FaSearch ,FaUserCircle} from 'react-icons/fa';
 
 
@@ -21,24 +21,9 @@ export default DashBoard;
 
 export function Appbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
 
-  // Monitor scroll event to trigger sticky behavior
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true); // Activate sticky mode after 50px scroll
-      } else {
-        setIsScrolled(false); // Revert to normal flow
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    // Cleanup event listener on component unmount
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  // Monitor scroll event to trigger sticky behavio
 
   // Handle logout functionality
   const handleLogout = async () => {
@@ -55,13 +40,16 @@ export function Appbar() {
     }
   };
 
-
   return (
     <div
-      className={`flex justify-between items-center px-4 py-4 bg-white border-b border-gray-400 mx-2 transition-all duration-300 ${isScrolled ? "fixed top-0 left-0 w-full shadow-lg z-50" : ""
-        }`}
-      style={{ height: "80px" }}
-    >
+    className={`flex justify-between items-center px-4 py-4 bg-white border-b border-gray-400 mx-2 transition-all duration-300 ${isScrolled ? "shadow-lg z-50" : ""}`}
+    style={{
+      position: "sticky",
+      top: 0,
+      height: "80px",
+      zIndex: 50,
+    }}
+  >
       {/* Logo and Text */}
       <div className="flex items-center justify-between">
         <img src="/assets/heal_logo.png" alt="Logo" className="w-25 h-20" />
@@ -85,16 +73,14 @@ export function Appbar() {
         {/* Logout Button */}
         <button
           onClick={handleLogout}
-          className={`px-4 py-2 text-white bg-red-600 rounded-full hover:bg-red-700 transform transition-all duration-300 ${isScrolled ? "translate-y-[-5px] scale-105" : ""
-            } hover:translate-y-[-5px] hover:scale-105`}
+          className={`px-4 py-2 text-white bg-red-600 rounded-full hover:bg-red-700 transition-all duration-300 ${isScrolled ? "shadow-md" : ""}`}
         >
           Logout
         </button>
 
         {/* Profile Icon */}
         <button
-          className={`p-2 text-blue-600 hover:text-blue-700 transform transition-all duration-300 ${isScrolled ? "translate-y-[-5px] scale-105" : ""
-            } hover:translate-y-[-5px] hover:scale-105`}
+          className={`p-2 text-blue-600 hover:text-blue-700 transition-all duration-300 ${isScrolled ? "shadow-md" : ""}`}
         >
           <FaUserCircle className="w-8 h-8" /> {/* User icon */}
         </button>
@@ -102,6 +88,8 @@ export function Appbar() {
     </div>
   );
 }
+
+
 
 
 export function HeroSection() {
