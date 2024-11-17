@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function DoctorProfile() {
   const navigate = useNavigate();
+  const [docImg, setDocImg] = useState(null);
   const [doctorDetails, setDoctorDetails] = useState({
     specialty: "",
     qualifications: [""],
@@ -21,6 +22,10 @@ export default function DoctorProfile() {
     biography: "",
   });
   const [loading, setLoading] = useState(false);
+
+  const handleFileChange = (e) => {
+    setDocImg(e.target.files[0]); 
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,10 +49,27 @@ export default function DoctorProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    const formData = new FormData();
+    formData.append("specialty", doctorDetails.specialty);
+    formData.append("experience", doctorDetails.experience);
+    formData.append("contactNumber", doctorDetails.contactNumber);
+    formData.append("consultationFee", doctorDetails.consultationFee);
+    formData.append("biography", doctorDetails.biography);
+    doctorDetails.qualifications.forEach((qualification, index) => {
+      formData.append(`qualifications[${index}]`, qualification);
+    });
+    Object.keys(doctorDetails.clinicAddress).forEach((key) => {
+      formData.append(`clinicAddress[${key}]`, doctorDetails.clinicAddress[key]);
+    });
+    if (docImg) {
+      formData.append("image", docImg); 
+    }
+
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_SERVER_URL}/profile/create-doctor`,
-        doctorDetails,
+        formData,
         { withCredentials: true }
       );
       if (response.status === 201) {
@@ -137,6 +159,7 @@ export default function DoctorProfile() {
         className="w-full p-2 mb-3 border border-gray-300 rounded-lg"
         placeholder="Country"
       />
+      <input type="file" onChange={handleFileChange} className="w-full p-2 mb-3 border border-gray-300 rounded-lg" id="doc-img"  />
       <button
         type="submit"
         className="bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 w-full mt-4"
