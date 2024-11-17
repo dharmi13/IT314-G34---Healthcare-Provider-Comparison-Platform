@@ -64,7 +64,7 @@ export function Appbar({isLoggedIn,navigate}) {
           DASHBOARD
         </button>
         <button
-          onClick={() => handleProtectedNavigation("/all-doctors", isLoggedIn, navigate)}
+          onClick={() => handleProtectedNavigation("/doctors", isLoggedIn, navigate)}
           className="hover:text-blue-600 hover:border-b-2 border-blue-600"
         >
           ALL DOCTORS
@@ -105,12 +105,6 @@ export function Appbar({isLoggedIn,navigate}) {
   );
 }
 
-
-
-
-
-
-
 function AppointmentSection({isLoggedIn,navigate}) {
   return (
     <div className="bg-blue-500 flex items-center justify-between px-4 mx-2 md:px-8  lg:px-16 rounded-lg mt-4">
@@ -123,7 +117,7 @@ function AppointmentSection({isLoggedIn,navigate}) {
           <p className="text-white text-base md:text-lg mb-8 hidden md:block">
             Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
           </p>
-          <button onClick={() => handleProtectedNavigation("/all-doctors",isLoggedIn,navigate)}className="bg-white text-blue-500 font-semibold py-3 px-6 rounded-full shadow-md hover:bg-gray-200 hover:scale-105 hover:translate-y-1 transition-all duration-300 ease-in-out">
+          <button onClick={() => handleProtectedNavigation("/doctors",isLoggedIn,navigate)}className="bg-white text-blue-500 font-semibold py-3 px-6 rounded-full shadow-md hover:bg-gray-200 hover:scale-105 hover:translate-y-1 transition-all duration-300 ease-in-out">
               Book appointment<span className="hidden sm:inline"> →</span>
           </button>
         </div>
@@ -156,7 +150,7 @@ export function SpecialitySection({isLoggedIn,navigate}) {
       </p>
       <div className="flex flex-wrap justify-center gap-8 cursor-pointer">
         {specialities.map((speciality, index) => (
-          <div key={index} onClick={()=>handleProtectedNavigation("/all-doctors",isLoggedIn,navigate)}className="flex flex-col items-center space-y-2">
+          <div key={index} onClick={()=>handleProtectedNavigation("/doctors",isLoggedIn,navigate)}className="flex flex-col items-center space-y-2">
             <div className="bg-blue-100 rounded-full w-24 h-24 flex items-center justify-center transition-transform transform hover:scale-110 hover:translate-y-2 shadow-md">
               <img src={speciality.icon} alt={speciality.name} className="w-12 h-12" />
             </div>

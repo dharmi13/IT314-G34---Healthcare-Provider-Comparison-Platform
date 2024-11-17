@@ -1,79 +1,9 @@
 import getErrorDetails from '../../Utilites/errorCodes.js';
-import AdminProfile from '../../data/models/profile/profile.admin.js';
 import PatientProfile from '../../data/models/profile/profile.patient.js';
 import DoctorProfile from '../../data/models/profile/profile.doctor.js';
-import LabTechnicianProfile from '../../data/models/profile/profile.labTechnician.js';
+import LabTechnicianProfile from '../../data/models/profile/profile.labtechnician.js';
 import PharmacistProfile from '../../data/models/profile/profile.pharmacist.js';
 import { v2 as cloudinary } from 'cloudinary';
-
-export const createAdminProfile = async (req, res) => {
-  try {
-    const { address, permissions = ['manageUsers', 'viewReports'] } = req.body;
-    const { userID } = req;
-
-    const adminProfile = new AdminProfile({
-      userID,
-      permissions,
-      address
-    });
-
-    await adminProfile.save();
-
-    const successResponse = getErrorDetails('CREATED');
-    res.status(successResponse.code).json({
-      message: 'Admin profile created successfully',
-    });
-
-  } catch (error) {
-    const errorResponse = getErrorDetails('INTERNAL_SERVER_ERROR', 'Error in creating the profile for admin');
-    console.log(error)
-    return res.status(errorResponse.code).json({ message: errorResponse.message });
-  }
-};
-
-export const getAdminProfile = async (req, res) => {
-  try {
-    const adminProfile = await AdminProfile.findById(req.params.id);
-    const response = { 
-      address: adminProfile.address, 
-      permissions: adminProfile.permissions 
-    };
-
-    const error = getErrorDetails('SUCCESS');
-    res.status(error.code).json({
-      response
-    });
-
-  } catch (error) {
-    const error_response = getErrorDetails('INTERNAL_SERVER_ERROR', 'Error in getting the profile for admin');
-    return res.status(error_response.code).json({message : error_response.message});
-  }
-};
-
-export const updateAdminProfile = async (req, res) => {
-  try {
-    const { address, permissions } = req.body;
-    const oldAdminProfile = {
-      address, 
-      permissions
-    };
-
-    await AdminProfile.findByIdAndUpdate(
-      req.params.id,
-      oldAdminProfile,
-      { new: true, runValidators: true }
-    );
-
-    const error = getErrorDetails('SUCCESS');
-    res.status(error.code).json({
-      message: 'Admin profile Updated successfully',
-    });
-
-  } catch (error) {
-    const error_response = getErrorDetails('INTERNAL_SERVER_ERROR', 'Error in Updating the profile for admin');
-    return res.status(error_response.code).json({message : error_response.message});
-  }
-};
 
 export const createPatientProfile = async (req, res) => {
   try {
@@ -193,7 +123,8 @@ export const createDoctorProfile = async (req, res) => {
     });
 
   } catch (error) {
-    const error_response = getErrorDetails('INTERNAL_SERVER_ERROR', 'Error in creating the profile for Doctor');   
+    const error_response = getErrorDetails('INTERNAL_SERVER_ERROR', 'Error in creating the profile for Doctor');  
+    console.log(error); 
     return res.status(error_response.code).json({message : error_response.message});
   }
 };
@@ -283,7 +214,6 @@ export const createPharmacistProfile = async (req, res) => {
 
   } catch (error) {
     const error_response = getErrorDetails('INTERNAL_SERVER_ERROR', 'Error in creating the profile for Pharmacist');
-    console.log(error);
     return res.status(error_response.code).json({message : error_response.message});
   }
 };
@@ -397,7 +327,6 @@ export const getLabTechnicianProfile = async (req, res) => {
     return res.status(error_response.code).json({message : error_response.message});
   }
 };
-
 
 export const updateLabTechnicianProfile = async (req, res) => {
   try {

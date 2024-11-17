@@ -10,6 +10,15 @@ import SendWelcomeMail from '../../Nodemailer/sendWelcomeMail.js';
 import SendPasswordResetEmail from '../../Nodemailer/sendPasswordResetEmail.js';
 import SendResetSuccessfulMail from '../../Nodemailer/sendResetSuccessfulMail.js';
 
+import DoctorProfile from '../../data/models/profile/profile.doctor.js';
+import PatientProfile from '../../data/models/profile/profile.patient.js';
+
+const profileModels = {
+  Doctor: DoctorProfile,
+  Patient: PatientProfile,
+  // Add other roles as needed
+};
+
 const signup = async (req, res) => {
   try {
     const { userName, email, password, confirmPassword, role } = req.body;
@@ -162,23 +171,42 @@ const resetPassword = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({email});
+    const user = await User.findOne({ email });
     const CheckPassword = await bcrypt.compare(password, user?.password ?? "");
 
-    if(!user || !CheckPassword) {
+    if (!user || !CheckPassword) {
       const error = getErrorDetails('UNAUTHORIZED', 'Invalid Credentials');
       return res.status(error.code).json({ message: error.message });
     }
 
-    const error = getErrorDetails('SUCCESS');
-    return res.status(error.code).send({
+    const ProfileModel = profileModels[user.role];
+    if (!ProfileModel) {
+      const error = getErrorDetails('UNAUTHORIZED', 'Role not supported!');
+      return res.status(error.code).json({ message: error.message });
+    }
+
+    const profile = await ProfileModel.findOne({ userID: user._id });
+
+    if (!profile) {
+      const error = getErrorDetails('UNAUTHORIZED', 'Profile not found for the user!');
+      return res.status(error.code).json({ message: error.message });
+    }
+
+    if (!profile.isVerified) {
+      const error = getErrorDetails('UNAUTHORIZED', 'Profile is yet to be verified by Admin!');
+      return res.status(error.code).json({ message: error.message });
+    }
+
+    const success = getErrorDetails('SUCCESS');
+    return res.status(success.code).send({
       userName: user.userName,
-      email: user.email
+      email: user.email,
     });
 
   } catch (error) {
+    console.error(error); 
     const error_response = getErrorDetails('INTERNAL_SERVER_ERROR', 'Error in Login');
-    return res.status(error_response.code).json({message : error_response.message});
+    return res.status(error_response.code).json({ message: error_response.message });
   }
 };
 

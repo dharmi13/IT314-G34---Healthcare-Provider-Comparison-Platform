@@ -16,8 +16,11 @@ const doctorSchema = new Schema({
   ratings: { type: [Number], default: [] },
   biography: { type: String },
   consultationFee: { type: Number },
-  image: {type: String, reqired: true},
-  createdAt: { type: Date, default: Date.now }
+  image: { type: String, reqired: true },
+  available: { type: Boolean, default: true },
+  slot_booked: { type: Object, default: {} },
+  createdAt: { type: Date, default: Date.now },
+  isVerified: {type: Boolean, default: false}
 }, { timestamps: true });
 
 const DoctorProfile = model("DoctorProfile", doctorSchema);

@@ -19,6 +19,7 @@ const patientSchema = new Schema({
   },
   medicalHistory: { type: [String], default: [] },
   image: {type: String, reqired: true},
+  isVerified: {type: Boolean, default: true},
   createdAt: { type: Date, default: Date.now }
 });
 
