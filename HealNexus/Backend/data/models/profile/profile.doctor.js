@@ -16,6 +16,7 @@ const doctorSchema = new Schema({
   ratings: { type: [Number], default: [] },
   biography: { type: String },
   consultationFee: { type: Number },
+  image: {type: String, reqired: true},
   createdAt: { type: Date, default: Date.now }
 }, { timestamps: true });
 

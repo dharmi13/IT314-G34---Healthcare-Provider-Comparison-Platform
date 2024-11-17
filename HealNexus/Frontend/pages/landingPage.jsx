@@ -1,39 +1,40 @@
-import { Link } from "react-router-dom";
-import { useState,useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import toast from 'react-hot-toast';
 
 function LandingPage() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
   return (
     <div>
-      <Appbar />
-      <AppointmentSection/>
-      <SpecialitySection/>
-      <AppointmentCTA/>
-      <Footer/>
+      <Appbar isLoggedIn={isLoggedIn} navigate={navigate}/>
+      <AppointmentSection isLoggedIn={isLoggedIn} navigate={navigate}/>
+      <SpecialitySection isLoggedIn={isLoggedIn} navigate={navigate}/>
+      <AppointmentCTA isLoggedIn={isLoggedIn} navigate={navigate}/>
+      <Footer />
     </div>
   );
 }
 export default LandingPage;
 
+const handleProtectedNavigation = (path, isLoggedIn, navigate) => {
+  if (!isLoggedIn) {
+    toast.error("Login required to access this page.");
+  } else {
+    navigate(path);
+  }
+};
 
+export function Appbar({isLoggedIn,navigate}) {
+  const [isScrolled, setIsScrolled] = useState(false);  // Simulated logged-in state
 
-
-
-export function Appbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  // Monitor scroll event to trigger sticky behavior
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true); // Activate sticky mode after 50px scroll
-      } else {
-        setIsScrolled(false); // Revert to normal flow
-      }
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
-    
-    // Cleanup event listener on component unmount
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -49,24 +50,42 @@ export function Appbar() {
       {/* Logo and Text */}
       <div className="flex items-center justify-between">
         <img src="/assets/heal_logo.png" alt="Logo" className="w-25 h-20" />
-        
-        {/* Center the text on small screens */}
         <div className="text-2xl font-bold text-gray-800 sm:text-left text-center w-full sm:w-auto">
           HealNexus
         </div>
       </div>
 
-      {/* Navigation Links (only visible on medium and up) */}
+      {/* Navigation Links */}
       <div className="hidden lg:flex space-x-8 text-gray-800 font-semibold">
-        <Link to="/home" className="hover:text-blue-600 hover:border-b-2 border-blue-600">HOME</Link>
-        <Link to="/all-doctors" className="hover:text-blue-600 hover:border-b-2 border-blue-600">ALL DOCTORS</Link>
-        <Link to="/about" className="hover:text-blue-600 hover:border-b-2 border-blue-600">ABOUT</Link>
-        <Link to="/contact" className="hover:text-blue-600 hover:border-b-2 border-blue-600">CONTACT</Link>
+        <button
+          onClick={() => handleProtectedNavigation("/dashboard", isLoggedIn, navigate)}
+          className="hover:text-blue-600 hover:border-b-2 border-blue-600"
+        >
+          DASHBOARD
+        </button>
+        <button
+          onClick={() => handleProtectedNavigation("/all-doctors", isLoggedIn, navigate)}
+          className="hover:text-blue-600 hover:border-b-2 border-blue-600"
+        >
+          ALL DOCTORS
+        </button>
+        <Link
+          to="/about"
+          className="hover:text-blue-600 hover:border-b-2 border-blue-600"
+        >
+          ABOUT
+        </Link>
+        <Link
+          to="/contact"
+          className="hover:text-blue-600 hover:border-b-2 border-blue-600"
+        >
+          CONTACT
+        </Link>
       </div>
-      
+
       {/* Action Buttons */}
       <div className="flex items-center space-x-4">
-      <button
+        <button
           className={`hidden sm:flex px-4 py-2 text-gray-800 border border-gray-300 rounded-full hover:bg-gray-100 transform transition-all duration-300 ${
             isScrolled ? "translate-y-[-5px] scale-105" : ""
           } hover:translate-y-[-5px] hover:scale-105`}
@@ -74,6 +93,7 @@ export function Appbar() {
           Admin Panel
         </button>
         <button
+          onClick={() => navigate("/login")}
           className={`px-4 py-2 text-white bg-blue-600 rounded-full hover:bg-blue-700 transform transition-all duration-300 ${
             isScrolled ? "translate-y-[-5px] scale-105" : ""
           } hover:translate-y-[-5px] hover:scale-105`}
@@ -89,7 +109,9 @@ export function Appbar() {
 
 
 
-function AppointmentSection() {
+
+
+function AppointmentSection({isLoggedIn,navigate}) {
   return (
     <div className="bg-blue-500 flex items-center justify-between px-4 mx-2 md:px-8  lg:px-16 rounded-lg mt-4">
       <div className="max-w-4xl flex flex-col md:flex-row items-center">
@@ -101,13 +123,13 @@ function AppointmentSection() {
           <p className="text-white text-base md:text-lg mb-8 hidden md:block">
             Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
           </p>
-          <button className="bg-white text-blue-500 font-semibold py-3 px-6 rounded-full shadow-md hover:bg-gray-200 hover:scale-105 hover:translate-y-1 transition-all duration-300 ease-in-out">
+          <button onClick={() => handleProtectedNavigation("/all-doctors",isLoggedIn,navigate)}className="bg-white text-blue-500 font-semibold py-3 px-6 rounded-full shadow-md hover:bg-gray-200 hover:scale-105 hover:translate-y-1 transition-all duration-300 ease-in-out">
               Book appointment<span className="hidden sm:inline"> →</span>
           </button>
         </div>
       </div>
       
-      {/* Right Section with Image */}
+    
       <div className="">
         <img src='/assets/header_img.png' className="self-end" alt="Doctor" />
       </div>
@@ -116,7 +138,7 @@ function AppointmentSection() {
 }
 
 
-function SpecialitySection() {
+export function SpecialitySection({isLoggedIn,navigate}) {
   const specialities = [
     { name: "General physician", icon: "/assets/general_physician.svg" },
     { name: "Gynecologist", icon: "/assets/gynecologist.svg" },
@@ -132,9 +154,9 @@ function SpecialitySection() {
       <p className="text-gray-600 mb-12">
         Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
       </p>
-      <div className="flex flex-wrap justify-center gap-8">
+      <div className="flex flex-wrap justify-center gap-8 cursor-pointer">
         {specialities.map((speciality, index) => (
-          <div key={index} className="flex flex-col items-center space-y-2">
+          <div key={index} onClick={()=>handleProtectedNavigation("/all-doctors",isLoggedIn,navigate)}className="flex flex-col items-center space-y-2">
             <div className="bg-blue-100 rounded-full w-24 h-24 flex items-center justify-center transition-transform transform hover:scale-110 hover:translate-y-2 shadow-md">
               <img src={speciality.icon} alt={speciality.name} className="w-12 h-12" />
             </div>
@@ -147,26 +169,15 @@ function SpecialitySection() {
 }
 
 
-const AppointmentCTA = () => {
+const AppointmentCTA = ({isLoggedIn,navigate}) => {
   return (
     <div className="bg-white sm:bg-blue-500 text-white mx-2 px-10 rounded-lg flex flex-col items-center md:justify-center md:text-center lg:flex-row lg:justify-between">
-      {/* Text Section - Only visible on small screens */}
-      <div className="w-full sm:block md:hidden text-center flex justify-center items-center">
-        {/* Button - Only visible on small screens */}
-        <button className="bg-blue-500 sm:bg-white text-white sm:text-blue-500 font-semibold py-3 px-6 rounded-full hover:bg-blue-700 transform transition-all duration-300 hover:translate-y-[-5px] hover:scale-105">
-          Create account
-        </button>
-      </div>
-
-      {/* Text Section - Hidden on small screens, visible on medium and larger screens */}
-      <div className="w-full lg:w-2/3 mb-6 lg:mb-0 text-center md:block hidden">
-        {/* Heading - Only visible on medium and larger screens */}
-        <h2 className="text-3xl font-bold mb-4 hidden md:block">
+      {/* Unified Text and Button Section */}
+      <div className="w-full text-center flex flex-col justify-center items-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-blue-500 md:text-white">
           Book Appointment With 100+ Trusted Doctors 
         </h2>
-
-        {/* Button - Only visible on medium and larger screens */}
-        <button className=" bg-white text-blue-500 font-semibold py-3 px-6 rounded-full hover:bg-gray-200 transform transition-all duration-300 hover:translate-y-[-5px] hover:scale-105">
+        <button onClick={()=>{navigate("/login")}}className="font-semibold py-3 px-6 rounded-full bg-blue-500 text-white md:bg-white md:text-blue-500 hover:bg-blue-700 md:hover:bg-gray-200 transform transition-all duration-300 hover:translate-y-[-5px] hover:scale-105">
           Create account
         </button>
       </div>
@@ -185,7 +196,9 @@ const AppointmentCTA = () => {
 
 
 
-const Footer = () => {
+
+
+export const Footer = () => {
   return (
     <footer className="bg-white mx-2 mt-4 pt-4 border-">
       <div className="container mx-auto flex flex-col md:flex-row justify-around items-center">

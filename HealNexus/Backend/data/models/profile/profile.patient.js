@@ -18,6 +18,7 @@ const patientSchema = new Schema({
     country: { type: String, required: true },
   },
   medicalHistory: { type: [String], default: [] },
+  image: {type: String, reqired: true},
   createdAt: { type: Date, default: Date.now }
 });
 

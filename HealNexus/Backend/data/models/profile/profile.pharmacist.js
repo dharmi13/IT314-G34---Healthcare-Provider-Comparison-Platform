@@ -13,6 +13,7 @@ const pharmacistSchema = new Schema({
   },
   contactNumber: { type: String },
   yearsOfExperience: { type: Number },
+  image: {type: String, reqired: true},
   createdAt: { type: Date, default: Date.now }
 }, { timestamps: true });
 
