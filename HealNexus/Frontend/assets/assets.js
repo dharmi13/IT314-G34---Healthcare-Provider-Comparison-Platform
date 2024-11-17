@@ -12,7 +12,14 @@ import doc11 from './doc11.png'
 import doc12 from './doc12.png'
 import doc14 from './doc14.png'
 import doc15 from './doc15.png'
-import upload_icon from './upload_area.png'
+
+
+export const assets = {
+    upload_icon: "https://via.placeholder.com/50?text=Upload+Icon", // Dummy placeholder image for upload icon
+    user_placeholder: "https://via.placeholder.com/150?text=User+Image", // Dummy placeholder image for user profile
+    logo: "https://via.placeholder.com/150?text=Logo", // Dummy logo image
+  };
+  
 
 
 
