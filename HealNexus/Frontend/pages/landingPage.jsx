@@ -237,5 +237,3 @@ export const Footer = () => {
     </footer>
   );
 };
-
-

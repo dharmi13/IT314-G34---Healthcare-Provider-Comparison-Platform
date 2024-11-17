@@ -4,6 +4,7 @@ import PatientProfile from '../../data/models/profile/profile.patient.js';
 import DoctorProfile from '../../data/models/profile/profile.doctor.js';
 import LabTechnicianProfile from '../../data/models/profile/profile.labTechnician.js';
 import PharmacistProfile from '../../data/models/profile/profile.pharmacist.js';
+import { v2 as cloudinary } from 'cloudinary';
 
 export const createAdminProfile = async (req, res) => {
   try {
@@ -78,6 +79,12 @@ export const createPatientProfile = async (req, res) => {
   try {
     const { age, gender, contactNumber, emergencyContact, address, medicalHistory } = req.body;
     const { userID } = req;
+    const imageFile = req.file;
+
+    const imageUploadResponse = await cloudinary.uploader.upload(imageFile.path, {
+      resource_type: "auto" 
+    });
+    const imageUrl = imageUploadResponse.secure_url;  
 
     const patientProfile = new PatientProfile({
       userID,
@@ -86,7 +93,8 @@ export const createPatientProfile = async (req, res) => {
       contactNumber,
       emergencyContact,
       address,
-      medicalHistory
+      medicalHistory,
+      image: imageUrl,
     });
     
     await patientProfile.save();
@@ -97,6 +105,7 @@ export const createPatientProfile = async (req, res) => {
 
   } catch (error) {
     const error_response = getErrorDetails('INTERNAL_SERVER_ERROR', 'Error in creating the profile for Patient');
+    console.log(error);
     return res.status(error_response.code).json({message : error_response.message});
   }
 };
@@ -157,6 +166,12 @@ export const createDoctorProfile = async (req, res) => {
   try {
     const { specialty, qualifications, experience, contactNumber, clinicAddress, ratings, biography, consultationFee } = req.body;
     const { userID } = req;
+    const imageFile = req.file;
+
+    const imageUploadResponse = await cloudinary.uploader.upload(imageFile.path, {
+      resource_type: "auto" 
+    });
+    const imageUrl = imageUploadResponse.secure_url;  
 
     const doctorProfile = new DoctorProfile({
       userID,
@@ -167,7 +182,8 @@ export const createDoctorProfile = async (req, res) => {
       clinicAddress, 
       ratings,
       biography,
-      consultationFee
+      consultationFee,
+      image: imageUrl
     });
     
     await doctorProfile.save();
@@ -242,6 +258,12 @@ export const createPharmacistProfile = async (req, res) => {
   try {
     const { certification, pharmacyName, pharmacyLocation, contactNumber, yearsOfExperience } = req.body;
     const { userID } = req;
+    const imageFile = req.file;
+
+    const imageUploadResponse = await cloudinary.uploader.upload(imageFile.path, {
+      resource_type: "auto" 
+    });
+    const imageUrl = imageUploadResponse.secure_url;  
 
     const pharmacistProfile = new PharmacistProfile({
       userID,
@@ -249,7 +271,8 @@ export const createPharmacistProfile = async (req, res) => {
       pharmacyName,
       pharmacyLocation,
       contactNumber,
-      yearsOfExperience
+      yearsOfExperience,
+      image: imageUrl
     });
     
     await pharmacistProfile.save();
@@ -320,6 +343,12 @@ export const createLabTechnicianProfile = async (req, res) => {
   try {
     const { qualifications, associatedLab, specialization, contactNumber, address, certifications, yearsOfExperience } = req.body;
     const { userID } = req;
+    const imageFile = req.file;
+
+    const imageUploadResponse = await cloudinary.uploader.upload(imageFile.path, {
+      resource_type: "auto" 
+    });
+    const imageUrl = imageUploadResponse.secure_url;  
 
     const labTechnicianProfile = new LabTechnicianProfile({
       userID,
@@ -329,7 +358,8 @@ export const createLabTechnicianProfile = async (req, res) => {
       contactNumber, 
       address,
       certifications,
-      yearsOfExperience
+      yearsOfExperience,
+      image: imageUrl
     });
     
     await labTechnicianProfile.save();

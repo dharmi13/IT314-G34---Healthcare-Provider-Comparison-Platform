@@ -13,6 +13,10 @@ import SendResetSuccessfulMail from '../../Nodemailer/sendResetSuccessfulMail.js
 const signup = async (req, res) => {
   try {
     const { userName, email, password, confirmPassword, role } = req.body;
+    if(!userName || !email || !password || !confirmPassword || !role) {
+      const error = getErrorDetails('BAD_REQUEST', 'All fields are necessary and cannot be empty!')
+      return res.status(error.code).json({ message: error.message });
+    }
 
     const EmailalreadyExists = await User.findOne({email});
     if(EmailalreadyExists) {
@@ -47,9 +51,7 @@ const signup = async (req, res) => {
 
     const error = getErrorDetails('CREATED');
     res.status(error.code).json({ 
-      username: newUser.userName,
-      email: newUser.email,
-      role: newUser.role,
+      message: 'User registered successfully'
     });
     await SendVerificationCode(newUser.userName, newUser.email, verificationCode);
 
@@ -67,9 +69,14 @@ const verifyEmail = async (req, res) => {
       verificationCode: ReceivedCode,
       verificationCodeExpiresAt: { $gt: Date.now() }
     });
-
+    
     if(!user) {
       const error = getErrorDetails('BAD_REQUEST', 'Invalid or Expired verification code');
+      return res.status(error.code).json({ message: error.message });
+    }
+
+    if(user.isVerified) {
+      const error = getErrorDetails('BAD_REQUEST', 'User already verified');
       return res.status(error.code).json({ message: error.message });
     }
 
@@ -163,7 +170,6 @@ const login = async (req, res) => {
       return res.status(error.code).json({ message: error.message });
     }
 
-    GenerateJWTTokenAndCookie(User._id, res)
     const error = getErrorDetails('SUCCESS');
     return res.status(error.code).send({
       userName: user.userName,
@@ -188,4 +194,39 @@ const logout = (req, res) => {
   }
 };
 
-export { signup, verifyEmail, forgetPassword, resetPassword, login, logout };
+const getuserDetails = async (req, res) => {
+  try {
+    const { userID } = req; 
+
+    if (!userID) {
+      const error_response = getErrorDetails('BAD_REQUEST', 'User ID is missing in the request');
+      return res.status(error_response.code).json({ message: error_response.message });
+    }
+
+    const userDetails = await User.findById(userID);
+    
+    if (!userDetails) {
+      const error_response = getErrorDetails('NOT_FOUND', 'User not found');
+      return res.status(error_response.code).json({ message: error_response.message });
+    }
+    
+    const response = {
+      userName: userDetails.userName,
+      email: userDetails.email,
+      role: userDetails.role
+    };
+
+    const success = getErrorDetails('SUCCESS');
+    return res.status(success.code).json(response);
+
+  } catch (error) {
+    const error_response = getErrorDetails(
+      'INTERNAL_SERVER_ERROR',
+      'Error in getting the profile for Patient'
+    );
+    return res.status(error_response.code).json({ message: error_response.message });
+  }
+};
+
+
+export { signup, verifyEmail, forgetPassword, resetPassword, login, logout, getuserDetails };
