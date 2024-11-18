@@ -6,7 +6,7 @@ import Login from '../pages/auth/auth.login.jsx';
 import ForgetPassword from '../pages/auth/auth.forgetPassword.jsx';
 import ResetPassword from '../pages/auth/auth.resetPassword.jsx';
 import DashBoard from '../pages/dashBoard.jsx';
-import MyProfile from '../pages/MyProfile.jsx';
+
 
 const AuthRoutes = () => {
   return (
@@ -18,7 +18,6 @@ const AuthRoutes = () => {
       <Route path="/forget-password" element={<ForgetPassword />} />
       <Route path="/reset-password/:token" element={<ResetPassword />} />
       <Route path="/dashboard" element={<DashBoard />} />
-      <Route path='/my-profile' element={<MyProfile/>}/>
     </Routes>
   )
 }
