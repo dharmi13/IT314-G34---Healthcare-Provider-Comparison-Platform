@@ -16,7 +16,7 @@ export const loginSchema = z.object({
 });
 
 
-import { z } from 'zod';
+
 
 // Define the SignUp schema
 export const signUpSchema = z.object({

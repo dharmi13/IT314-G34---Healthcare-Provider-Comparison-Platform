@@ -1,13 +1,16 @@
 import { Toaster } from 'react-hot-toast';
-import AuthRoutes from '../routes/auth.routes.jsx';
+// import AuthRoutes from '../routes/auth.routes.jsx';
 import { ProfileRoute } from '../routes/profile.routes.jsx';
 import { AllPatientRoutes } from '../routes/patient/patient.route.jsx';
 import { DoctorRoutes } from '../routes/doctor.routes.jsx';
 import { AdminRoutes } from '../routes/admin.routes.jsx';
+import FeedbackForm from '../pages/FeedbackForm.jsx';
 
 const App = () => {
   return (
-    <div>
+    <>
+    <FeedbackForm/>
+    {/* <div>
 
       <Toaster />
       <AuthRoutes />
@@ -15,7 +18,9 @@ const App = () => {
       <AllPatientRoutes/>
       <DoctorRoutes/>
       <AdminRoutes/>
-    </div>
+    </div> */}
+    </>
+
   )
 }
 
