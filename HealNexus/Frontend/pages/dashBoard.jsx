@@ -1,37 +1,15 @@
 import React from 'react'
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'
+import { Link ,useNavigate} from 'react-router-dom'
 import { FaMapMarkerAlt, FaSearch ,FaUserCircle} from 'react-icons/fa';
 
 
 const DashBoard = () => {
-  const [userDetails, setUserDetails] = useState('User');
-
-  useEffect(() => {
-    const fetchUserDetails = async () => {
-      try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/auth/get-user-details`, {
-          withCredentials: true
-        });
-
-        if (response.status === 200) {
-          setUserDetails(response.data.userName);
-        } else {
-          console.error('Unexpected response status:', response.status);
-        }
-      } catch (error) {
-        console.error('Failed to fetch user details:', error);
-      }
-    };
-
-    fetchUserDetails();
-  }, []);
-
   return (
     <div>
       <Appbar />
-      <HeroSection userDetails={userDetails}/>
+      <HeroSection/>
       <Services />
       <SpecialitySection />
       <Footer />
@@ -43,37 +21,35 @@ export default DashBoard;
 
 export function Appbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
 
-  // Monitor scroll event to trigger sticky behavior
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true); // Activate sticky mode after 50px scroll
-      } else {
-        setIsScrolled(false); // Revert to normal flow
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    // Cleanup event listener on component unmount
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  // Monitor scroll event to trigger sticky behavio
 
   // Handle logout functionality
-  const handleLogout = () => {
-    // Add your logout logic here, like clearing auth tokens or redirecting to login page
-    console.log('Logging out...');
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/logout`, {
+        withCredentials: true
+      });
+
+      if (response.status === 200) {
+        navigate('/');
+      } 
+    } catch (error) {
+      console.error('Error in Logging out', error);
+    }
   };
 
   return (
     <div
-      className={`flex justify-between items-center px-4 py-4 bg-white border-b border-gray-400 mx-2 transition-all duration-300 ${isScrolled ? "fixed top-0 left-0 w-full shadow-lg z-50" : ""
-        }`}
-      style={{ height: "80px" }}
-    >
+    className={`flex justify-between items-center px-4 py-4 bg-white border-b border-gray-400 mx-2 transition-all duration-300 ${isScrolled ? "shadow-lg z-50" : ""}`}
+    style={{
+      position: "sticky",
+      top: 0,
+      height: "80px",
+      zIndex: 50,
+    }}
+  >
       {/* Logo and Text */}
       <div className="flex items-center justify-between">
         <img src="/assets/heal_logo.png" alt="Logo" className="w-25 h-20" />
@@ -87,7 +63,7 @@ export function Appbar() {
       {/* Navigation Links (only visible on medium and up) */}
       <div className="hidden lg:flex space-x-8 text-gray-800 font-semibold">
         <Link to="/dashboard" className="hover:text-blue-600 hover:border-b-2 border-blue-600">DASHBOARD</Link>
-        <Link to="/all-doctors" className="hover:text-blue-600 hover:border-b-2 border-blue-600">ALL DOCTORS</Link>
+        <Link to="/doctors" className="hover:text-blue-600 hover:border-b-2 border-blue-600">ALL DOCTORS</Link>
         <Link to="/about" className="hover:text-blue-600 hover:border-b-2 border-blue-600">ABOUT</Link>
         <Link to="/contact" className="hover:text-blue-600 hover:border-b-2 border-blue-600">CONTACT</Link>
       </div>
@@ -97,16 +73,14 @@ export function Appbar() {
         {/* Logout Button */}
         <button
           onClick={handleLogout}
-          className={`px-4 py-2 text-white bg-red-600 rounded-full hover:bg-red-700 transform transition-all duration-300 ${isScrolled ? "translate-y-[-5px] scale-105" : ""
-            } hover:translate-y-[-5px] hover:scale-105`}
+          className={`px-4 py-2 text-white bg-red-600 rounded-full hover:bg-red-700 transition-all duration-300 ${isScrolled ? "shadow-md" : ""}`}
         >
           Logout
         </button>
 
         {/* Profile Icon */}
         <button
-          className={`p-2 text-blue-600 hover:text-blue-700 transform transition-all duration-300 ${isScrolled ? "translate-y-[-5px] scale-105" : ""
-            } hover:translate-y-[-5px] hover:scale-105`}
+          className={`p-2 text-blue-600 hover:text-blue-700 transition-all duration-300 ${isScrolled ? "shadow-md" : ""}`}
         >
           <FaUserCircle className="w-8 h-8" /> {/* User icon */}
         </button>
@@ -116,7 +90,9 @@ export function Appbar() {
 }
 
 
-export function HeroSection({userDetails}) {
+
+
+export function HeroSection() {
   return (
     <div className="bg-white py-10">
       <div className="container mx-auto text-center">
@@ -149,7 +125,7 @@ export function HeroSection({userDetails}) {
         <div className="bg-blue-500 mx-8 rounded-lg mt-6">
           <div className="flex justify-between items-center max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 ">
 
-            <h2 className="text-3xl text-left font-semibold text-white">Welcome {userDetails || 'User'}</h2>
+            <h2 className="text-3xl text-left font-semibold text-white">Welcome to Heal Nexus</h2>
             <img
               src="assets/doc13.png" // Replace with your image path
               alt="Doctor pointing"

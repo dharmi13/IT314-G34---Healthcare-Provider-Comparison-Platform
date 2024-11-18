@@ -1,10 +1,15 @@
 import { model, Schema, Types } from 'mongoose';
 
 const appointmentSchema = new Schema({
-    patientID: { type: Types.ObjectId, ref: 'PatientProfile'},
+    patientID: { type: Types.ObjectId, ref: 'PatientProfile' },
     doctorID: { type: Types.ObjectId, ref: 'DoctorProfile' },
-    slotID: { type: Types.ObjectId, ref: 'slot' },
-    status: { type: String,  enum: ['Booked', 'Cancelled', 'Pending'], default: 'Booked' },
+    slotTime: { type: String, required: true },
+    slotDate: { type: String, required: true },
+    amount: { type: Number, required: true },
+    date: { type: Number, required: true },
+    cancel: { type: Boolean, default: false },
+    payment: { type: Boolean, default: false },
+    isCompleted: { type: Boolean, default: false },
     createdAt: { type: Date, default: Date.now }
 }, { timestamps: true });
 

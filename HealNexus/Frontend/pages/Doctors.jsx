@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-
+import axios from 'axios';
 import { Footer } from './landingPage';
 import { doctor } from '../assets/assets';
 import { Appbar } from './dashBoard';
@@ -14,7 +14,17 @@ export const Doctors = () => {
     // Fetch doctors from backend
     useEffect(() => {
       const fetchDoctors = async () => {
-        setDoctors(doctor) // TODO BACKEND
+        try {
+          const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/patient/doctor-list`, {
+            withCredentials: true
+          });
+
+          if (response.status === 200) {
+            setDoctors(response.data.doctorData);
+          } 
+        } catch (error) {
+          console.error('Error in Logging out', error);
+        }
       };
   
       fetchDoctors();
@@ -74,16 +84,16 @@ export const Doctors = () => {
             filterDoc.map((item, index) => (
               <div 
                 key={index} 
-                onClick={() => navigate(`/appointment/${item._id}`)} 
+                onClick={() => navigate(`/appointment/${item.profile._id}`)} 
                 className='border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500'>
-                <img className='bg-blue-500' src={item.image} alt="" />
+                <img className='bg-blue-500' src={item.profile.image} alt="" />
                 <div className='p-4'>
                   <div className='flex items-center gap-2 text-sm text-center text-gray text-green-500'>
                     <p className="w-2 h-2 bg-green-500 rounded-full"></p>
                     <p>Available</p>
                   </div>
-                  <p className='text-gray-900 text-lg font-medium'>{item.name}</p>
-                  <p className='text-gray-600 text-sm'>{item.speciality}</p>
+                  <p className='text-gray-900 text-lg font-medium'>{item.user.userName}</p>
+                  <p className='text-gray-600 text-sm'>{item.profile.specialty}</p>
                 </div>
               </div>
             ))

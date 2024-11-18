@@ -3,7 +3,6 @@ import AuthRoutes from '../routes/auth.routes.jsx';
 import { ProfileRoute } from '../routes/profile.routes.jsx';
 import { AllDoctorRoute } from '../routes/patient/doctor.route.jsx';
 
-
 const App = () => {
   return (
     <div>

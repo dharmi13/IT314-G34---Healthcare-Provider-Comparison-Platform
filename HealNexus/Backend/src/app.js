@@ -3,6 +3,9 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import authroutes from '../api/routes/auth.routes.js';
 import profileroutes from '../api/routes/profile.route.js';
+import adminroutes from '../api/routes/admin.routes.js';
+import appointmentroutes from '../api/routes/appointments.routes.js';
+import patientroutes from '../api/routes/patient.routes.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -24,5 +27,8 @@ app.use((_, res, next) => {
 
 app.use("/auth", authroutes);
 app.use("/profile", profileroutes);
+app.use("/admin", adminroutes);
+app.use("/appointment", appointmentroutes);
+app.use("/patient", patientroutes);
 
 export default app; 
