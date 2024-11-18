@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Link ,useNavigate} from 'react-router-dom'
+import { Link ,useNavigate,NavLink} from 'react-router-dom'
 import { FaMapMarkerAlt, FaSearch ,FaUserCircle} from 'react-icons/fa';
 
 
@@ -23,8 +23,6 @@ export function Appbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
 
-  // Monitor scroll event to trigger sticky behavio
-
   // Handle logout functionality
   const handleLogout = async () => {
     try {
@@ -34,42 +32,75 @@ export function Appbar() {
 
       if (response.status === 200) {
         navigate('/');
-      } 
+      }
     } catch (error) {
       console.error('Error in Logging out', error);
     }
   };
 
+  // Handle profile navigation
+  const handleProfileClick = () => {
+    navigate('/my-profile');
+  };
+
   return (
     <div
-    className={`flex justify-between items-center px-4 py-4 bg-white border-b border-gray-400 mx-2 transition-all duration-300 ${isScrolled ? "shadow-lg z-50" : ""}`}
-    style={{
-      position: "sticky",
-      top: 0,
-      height: "80px",
-      zIndex: 50,
-    }}
-  >
+      className={`flex justify-between items-center px-4 py-4 bg-white border-b border-gray-400 mx-2 transition-all duration-300 ${isScrolled ? "shadow-lg z-50" : ""}`}
+      style={{
+        position: "sticky",
+        top: 0,
+        height: "80px",
+        zIndex: 50,
+      }}
+    >
       {/* Logo and Text */}
       <div className="flex items-center justify-between">
         <img src="/assets/heal_logo.png" alt="Logo" className="w-25 h-20" />
 
         {/* Center the text on small screens */}
-        <div className="text-2xl font-bold text-gray-800 sm:text-left text-center w-full sm:w-auto">
+        <div className="hidden sm:block text-2xl font-bold text-gray-800 sm:text-left text-center w-full sm:w-auto">
           HealNexus
         </div>
       </div>
 
       {/* Navigation Links (only visible on medium and up) */}
       <div className="hidden lg:flex space-x-8 text-gray-800 font-semibold">
-        <Link to="/dashboard" className="hover:text-blue-600 hover:border-b-2 border-blue-600">DASHBOARD</Link>
-        <Link to="/doctors" className="hover:text-blue-600 hover:border-b-2 border-blue-600">ALL DOCTORS</Link>
-        <Link to="/about" className="hover:text-blue-600 hover:border-b-2 border-blue-600">ABOUT</Link>
-        <Link to="/contact" className="hover:text-blue-600 hover:border-b-2 border-blue-600">CONTACT</Link>
+        <NavLink
+          to="/dashboard"
+          className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600' : 'hover:text-blue-600 hover:border-b-2 border-transparent'}
+        >
+          DASHBOARD
+        </NavLink>
+        <NavLink
+          to="/doctors"
+          className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600' : 'hover:text-blue-600 hover:border-b-2 border-transparent'}
+        >
+          ALL DOCTORS
+        </NavLink>
+        <NavLink
+          to="/about"
+          className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600' : 'hover:text-blue-600 hover:border-b-2 border-transparent'}
+        >
+          ABOUT
+        </NavLink>
+        <NavLink
+          to="/contact"
+          className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600' : 'hover:text-blue-600 hover:border-b-2 border-transparent'}
+        >
+          CONTACT
+        </NavLink>
       </div>
 
       {/* Action Buttons */}
       <div className="flex items-center space-x-4">
+        {/* Appointment Button */}
+        <NavLink
+          to="/my-appointments"
+          className={`px-4 py-2 text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-all duration-300 ${isScrolled ? "shadow-md" : ""}`}
+        >
+          MyAppointments
+        </NavLink>
+
         {/* Logout Button */}
         <button
           onClick={handleLogout}
@@ -80,6 +111,7 @@ export function Appbar() {
 
         {/* Profile Icon */}
         <button
+          onClick={handleProfileClick}
           className={`p-2 text-blue-600 hover:text-blue-700 transition-all duration-300 ${isScrolled ? "shadow-md" : ""}`}
         >
           <FaUserCircle className="w-8 h-8" /> {/* User icon */}
@@ -88,6 +120,9 @@ export function Appbar() {
     </div>
   );
 }
+
+
+
 
 
 
