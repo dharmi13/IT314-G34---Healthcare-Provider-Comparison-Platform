@@ -12,7 +12,7 @@ const MyProfile = () => {
     // Sample dummy data (replace with actual API data)
     const dummyUserData = {
         name: "John Doe",
-        age: 34,
+        age: 1910391029102910,
         gender: "Male",
         contactNumber: "123-456-7890",
         emergencyContact: {
