@@ -2,67 +2,72 @@ import axios from "axios";
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { loginSchema,signUpSchema } from "./AuthSchema";
 
 export function Auth({ type }) {
-  const [userDetails, setUserDetails] = useState({userName: "", email: "", password: "", confirmPassword: "", role: ""});
+  const [userDetails, setUserDetails] = useState({ userName: "", email: "", password: "", confirmPassword: "", role: "" });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true);
-
     try {
-      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/login`, {email: userDetails.email, password: userDetails.password}, {
-        withCredentials: true
-      });
-      if(response.status === 200) {
-        toast.success("Login successfull");
-        navigate('/dashboard')
-      }
+      // Validate user details with Zod
+      loginSchema.parse(userDetails);
 
+      setLoading(true);
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/login`, {
+        email: userDetails.email,
+        password: userDetails.password,
+      }, { withCredentials: true });
+
+      if (response.status === 200) {
+        toast.success("Login successful");
+        navigate('/dashboard');
+      }
     } catch (error) {
-      console.error('Error logging in:', error.response?.data || error.message);
-      const errorMessage = error.response?.data?.error || 'An error occurred. Please try again.';
-      toast.error(errorMessage);
+      // Handle validation errors from Zod
+      if (error instanceof z.ZodError) {
+        error.errors.forEach(err => toast.error(err.message));
+      } else {
+        console.error('Error logging in:', error.response?.data || error.message);
+        const errorMessage = error.response?.data?.error || 'An error occurred. Please try again.';
+        toast.error(errorMessage);
+      }
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const {userName, email, password, confirmPassword, role} = userDetails;
-
-    if(!userName || !email || !password || !confirmPassword || !role) {
-      const error = "All fields are necessary!";
-      toast.error(error);
-      return;
-    }
-
-    if(userDetails.password != userDetails.confirmPassword) {
-      const error = "Password and confirmPassword fields are not matching";
-      toast.error(error);
-      return;
-    }
-
-    setLoading(true);  
     try {
+      // Validate user details with Zod
+      signUpSchema.parse(userDetails);
+
+      setLoading(true);
       const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/signup`, userDetails, {
-        withCredentials: true
+        withCredentials: true,
       });
-      if(response.status === 201) {
+
+      if (response.status === 201) {
+        toast.success("Sign up successful! Please verify your email.");
         navigate('/verify-email');
       }
-
-    } catch (error_) {
-      console.error('Error logging in:', error_.response?.data || error_.message);
-      const error = error_.response?.data?.error || "An error occurred. Please try again.";
-      toast.error(error);
+    } catch (error) {
+      // Handle validation errors from Zod
+      if (error instanceof z.ZodError) {
+        error.errors.forEach(err => toast.error(err.message));
+      } else {
+        console.error('Error during sign up:', error.response?.data || error.message);
+        const errorMessage = error.response?.data?.error || 'An error occurred. Please try again.';
+        toast.error(errorMessage);
+      }
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
+
 
   return (
     <div className="bg-white h-screen flex flex-col justify-center items-center">
@@ -83,23 +88,23 @@ export function Auth({ type }) {
         </p>
       </div>
       <div className="w-80 flex flex-col space-y-4">
-        {type === 'signup' ? <RegisterAs onRoleChange={(e) => setUserDetails({...userDetails, role: e.target.value})} /> : null}
+        {type === 'signup' ? <RegisterAs onRoleChange={(e) => setUserDetails({ ...userDetails, role: e.target.value })} /> : null}
 
         {type === 'signup' ? <Inputbox
           placeholder="Enter your username"
           title="UserName"
           type="text"
           value={userDetails.userName}
-          onChange={(e) => setUserDetails({...userDetails, userName: e.target.value})}
+          onChange={(e) => setUserDetails({ ...userDetails, userName: e.target.value })}
         /> : undefined
-        } 
+        }
 
         <Inputbox
           placeholder="Enter your email"
           title="Email"
           type="text"
           value={userDetails.email}
-          onChange={(e) => setUserDetails({...userDetails, email: e.target.value})}
+          onChange={(e) => setUserDetails({ ...userDetails, email: e.target.value })}
         />
 
         <Inputbox
@@ -107,7 +112,7 @@ export function Auth({ type }) {
           title="Password"
           type="password"
           value={userDetails.password}
-          onChange={(e) => setUserDetails({...userDetails, password: e.target.value})}
+          onChange={(e) => setUserDetails({ ...userDetails, password: e.target.value })}
         />
 
         {type === 'signup' ? (
@@ -116,23 +121,23 @@ export function Auth({ type }) {
             title="Re-Enter Password"
             type="password"
             value={userDetails.confirmPassword}
-            onChange={(e) => setUserDetails({...userDetails, confirmPassword: e.target.value})}
+            onChange={(e) => setUserDetails({ ...userDetails, confirmPassword: e.target.value })}
           />
         ) : null}
 
         <p className="text-slate-400">
           {type === 'login' ? (
-              <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between">
               <div className="text-sm">
                 <a
-                  onClick={() => {navigate('/forget-password')}}
+                  onClick={() => { navigate('/forget-password') }}
                   className="font-medium text-blue-500 hover:text-blue-400 cursor-pointer"
                 >
                   Forgot Password?
                 </a>
               </div>
             </div>
-            ) :undefined
+          ) : undefined
           }
         </p>
 
