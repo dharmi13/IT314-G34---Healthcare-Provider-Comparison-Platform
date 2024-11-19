@@ -1,0 +1,171 @@
+body {
+    background: linear-gradient(135deg, #3b4961, #d1c6e1); /* Gradient background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh; /* Ensure it fits the full viewport */
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Main Container */
+  .our-team-container {
+    width: 100%; /* Increased width for a broader layout */
+    margin: 40px auto;
+    text-align: center;
+    padding:  20px; /* Added padding to ensure content doesn’t touch edges */
+  }
+  .header{
+    color: white;
+    font-size: 50px;
+  }
+  
+  /* Healthcare Content Section */
+  .healthcare-content {
+    background-color: #6c4444;
+    padding: 60px 40px; /* More padding for a spacious feel */
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    margin-bottom: 60px; /* Added more space between healthcare content and team section */
+    text-align: center;
+  }
+  
+  .healthcare-content h2 {
+    color: #2c3e50;
+    font-size: 6rem; /* Increased font size for more prominence */
+    font-weight: 900; /* Bold and heavy font weight */
+    letter-spacing: -1px; /* Slightly negative letter spacing for a tight look */
+    text-transform: uppercase; /* Capitalized text for emphasis */
+    margin-bottom: 20px; /* Space between title and description */
+  }
+  
+  .healthcare-content p {
+    font-size: 1.5rem; /* Slightly increased font size */
+    color: #34495e;
+    line-height: 1.8;
+    font-weight: 600; /* Semi-bold text for the description */
+    margin-top: 20px; /* Spacing below the title */
+    max-width: 800px; /* Limit width for readability */
+    margin-left: auto;
+    margin-right: auto; /* Centered paragraph */
+  }
+  
+  /* Team Section */
+  .our-team-container h2 {
+    font-size: 5.5rem; /* Increased size for better visibility */
+    color: #333;
+    font-weight: 800; /* Bold text */
+    margin-bottom: 40px;
+    text-transform: uppercase; /* Uppercase for uniformity */
+    letter-spacing: 2px; /* Added letter spacing for a clean look */
+  }
+  
+  /* Team Grid */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for the first 9 items */
+    gap: 30px; /* Moderate gap between items */
+    justify-items: center;
+    margin-bottom: 40px; /* Add spacing below the grid */
+  }
+  
+  /* Targeting the last card (for Mentor) */
+  .team-grid .team-card:last-child {
+    grid-column: span 3; /* Span the last item across the row */
+    justify-self: center; /* Center the last item */
+  }
+  
+  /* Responsive grid for medium and small screens */
+  @media (max-width: 1024px) {
+    .team-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns for tablet */
+    }
+  
+    .team-grid .team-card:last-child {
+      grid-column: span 2; /* Span across the 2 columns on smaller screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .team-grid {
+      grid-template-columns: repeat(1, 1fr); /* 1 column for mobile */
+    }
+  
+    .team-grid .team-card:last-child {
+      grid-column: span 1; /* Span only 1 column on very small screens */
+    }
+  }
+  
+  /* Team Card */
+  .team-card {
+    background-color: gray;
+    border-radius: 10px;
+    width: 250px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .team-card:hover {
+    transform: translateY(-10px); /* Lift effect */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Team Image */
+  .team-image {
+    width: 200px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+  
+  /* Team Name */
+  .team-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    text-transform: capitalize; /* Capitalize the first letter of the name */
+  }
+  
+  /* Team ID */
+  .team-id {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-top: 5px; /* Spacing for clarity */
+  }
+  
+  /* Go Back Button */
+  .go-back-button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #3498db; /* Blue color */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 40px;
+    transition: background-color 0.3s ease;
+    display: block; /* Make button a block element */
+    margin-left: auto;
+    margin-right: auto; /* Center the button */
+  }
+  
+  .go-back-button:hover {
+    background-color: #2980b9; /* Darker blue */
+  }
+  
+  /* Added spacing between grid and button */
+  .team-grid + .go-back-button {
+    margin-top: 50px; /* Gap between grid and button */
+  }
+  
+  /* Additional spacing between Our Team content and the grid */
+  .our-team-container h2 + .team-grid {
+    margin-top: 60px; /* Space between "Our Team" heading and grid */
+  }
+  
