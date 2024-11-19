@@ -1,0 +1,125 @@
+/* General Styling */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, gray, gray);
+    color: #333;
+}
+
+/* Container */
+.about-us-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 20px;
+    text-align: center;
+    background-color: rgb(174, 236, 238);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+/* Logo Styling */
+.logo {
+    margin-left: 25%;
+    width: 550px;
+    margin-bottom: 20px;
+}
+
+/* Header Styling */
+.about-us-header {
+    margin-bottom: 40px;
+}
+
+.about-us-header h1 {
+    font-size: 3rem;
+    color: #2c3e50;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+/* Section Styling */
+.section {
+    margin-bottom: 40px;
+}
+
+.section h2 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* About Us Content */
+.about-us-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #34495e;
+    font-weight: 500;
+}
+
+/* Key Features List */
+.key-features-list {
+    text-align: left;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 900px;
+    list-style-type: none;
+}
+
+.key-features-list li {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 10px;
+    color: #34495e;
+}
+
+.key-features-list li strong {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Go Back Button */
+.go-back-button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #3498db;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 40px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.go-back-button:hover {
+    background-color: #2980b9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-us-container {
+        padding: 30px 15px;
+    }
+
+    .about-us-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .section h2 {
+        font-size: 2rem;
+    }
+
+    .about-us-text, .key-features-list li {
+        font-size: 1.1rem;
+    }
+
+    .go-back-button {
+        font-size: 1rem;
+        padding: 12px 24px;
+    }
+}
