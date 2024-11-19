@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+<<<<<<< Updated upstream
 export const loginSchema = z.object({
   email: z.string()
     .min(5, { message: "Email must be at least 5 characters long" })
@@ -19,6 +20,8 @@ export const loginSchema = z.object({
 
 
 // Define the SignUp schema
+=======
+>>>>>>> Stashed changes
 export const signUpSchema = z.object({
   role: z.string().min(1, { message: "Please select a role" }), // Ensure a role is selected
   userName: z.string()

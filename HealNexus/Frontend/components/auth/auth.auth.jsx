@@ -2,7 +2,8 @@ import axios from "axios";
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { loginSchema,signUpSchema } from "./AuthSchema";
+import { signUpSchema } from "./AuthSchema.js";
+import {z} from 'zod';
 
 export function Auth({ type }) {
   const [userDetails, setUserDetails] = useState({ userName: "", email: "", password: "", confirmPassword: "", role: "" });
@@ -12,21 +13,34 @@ export function Auth({ type }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      // Validate user details with Zod
-      loginSchema.parse(userDetails);
-
       setLoading(true);
       const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/login`, {
         email: userDetails.email,
         password: userDetails.password,
       }, { withCredentials: true });
 
-      if (response.status === 200) {
+      if(response.status === 200 && response.data.role == 'Admin') {
+        toast.success("Welcome Admin");
+        navigate('/admin-dashboard');
+      }
+      else if (response.status === 200 && response.data.role == 'Doctor') {
+        toast.success("Welcome Doctor");
+        navigate('/doctor-dashboard');
+      }
+      else if(response.status === 200 && response.data.role == 'Patient') {
         toast.success("Login successful");
         navigate('/dashboard');
       }
+      else if(response.status === 200 && response.data.role == 'Pharmacist') {
+        toast.success("Login successful");
+        navigate('/pharmacist-dashboard');
+      }
+      else {
+        toast.success("Login successful");
+        navigate('/lab-technician-dashboard');
+      }
     } catch (error) {
-      // Handle validation errors from Zod
+  
       if (error instanceof z.ZodError) {
         error.errors.forEach(err => toast.error(err.message));
       } else {

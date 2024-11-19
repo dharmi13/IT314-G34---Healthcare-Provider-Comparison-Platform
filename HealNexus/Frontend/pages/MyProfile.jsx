@@ -1,52 +1,65 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { toast } from 'react-toastify';
-import { assets } from '../assets/assets'; // Assuming assets.js is correctly set up
 import { Appbar } from './dashBoard';
+
 
 const MyProfile = () => {
     const [userdata, setuserdata] = useState(null);
     const [isEdit, setIsedit] = useState(false);
     const [image, setImage] = useState(null);
-    const [token, setToken] = useState(true); // Token is now true
 
-    // Sample dummy data (replace with actual API data)
-    const dummyUserData = {
-        name: "John Doe",
-        age: 1910391029102910,
-        gender: "Male",
-        contactNumber: "123-456-7890",
-        emergencyContact: {
-            name: "Jane Doe",
-            relationship: "Spouse",
-            contactNumber: "987-654-3210"
-        },
-        address: {
-            street: "123 Main St",
-            city: "Springfield",
-            state: "IL",
-            postalCode: "62704",
-            country: "USA"
-        },
-        medicalHistory: ["Allergy to peanuts", "Asthma"],
-        image: assets.user_placeholder
-    };
-
-    // Set userdata to dummy data instead of fetching from backend
     useEffect(() => {
-        if (token) {
-            setuserdata(dummyUserData);
-        } else {
-            setuserdata(null);
-        }
-    }, [token]);
+        const fetchProfileData = async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/profile/get-patient`, {
+                    withCredentials: true
+                });
 
-    // Function to update the profile data
-    const updateUserProfileData = () => {
-        // Log updated userdata to console (replace with actual API call logic)
-        console.log('Updated User Data:', userdata);
-        toast.success("Profile updated successfully!");
-        setIsedit(false); // Switch to view mode after saving
-        setImage(null); // Clear image selection
+                if (response.status === 200) {
+                    setuserdata(response.data);
+                }
+            } catch (error) {
+                console.error('Error in Logging out', error);
+            }
+        };
+
+        fetchProfileData();
+    }, []);
+
+    const updateUserProfileData = async () => {
+        try {
+            const formData = new FormData();
+
+            formData.append("age", userdata.age);
+            formData.append("gender", userdata.gender);
+            formData.append("contactNumber", userdata.contactNumber);
+            formData.append("medicalHistory", userdata.medicalHistory);
+            formData.append("emergencyContact[name]", userdata.emergencyContact.name);
+            formData.append("emergencyContact[relationship]", userdata.emergencyContact.relationship);
+            formData.append("emergencyContact[contactNumber]", userdata.emergencyContact.contactNumber);
+            formData.append("address[street]", userdata.address.street);
+            formData.append("address[city]", userdata.address.city);
+            formData.append("address[state]", userdata.address.state);
+            formData.append("address[postalCode]", userdata.address.postalCode);
+            formData.append("address[country]", userdata.address.country);
+            if (image) {
+                formData.append("image", image);
+            }
+
+            const response = await axios.put(`${import.meta.env.VITE_SERVER_URL}/profile/update-patient`, formData, {
+                withCredentials: true
+            });
+
+            if (response.status === 200) {
+                toast.success("Profile updated successfully!");
+                setIsedit(false);
+                setImage(null);
+                window.location.reload();
+            }
+        } catch (error) {
+            console.error('Error in Logging out', error);
+        }
     };
 
     const address = userdata?.address || {};

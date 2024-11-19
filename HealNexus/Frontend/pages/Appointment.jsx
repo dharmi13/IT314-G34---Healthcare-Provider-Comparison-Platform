@@ -1,42 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import axios from "axios"; // Import axios for HTTP requests
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
-// Configure React Modal
 Modal.setAppElement("#root");
 
 const Appointment = () => {
-  // Dummy data for doctor information
-  const docInfo = {
-    id: "1",
-    name: "Dr. John Doe",
-    image: "https://via.placeholder.com/150", // Placeholder image
-    degree: "MBBS",
-    speciality: "General Physician",
-    experience: "5 years",
-    about:
-      "Dr. John Doe is dedicated to providing high-quality healthcare with a focus on preventive care and wellness.",
-    fee: 50,
-  };
+  const [doctorData, setDoctorData] = useState({});
+  const { id } = useParams();
 
-  // Dummy data for slots
+  useEffect(() => {
+    const fetchDoctorDetails = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_SERVER_URL}/profile/get-doctor/${id}`,
+          { withCredentials: true }
+        );
+        if (response.status === 200) {
+          setDoctorData(response.data.response);
+        }
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+      }
+    };
+
+    if (id) {
+      fetchDoctorDetails(); 
+    }
+  }, [id]);
+
   const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   const doctorSlots = [
-    { day: "2024_11_21", slots: ["10:00 AM", "11:00 AM", "2:00 PM", "4:00 PM"] },
-    { day: "2024_11_22", slots: ["9:00 AM", "12:00 PM", "3:00 PM"] },
-    { day: "2024_11_23", slots: ["10:00 AM", "1:00 PM", "5:00 PM"] },
+    { date: "21_11_2024", slots: ["10:00 AM", "11:00 AM", "2:00 PM", "4:00 PM"] },
+    { date: "22_11_2024", slots: ["9:00 AM", "12:00 PM", "3:00 PM"] },
+    { date: "23_11_2024", slots: ["10:00 AM", "1:00 PM", "5:00 PM"] },
   ];
 
-  // State variables
   const [selectedDayIndex, setSelectedDayIndex] = useState(0);
   const [selectedSlot, setSelectedSlot] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
 
-  // Event Handlers
   const handleDayClick = (index) => {
     setSelectedDayIndex(index);
-    setSelectedSlot(""); // Clear the selected slot when switching days
+    setSelectedSlot(""); 
   };
 
   const handleSlotClick = (slot) => {
@@ -48,27 +55,27 @@ const Appointment = () => {
       alert("Please select a time slot before booking.");
       return;
     }
-    setIsModalOpen(true); // Open the confirmation modal
+    setIsModalOpen(true); 
   };
 
-  const confirmBooking = () => {
-    // Send the appointment data to the backend here
-    axios
-      .post("/api/book-appointment", {
-        doctorId: docInfo.id,
-        selectedDay: doctorSlots[selectedDayIndex].day,
-        selectedSlot: selectedSlot,
-        patientName: "Patient Name", // You can collect patient data from a form if needed
-        patientContact: "Patient Contact Info",
-      })
-      .then((response) => {
-        setIsModalOpen(false); // Close the confirmation modal
-        setIsSuccessModalOpen(true); // Open the success modal
-      })
-      .catch((error) => {
-        alert("Error booking appointment. Please try again.");
-        console.error("Error booking appointment:", error);
+  const confirmBooking = async () => {
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/appointment/book-appointment`, {
+        doctorID: id,
+        slotDate: doctorSlots[selectedDayIndex].date,
+        slotTime: selectedSlot,
+      }, {
+        withCredentials: true,
       });
+
+      if(response.status === 201) {
+        setIsModalOpen(false);
+        setIsSuccessModalOpen(true); 
+      }
+    } catch (error) {
+      alert("Error booking appointment. Please try again.");
+      console.error("Error booking appointment:", error);
+    }
   };
 
   const closeSuccessModal = () => {
@@ -82,22 +89,23 @@ const Appointment = () => {
       {/* Doctor Details Section */}
       <div className="flex flex-col items-center bg-white rounded-lg shadow-lg p-6">
         <img
-          src={docInfo.image}
-          alt={docInfo.name}
+          src={doctorData.image}
+          alt={doctorData.userName}
           className="w-32 h-32 rounded-full object-cover mb-4 border-4 border-blue-100"
         />
         <h1 className="text-2xl font-bold text-gray-800">
-          {docInfo.name}{" "}
+          {doctorData.userName}{" "}
           <span className="text-blue-500">
             <i className="fas fa-check-circle"></i>
           </span>
         </h1>
         <p className="text-gray-600">
-          {docInfo.degree} - {docInfo.speciality}
+          {doctorData?.qualifications?.join(", ")} - {doctorData?.specialty}
         </p>
-        <p className="text-gray-500 mt-2 text-center">{docInfo.about}</p>
+
+        <p className="text-gray-500 mt-2 text-center">{doctorData.biography}</p>
         <p className="text-lg font-semibold text-gray-800 mt-4">
-          Appointment Fee: ${docInfo.fee}
+          Appointment Fee: ${doctorData.consultationFee}
         </p>
       </div>
 
@@ -108,21 +116,20 @@ const Appointment = () => {
         </h3>
         {/* Day Buttons */}
         <div className="flex justify-center mb-6">
-          {doctorSlots.map((day, index) => {
-            const dayDate = day.day.replace(/_/g, "-"); // Corrected format
-            const [year, month, date] = dayDate.split("-");
-            const formattedDate = `${year}-${month}-${date}`; // Reformat for JS Date
+          {doctorSlots.map((date, index) => {
+            const dayDate = date.date.replace(/_/g, "-"); // Corrected format
+            const [year, month, day] = dayDate.split("-");
+            const formattedDate = `${day}-${month}-${year}`; // Reformat for JS Date
             const dayName = daysOfWeek[new Date(formattedDate).getDay()]; // Get day name
 
             return (
               <button
                 key={index}
                 onClick={() => handleDayClick(index)}
-                className={`text-center w-24 h-16 rounded-md font-bold mx-2 flex flex-col items-center justify-center ${
-                  selectedDayIndex === index
+                className={`text-center w-24 h-16 rounded-md font-bold mx-2 flex flex-col items-center justify-center ${selectedDayIndex === index
                     ? "bg-blue-600 text-white"
                     : "bg-gray-200 text-gray-700"
-                }`}
+                  }`}
               >
                 <span className="text-base font-semibold">{dayName}</span>
                 <span className="text-xs mt-1">{dayDate}</span>
@@ -140,11 +147,10 @@ const Appointment = () => {
             <button
               key={idx}
               onClick={() => handleSlotClick(slot)}
-              className={`p-2 border rounded-md text-center ${
-                selectedSlot === slot
+              className={`p-2 border rounded-md text-center ${selectedSlot === slot
                   ? "bg-blue-600 text-white"
                   : "bg-gray-100 text-gray-700"
-              }`}
+                }`}
             >
               {slot}
             </button>
@@ -171,10 +177,10 @@ const Appointment = () => {
       >
         <h2 className="text-xl font-bold text-gray-800 mb-4">Confirm Booking</h2>
         <p className="text-gray-700 mb-6">
-          Are you sure you want to book an appointment with <b>{docInfo.name}</b>{" "}
+          Are you sure you want to book an appointment with <b>{doctorData.userName}</b>{" "}
           on{" "}
           <b>
-            {doctorSlots[selectedDayIndex].day.replace(/_/g, "/")} at{" "}
+            {doctorSlots[selectedDayIndex].date.replace(/_/g, "/")} at{" "}
             {selectedSlot}
           </b>
           ?
@@ -204,9 +210,9 @@ const Appointment = () => {
       >
         <h2 className="text-xl font-bold text-green-600 mb-4">Success!</h2>
         <p className="text-gray-700 mb-6">
-          Appointment successfully booked with <b>{docInfo.name}</b> on{" "}
+          Appointment successfully booked with <b>{doctorData.userName}</b> on{" "}
           <b>
-            {doctorSlots[selectedDayIndex].day.replace(/_/g, "/")} at{" "}
+            {doctorSlots[selectedDayIndex].date.replace(/_/g, "/")} at{" "}
             {selectedSlot}
           </b>
           .

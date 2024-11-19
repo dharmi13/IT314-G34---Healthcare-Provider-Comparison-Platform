@@ -6,7 +6,7 @@ const verifyToken = (req, res, next) => {
     if (!token) {
       return res.status(400).json({ error: "Unauthorized - No token Provided!" });
     }
-    
+
     const decode = jwt.verify(token, process.env.SECRET_JWT_KEY ?? "");
     if (!decode) {
       return res.status(400).json({ error: "Unauthorized - Invalid Provided!" });
