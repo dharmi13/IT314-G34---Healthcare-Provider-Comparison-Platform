@@ -1,50 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import  {people_icon}  from '../../assets/assets_copy.js'; 
 import Navbar from '../../components/doctor/Navbar.jsx';
-import Sidebar from '../../components/doctor/Sidebar.jsx'; // Assuming you have local assets
+import Sidebar from '../../components/doctor/Sidebar.jsx'; 
+import axios from 'axios';
 
 export const DoctorAllAppointments = () => {
-  // Mocked static data for appointments
-  const [appointments, setAppointments] = useState([
-    {
-      userData: { name: "John Doe", dob: "1990-06-15", image: "src/assets/user.png" },
-      docData: { name: "Dr. Sarah Lee", fee: 50, image: "src/assets/doctor.jpg" },
-      slotDate: "15_11_2024",
-      slotTime: "10:00 AM"
-    },
-    {
-      userData: { name: "Jane Smith", dob: "1985-09-25", image: "src/assets/user.png" },
-      docData: { name: "Dr. Michael Green", fee: 70, image: "src/assets/doctor.jpg" },
-      slotDate: "16_11_2024",
-      slotTime: "2:00 PM"
-    },
-    {
-      userData: { name: "Robert Johnson", dob: "1993-02-12", image: "src/assets/user.png" },
-      docData: { name: "Dr. Emily Brown", fee: 60, image: "src/assets/doctor.jpg" },
-      slotDate: "17_11_2024",
-      slotTime: "11:00 AM"
-    }
-  ]);
+  const [totalAppointments, setTotalAppointments] = useState([]);
+    
+  useEffect(() => {
+    const getTotalAppointments = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/patient/appointments`, {
+          withCredentials: true
+        });
+  
+        if (response.status === 200) {
+          setTotalAppointments(response.data.allAppointmentsData);
+        }
+      } catch (error) {
+        console.error('Error in Logging out', error);
+      }
+    };
 
-  // Function to format the date
+    getTotalAppointments();
+  });
+
   function formatDate(dateString) {
     const [day, month, year] = dateString.split("_");
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const monthName = months[parseInt(month, 10) - 1];
     return `${day} ${monthName} ${year}`;
   }
-
-  // Function to calculate age based on date of birth
-  const calculateAge = (dob) => {
-    const birthDate = new Date(dob);
-    const today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const month = today.getMonth();
-    if (month < birthDate.getMonth() || (month === birthDate.getMonth() && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-    return age;
-  };
 
   return (
     <div>
@@ -63,25 +49,25 @@ export const DoctorAllAppointments = () => {
           <p>Fees</p>
         </div>
 
-        {appointments && appointments.length > 0 ? (
-          appointments.map((item, index) => (
+        {totalAppointments && totalAppointments.length > 0 ? (
+          totalAppointments.map((item, index) => (
             <div
               className='flex flex-wrap justify-between sm:grid sm:grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr] items-center text-gray-500 py-3 px-6 border-b hover:bg-gray-50'
               key={index}
             >
               <p className='max-sm:hidden'>{index + 1}</p>
               <div className='flex items-center gap-2'>
-                {item.userData && (
+                {item.patientData && (
                   <>
-                    <img className='w-8 rounded-full' src={item.userData.image || people_icon} alt="User" />
-                    <p className='text-ellipsis overflow-hidden max-w-[150px]'>{item.userData.name}</p>
+                    <img className='w-8 rounded-full' src={item.patientData.image || people_icon} alt="User" />
+                    <p className='text-ellipsis overflow-hidden max-w-[150px]'>{item.patientData.userName}</p>
                   </>
                 )}
               </div>
-              <p>{item.userData ? calculateAge(item.userData.dob) : "N/A"}</p>
-              <p>{formatDate(item.slotDate)} | {item.slotTime}</p>
+              <p>{item.patientData ? item.patientData.age : "N/A"}</p>
+              <p>{formatDate(item.appointmentData.slotDate)} | {item.appointmentData.slotTime}</p>
               
-              <p>{item.docData ? `$${item.docData.fee}` : "N/A"}</p>
+              <p>{item.appointmentData ? `$${item.appointmentData.amount}` : "N/A"}</p>
             </div>
           ))
         ) : (

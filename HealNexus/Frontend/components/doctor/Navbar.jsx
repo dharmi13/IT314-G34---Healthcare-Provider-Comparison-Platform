@@ -1,15 +1,43 @@
-import React, { useState } from 'react';
-import { heal_logo, doctor_icon } from '../../assets/assets_copy.js'; // Assuming you have local assets
+import React, { useEffect, useState } from 'react';
+import { heal_logo, doctor_icon } from '../../assets/assets_copy.js'; 
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-  // Mock state for admin/doctor status
-  const [isAdmin, setIsAdmin] = useState(true); // Mock admin/doctor status
-  const [showProfileDropdown, setShowProfileDropdown] = useState(false); // State for profile dropdown visibility
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false); 
+  const navigate = useNavigate();
+  const [doctorName, setDoctorName] = useState("Doctor");
 
-  const logOut = () => {
-    // Simple mock logout logic
-    setIsAdmin(false);
-    alert("Logged out!");
+  useEffect(() => {
+    const fetchDoctorName = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/patient/get-doctor-name`, {
+          withCredentials: true
+        });
+  
+        if (response.status === 200) {
+          setDoctorName(response.data.userName);
+        }
+      } catch (error) {
+        console.error('Error in Logging out', error);
+      }
+    };
+
+    fetchDoctorName();
+  });
+
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/logout`, {
+        withCredentials: true
+      });
+
+      if (response.status === 200) {
+        navigate('/');
+      }
+    } catch (error) {
+      console.error('Error in Logging out', error);
+    }
   };
 
   const toggleProfileDropdown = () => {
@@ -29,17 +57,14 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Right: Logout and Profile Section */}
       <div className="flex items-center relative gap-4">
-        {/* Logout Button */}
         <button
-          onClick={logOut}
+          onClick={handleLogout}
           className="bg-red-500 text-white text-sm px-4 py-2 rounded-full"
         >
           Logout
         </button>
 
-        {/* Profile Section */}
         <div
           className="flex items-center cursor-pointer gap-2"
           onClick={toggleProfileDropdown}
@@ -49,10 +74,9 @@ const Navbar = () => {
             alt="Profile"
             className="w-10 h-10 rounded-full"
           />
-          <p className="text-sm font-medium">Dr. John Doe</p>
+          <p className="text-sm font-medium">{doctorName}</p>
         </div>
 
-        {/* Profile Dropdown */}
         {showProfileDropdown && (
           <div className="absolute right-0 top-12 bg-white shadow-lg rounded-md p-4 w-48">
             <ul>

@@ -1,6 +1,23 @@
 import Appointment from '../../data/models/appointment.models.js';
 import DoctorProfile from '../../data/models/profile/profile.doctor.js';
+import PatientProfile from '../../data/models/profile/profile.patient.js';
 import User from '../../data/models/user.model.js';
+
+const getDoctorName = async (req, res) => {
+  try {
+    const { userID } = req;
+    const docData = await User.findById(userID);
+    if (!docData) {
+      return res.status(404).json({ success: false, message: 'Doctor not found' });
+    }
+
+    res.status(200).json({ success: true, userName: docData.userName });
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Error Fetching Doctor Name' });
+  }
+};
 
 const changeAvailablity = async (req, res) => {
   try {
@@ -46,14 +63,42 @@ const doctorlist = async (req, res) => {
 
 const appointmentsDoctor = async (req, res) => {
   try {
-    const { userID } = req.body
-    const appointments = await Appointment.find({ doctorID: userID });
+    const { userID } = req
+    const doctorProfileData = await DoctorProfile.find({userID: userID});
+    const appointments = await Appointment.find({ doctorID: doctorProfileData[0]._id, isCompleted: false });
+    const Completedappointments = await Appointment.find({ doctorID: doctorProfileData[0]._id, payment: true, cancel: false });
 
-    res.json({ success: true, appointments });
+    const PatientDataPromises = appointments.map(async (appointment) => {
+      const patientData = await PatientProfile.findById(appointment.patientID);
+      const patientSignupData = await User.findById(patientData.userID);
+      return {
+        appointmentData: {
+          id: appointment._id,
+          slotDate: appointment.slotDate,
+          slotTime: appointment.slotTime,
+          cancel: appointment.cancel,
+          isCompleted: appointment.isCompleted,
+          payment: appointment.payment,
+          amount: appointment.amount
+        },
+        patientData: {
+          image: patientData.image,
+          userName: patientSignupData.userName,
+          age: patientData.age
+        },
+      };
+    });
+
+    const totalAmount = Completedappointments.reduce((sum, appointment) => {
+      return sum + (appointment.amount || 0); 
+    }, 0);
+
+    const allAppointmentsData = await Promise.all(PatientDataPromises);
+    res.status(200).json({ success: true, allAppointmentsData, totalAmount });
 
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: 'Server error' });
+    res.status(500).json({ success: false, message: 'Error in geting doctor Appointments.' });
   }
 }
 
@@ -108,4 +153,4 @@ const doctorDashboard = async (req, res) => {
   }
 }
 
-export { changeAvailablity, doctorlist, appointmentsDoctor, completeAppointment, doctorDashboard };
+export { getDoctorName, changeAvailablity, doctorlist, appointmentsDoctor, completeAppointment, doctorDashboard };

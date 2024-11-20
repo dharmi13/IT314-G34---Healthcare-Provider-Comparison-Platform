@@ -8,7 +8,7 @@ router.get("/get-profile", getAdminProfile);
 router.post("/update-profile/:id", updateAdminProfile);
 router.get("/get-verified-doctors", verifyToken, allVerifiedDoctors);
 router.get("/get-unverified-doctors", verifyToken, allUnVerifiedDoctors);
-router.post("/approve-doctor/:doctorID", verifyToken, approveDoctor);
+router.put("/approve-doctor/:doctorID", verifyToken, approveDoctor);
 router.get("/appointments", verifyToken, appointmentsAdmin);
 router.get("/dashboard", verifyToken, adminDashboard);
 

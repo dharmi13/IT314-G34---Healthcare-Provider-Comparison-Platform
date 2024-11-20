@@ -5,7 +5,7 @@ import healLogo from '../assets/heal_logo.png';
 
 const AboutUs = () => {
   const goBackToHome = () => {
-    window.location.href = "/"; // Navigate to the home page
+    window.location.href = "/"; 
   };
 
   return (
