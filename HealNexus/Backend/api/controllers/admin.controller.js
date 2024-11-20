@@ -1,7 +1,10 @@
 import DoctorProfile from '../../data/models/profile/profile.doctor.js';
 import PatientProfile from '../../data/models/profile/profile.patient.js';
+import LabTechnicianProfile from '../../data/models/profile/profile.labtechnician.js';
+import PharmacistProfile from '../../data/models/profile/profile.pharmacist.js';
 import Appointment from '../../data/models/appointment.models.js';
 import AdminProfile from '../../data/models/profile/profile.admin.js';
+import User from '../../data/models/user.model.js';
 
 const getAdminProfile = async (req, res) => {
   try {
@@ -66,7 +69,17 @@ const adminLogin = async (req, res) => {
 const allVerifiedDoctors = async (req, res) => {
   try {
     const doctors = await DoctorProfile.find({isVerified: true});
-    res.json({ success: true, doctors });
+    const doctorData = await Promise.all(
+      doctors.map(async (doctor) => {
+        const user = await User.findById(doctor.userID); 
+        return {
+          ...doctor.toObject(), 
+          userData: user ? user : null, 
+        };
+      })
+    );
+
+    res.status(200).json({ success: true, doctorData });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: 'Server error' });
@@ -76,7 +89,17 @@ const allVerifiedDoctors = async (req, res) => {
 const allUnVerifiedDoctors = async (req, res) => {
   try {
     const doctors = await DoctorProfile.find({isVerified: false});
-    res.json({ success: true, doctors });
+      const doctorData = await Promise.all(
+        doctors.map(async (doctor) => {
+          const user = await User.findById(doctor.userID); 
+          return {
+            ...doctor.toObject(), 
+            userData: user ? user : null, 
+          };
+        })
+      );
+
+    res.json({ success: true, doctorData });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: 'Server error' });
@@ -88,7 +111,7 @@ const approveDoctor = async (req, res) => {
     const { doctorID } = req.params;
     await DoctorProfile.findByIdAndUpdate(doctorID, { isVerified: true });
 
-    res.json({ success: true });
+    res.status(200).json({ success: true });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: 'Server error' });
@@ -109,18 +132,42 @@ const appointmentsAdmin = async (req, res) => {
 
 const adminDashboard = async (req, res) => {
   try {
-    const doctors = await doctorModel.find({});
     const users = await PatientProfile.find({});
-    const appointments = await Appointment.find({});
+    const doctors = await DoctorProfile.find({});
+    const appointments = await Appointment.find({isCompleted: false});
+    const labTechnicians = await LabTechnicianProfile.find({});
+    const pharmacists = await PharmacistProfile.find({});
 
-    const dashData = {
+    const detailedAppointments = await Promise.all(
+      appointments.map(async (appointment) => {
+        const patient = await PatientProfile.findById(appointment.patientID); 
+        const patientData = await User.findById(patient.userID); 
+        const doctor = await DoctorProfile.findById(appointment.doctorID); 
+        const doctorData = await User.findById(doctor.userID); 
+
+        return {
+          slotDate: appointment.slotDate, 
+          slotTime: appointment.slotTime,
+          amount: appointment.amount, 
+          patientName: patientData.userName, 
+          patientimage: patient.image,
+          patientage: patient.age, 
+          doctorName: doctorData.userName,
+          doctorimage: doctor.image
+        };
+      })
+    );
+
+    const dashboardData = {
+      users: users.length,
       doctors: doctors.length,
       appointments: appointments.length,
-      users: users.length,
+      labTechnicians: labTechnicians.length,
+      pharmacists: pharmacists.length,
       latestappointments: appointments.reverse().slice(0, 5)
     };
 
-    res.json({ success: true, data: dashData });
+    res.status(200).json({ success: true, dashboardData, detailedAppointments});
 
   } catch (error) {
     console.error(error);

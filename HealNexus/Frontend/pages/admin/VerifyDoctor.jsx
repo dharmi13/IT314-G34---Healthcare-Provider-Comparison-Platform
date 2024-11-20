@@ -1,43 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/admin/Navbar.jsx';
 import Sidebar from '../../components/admin/Sidebar.jsx';
+import axios from 'axios';
 
 const UnverifiedDoctor = () => {
-  // Local state for unverified doctors
-  const [unverifiedDoctors, setUnverifiedDoctors] = useState([
-    { name: "Dr. John Eliyah", image: "src/assets/doctor.jpg", speciality: "Cardiologist" },
-    { name: "Dr. Smith Johnson", image: "src/assets/doctor.jpg", speciality: "Dermatologist" },
-    { name: "Dr. Michael White", image: "src/assets/doctor.jpg", speciality: "Neurologist" },
-    { name: "Dr. Brown Davis", image: "src/assets/doctor.jpg", speciality: "Pediatrician" },
-    { name: "Dr. William Johns", image: "src/assets/doctor.jpg", speciality: "Orthopedic Surgeon" },
-  ]);
+  const [unverifiedDoctors, setUnverifiedDoctors] = useState([]);
 
-  const [selectedDoctor, setSelectedDoctor] = useState(null); // State for selected doctor
-  const [verifiedDoctors, setVerifiedDoctors] = useState([]); // State for verified doctors
+  useEffect(() => {
+    const fetchDoctorData = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/admin/get-unverified-doctors`, {
+          withCredentials: true
+        });
+  
+        if (response.status === 200) {
+          console.log(response.data.doctorData);
+          setUnverifiedDoctors(response.data.doctorData);
+        }
+      } catch (error) {
+        console.error('Error in Logging out', error);
+      }
+    };
 
-  // Handle showing the profile of a doctor
+    fetchDoctorData();
+  }, []);
+
+  const [selectedDoctor, setSelectedDoctor] = useState(null); 
+
   const showDoctorProfile = (doctor) => {
     setSelectedDoctor(doctor);
   };
 
-  // Handle returning to the list of unverified doctors
   const goBackToList = () => {
     setSelectedDoctor(null);
   };
 
-  // Handle approving a doctor
-  const verifyDoctor = (doctor) => {
-    setVerifiedDoctors([...verifiedDoctors, doctor]); // Add doctor to verified list
-    setUnverifiedDoctors(unverifiedDoctors.filter((item) => item !== doctor)); // Remove doctor from unverified list
+  const verifyDoctor = async (doctor) => {
+    try {
+      const response = await axios.put(`${import.meta.env.VITE_SERVER_URL}/admin/approve-doctor/${doctor._id}`, null, {
+        withCredentials: true
+      });
+
+      if (response.status === 200) {
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error('Error in Logging out', error);
+    }
   };
 
-  // Handle rejecting a doctor
-  const rejectDoctor = (doctor) => {
-    setUnverifiedDoctors(unverifiedDoctors.filter((item) => item !== doctor)); // Remove doctor from unverified list
+  const rejectDoctor = () => {
+
   };
 
   if (selectedDoctor) {
-    // Show profile view of the selected doctor
     return (
       <div>
         <Navbar />
@@ -48,8 +64,19 @@ const UnverifiedDoctor = () => {
             <div className="border border-indigo-200 rounded-xl p-4 max-w-md">
               <img className="bg-indigo-50" src={selectedDoctor.image} alt="doctor" />
               <div className="pt-4">
-                <p className="text-neutral-800 text-lg font-medium">{selectedDoctor.name}</p>
-                <p className="text-zinc-600 text-sm">{selectedDoctor.speciality}</p>
+                <p className="text-neutral-800 text-lg font-medium">{selectedDoctor.userData.userName}</p>
+                <p className="text-zinc-600 text-sm">{selectedDoctor.userData.email}</p>
+                <p className="text-zinc-600 text-sm">{selectedDoctor. contactNumber}</p>
+                <p className="text-zinc-600 text-sm">{selectedDoctor.specialty}</p>
+                <p className="text-zinc-600 text-sm">{selectedDoctor.qualifications}</p>
+                <p className="text-zinc-600 text-sm">{selectedDoctor.experience}</p>
+                <p className="text-zinc-600 text-sm">{selectedDoctor.consultationFee}</p>
+                <p className="text-zinc-600 text-sm">{selectedDoctor.clinicAddress.street}</p>
+                <p className="text-zinc-600 text-sm">{selectedDoctor.clinicAddress.city}</p>
+                <p className="text-zinc-600 text-sm">{selectedDoctor.clinicAddress.state}</p>
+                <p className="text-zinc-600 text-sm">{selectedDoctor.clinicAddress.country}</p>
+                <p className="text-zinc-600 text-sm">{selectedDoctor.clinicAddress.postalCode}</p>
+                <p className="text-zinc-600 text-sm">{selectedDoctor.biography}</p>
               </div>
               <div className="mt-4">
                 <button
@@ -84,7 +111,6 @@ const UnverifiedDoctor = () => {
     );
   }
 
-  // Default view showing the list of unverified doctors
   return (
     <div>
       <Navbar />
@@ -104,12 +130,12 @@ const UnverifiedDoctor = () => {
                   alt="doctor"
                 />
                 <div className="p-4">
-                  <p className="text-neutral-800 text-lg font-medium">{item.name}</p>
-                  <p className="text-zinc-600 text-sm">{item.speciality}</p>
+                  <p className="text-neutral-800 text-lg font-medium">{item.userData.userName}</p>
+                  <p className="text-zinc-600 text-sm">{item.specialty}</p>
                   <div className="mt-2 flex items-center gap-1 text-sm">
                     <button
                       style={{ color: 'white', backgroundColor: 'blue', width: '70px', height: '35px' }}
-                      onClick={() => showDoctorProfile(item)} // Show profile on button click
+                      onClick={() => showDoctorProfile(item)} 
                     >
                       Checkout
                     </button>

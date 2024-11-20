@@ -26,7 +26,7 @@ const handleProtectedNavigation = (path, isLoggedIn, navigate) => {
 };
 
 export function Appbar({isLoggedIn,navigate}) {
-  const [isScrolled, setIsScrolled] = useState(false);  // Simulated logged-in state
+  const [isScrolled, setIsScrolled] = useState(false);  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,16 +70,16 @@ export function Appbar({isLoggedIn,navigate}) {
           ALL DOCTORS
         </button>
         <Link
-          to="/about"
+          to="/about-us"
           className="hover:text-blue-600 hover:border-b-2 border-blue-600"
         >
           ABOUT
         </Link>
         <Link
-          to="/contact"
+          to="/our-team"
           className="hover:text-blue-600 hover:border-b-2 border-blue-600"
         >
-          CONTACT
+          OUR-TEAM
         </Link>
       </div>
 

@@ -4,7 +4,7 @@ import Harshit from '../assets/Harshit.png';
 import Zeel from '../assets/zeel.png';
 import Mihir from '../assets/mihir.png';
 import Shail from '../assets/shail.png';
-import Hitanshu from '../assets/hitanshu.png';
+import Hitanshu from '../assets/hitanshu.jpg';
 import Aditya from '../assets/aditya.png';
 import Mentor from '../assets/prof.saurabh tiwary.png';
 import Malay from '../assets/malay.jpg';

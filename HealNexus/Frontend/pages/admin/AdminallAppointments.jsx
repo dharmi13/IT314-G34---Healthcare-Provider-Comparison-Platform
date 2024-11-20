@@ -1,33 +1,29 @@
-
-
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { people_icon, doctor_icon } from '../../assets/assets_copy.js';  // Assuming you have local assets
 import Navbar from '../../components/admin/Navbar.jsx';
 import Sidebar from '../../components/admin/Sidebar.jsx';
 
 export const AdminallAppointments = () => {
-  // Mocked static data for appointments
-  const [appointments, setAppointments] = useState([
-    {
-      userData: { name: "John Doe", dob: "1990-06-15", image: "src/assets/user.png" },
-      docData: { name: "Dr. Sarah Lee", fee: 50, image: "src/assets/doctor.jpg" },
-      slotDate: "15_11_2024",
-      slotTime: "10:00 AM"
-    },
-    {
-      userData: { name: "Jane Smith", dob: "1985-09-25", image: "src/assets/user.png" },
-      docData: { name: "Dr. Michael Green", fee: 70, image: "src/assets/doctor.jpg" },
-      slotDate: "16_11_2024",
-      slotTime: "2:00 PM"
-    },
-    {
-      userData: { name: "Robert Johnson", dob: "1993-02-12", image: "src/assets/user.png" },
-      docData: { name: "Dr. Emily Brown", fee: 60, image: "src/assets/doctor.jpg" },
-      slotDate: "17_11_2024",
-      slotTime: "11:00 AM"
-    }
-  ]);
+  const [appointmentData, setAppointmentData] = useState([]);
 
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/admin/dashboard`, {
+          withCredentials: true
+        });
+  
+        if (response.status === 200) {
+          setAppointmentData(response.data.detailedAppointments)
+        }
+      } catch (error) {
+        console.error('Error in Logging out', error);
+      }
+    };
+
+    fetchDashboardData();
+  }, []);
   // Function to format the date
   function formatDate(dateString) {
     const [day, month, year] = dateString.split("_");
@@ -66,32 +62,32 @@ export const AdminallAppointments = () => {
           <p>Fees</p>
         </div>
 
-        {appointments && appointments.length > 0 ? (
-          appointments.map((item, index) => (
+        {appointmentData && appointmentData.length > 0 ? (
+          appointmentData.map((item, index) => (
             <div
               className='flex flex-wrap justify-between sm:grid sm:grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr] items-center text-gray-500 py-3 px-6 border-b hover:bg-gray-50'
               key={index}
             >
               <p className='max-sm:hidden'>{index + 1}</p>
               <div className='flex items-center gap-2'>
-                {item.userData && (
+                {item.patientName && (
                   <>
-                    <img className='w-8 rounded-full' src={item.userData.image || people_icon} alt="User" />
-                    <p className='text-ellipsis overflow-hidden max-w-[150px]'>{item.userData.name}</p>
+                    <img className='w-8 rounded-full' src={item.patientimage || people_icon} alt="User" />
+                    <p className='text-ellipsis overflow-hidden max-w-[150px]'>{item.patientName}</p>
                   </>
                 )}
               </div>
-              <p>{item.userData ? calculateAge(item.userData.dob) : "N/A"}</p>
+              <p>{item.userData ? item.patientage : "N/A"}</p>
               <p>{formatDate(item.slotDate)} | {item.slotTime}</p>
               <div className='flex items-center gap-2'>
-                {item.docData && (
+                {item.doctorName && (
                   <>
-                    <img className='w-8 rounded-full' src={item.docData.image || doctor_icon} alt="Doctor" />
-                    <p className='text-ellipsis overflow-hidden max-w-[150px]'>{item.docData.name}</p>
+                    <img className='w-8 rounded-full' src={item.doctorimage || doctor_icon} alt="Doctor" />
+                    <p className='text-ellipsis overflow-hidden max-w-[150px]'>{item.doctorName}</p>
                   </>
                 )}
               </div>
-              <p>{item.docData ? `$${item.docData.fee}` : "N/A"}</p>
+              <p>{item.doctorName ? `$${item.amount}` : "N/A"}</p>
             </div>
           ))
         ) : (
