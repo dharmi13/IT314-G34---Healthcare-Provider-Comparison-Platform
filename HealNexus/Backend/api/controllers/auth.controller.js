@@ -171,6 +171,15 @@ const resetPassword = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
+
+    if(email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+      GenerateJWTTokenAndCookie(email + password, res);
+      const success = getErrorDetails('SUCCESS');
+      return res.status(200).json({
+        role: 'Admin'
+      });
+    }
+
     const user = await User.findOne({ email });
     const CheckPassword = await bcrypt.compare(password, user?.password ?? "");
 
@@ -197,10 +206,10 @@ const login = async (req, res) => {
       return res.status(error.code).json({ message: error.message });
     }
 
+    GenerateJWTTokenAndCookie(user._id, res);
     const success = getErrorDetails('SUCCESS');
     return res.status(success.code).send({
-      userName: user.userName,
-      email: user.email,
+      role: user.role
     });
 
   } catch (error) {
@@ -213,6 +222,7 @@ const login = async (req, res) => {
 const logout = (req, res) => {
   try {
     res.cookie("jwt", "", {maxAge: 0});
+    res.clearCookie("jwt");
     const error = getErrorDetails('SUCCESS', 'Logged Out Successfully!');
     return res.status(error.code).json({message: error.message});
 

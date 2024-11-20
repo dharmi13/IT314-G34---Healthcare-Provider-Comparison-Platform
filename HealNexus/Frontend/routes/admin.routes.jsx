@@ -5,7 +5,7 @@ import UnverifiedDoctor from '../pages/Admin/VerifyDoctor'
 import DoctorsList from '../pages/Admin/DoctorsList'
 
 export function AdminRoutes(){
-    return <Routes> <Route path='/admin_dash' element={<AdminDashBoard/>}></Route>
+    return <Routes> <Route path='/admin-dashboard' element={<AdminDashBoard/>}></Route>
     <Route path='/admin_all-appointments' element={<AdminallAppointments/>}></Route>
     <Route path='/admin_add-doctor' element={<UnverifiedDoctor></UnverifiedDoctor> }></Route>
     <Route path='/admin_doctor-list' element={ <DoctorsList></DoctorsList> }></Route></Routes>

@@ -4,12 +4,31 @@ import { useState, useEffect } from 'react';
 import { Link ,useNavigate,NavLink} from 'react-router-dom'
 import { FaMapMarkerAlt, FaSearch ,FaUserCircle} from 'react-icons/fa';
 
-
 const DashBoard = () => {
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    const fetchUserName = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_SERVER_URL}/auth/get-user-details`,
+          { withCredentials: true }
+        );
+        if (response.status === 200) {
+          setUserName(response.data.userName);
+        }
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+      }
+    };
+
+    fetchUserName();
+  }, []);
+
   return (
     <div>
       <Appbar />
-      <HeroSection/>
+      <HeroSection userName={userName} />
       <Services />
       <SpecialitySection />
       <Footer />
@@ -17,13 +36,13 @@ const DashBoard = () => {
   );
 };
 
+
 export default DashBoard;
 
 export function Appbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
 
-  // Handle logout functionality
   const handleLogout = async () => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/logout`, {
@@ -36,11 +55,6 @@ export function Appbar() {
     } catch (error) {
       console.error('Error in Logging out', error);
     }
-  };
-
-  // Handle profile navigation
-  const handleProfileClick = () => {
-    navigate('/my-profile');
   };
 
   return (
@@ -111,8 +125,8 @@ export function Appbar() {
 
         {/* Profile Icon */}
         <button
-          onClick={handleProfileClick}
           className={`p-2 text-blue-600 hover:text-blue-700 transition-all duration-300 ${isScrolled ? "shadow-md" : ""}`}
+          onClick={(e) => {navigate('/my-profile')}}
         >
           <FaUserCircle className="w-8 h-8" /> {/* User icon */}
         </button>
@@ -121,13 +135,7 @@ export function Appbar() {
   );
 }
 
-
-
-
-
-
-
-export function HeroSection() {
+export function HeroSection({ userName }) {
   return (
     <div className="bg-white py-10">
       <div className="container mx-auto text-center">
@@ -159,8 +167,12 @@ export function HeroSection() {
         {/* Service Options */}
         <div className="bg-blue-500 mx-8 rounded-lg mt-6">
           <div className="flex justify-between items-center max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 ">
-
-            <h2 className="text-3xl text-left font-semibold text-white">Welcome to Heal Nexus</h2>
+            <div>
+              <h2 className="text-3xl text-left font-semibold text-white">Welcome {userName || "Guest"} to Heal Nexus!</h2>
+              <p class="text-sm text-white bg-blue-500 p-2 rounded-md">
+                Connecting you to care that truly matters.
+              </p>
+            </div>
             <img
               src="assets/doc13.png" // Replace with your image path
               alt="Doctor pointing"

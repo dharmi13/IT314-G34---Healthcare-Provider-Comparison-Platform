@@ -2,13 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Footer } from './landingPage';
-import { doctor } from '../assets/assets';
 import { Appbar } from './dashBoard';
 
 export const Doctors = () => {
   const { speciality } = useParams();
   const [filterDoc, setFilterDoc] = useState([]);
-  const [doctors, setDoctors] = useState([]);  // State for storing doctors
+  const [doctors, setDoctors] = useState([]);  
   const navigate = useNavigate();
 
   // Fetch doctors from backend
@@ -99,7 +98,7 @@ export const Doctors = () => {
                   </div>
                 ))
               ) : (
-                <p className='text-gray-600'>No doctors found.</p> // Add a fallback message if no doctors are found
+                <p className='text-gray-600'>No doctors found.</p> 
               )
             }
           </div>

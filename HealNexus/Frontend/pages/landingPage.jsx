@@ -86,6 +86,7 @@ export function Appbar({isLoggedIn,navigate}) {
       {/* Action Buttons */}
       <div className="flex items-center space-x-4">
         <button
+          onClick={() => navigate("/login")}
           className={`hidden sm:flex px-4 py-2 text-gray-800 border border-gray-300 rounded-full hover:bg-gray-100 transform transition-all duration-300 ${
             isScrolled ? "translate-y-[-5px] scale-105" : ""
           } hover:translate-y-[-5px] hover:scale-105`}
