@@ -4,16 +4,12 @@ import { ProfileRoute } from '../routes/profile.routes.jsx';
 import { AllPatientRoutes } from '../routes/patient/patient.route.jsx';
 import { DoctorRoutes } from '../routes/doctor.routes.jsx';
 import { AdminRoutes } from '../routes/admin.routes.jsx';
-// import FeedbackForm from '../pages/FeedbackForm.jsx';
-// import OurTeam from '../pages/OurTeam.jsx';
-// import AboutUs from '../pages/AboutUs.jsx';
+import { TeamRoutes } from '../routes/Team.route.jsx';
+
 
 const App = () => {
   return (
     <>
-    {/* <OurTeam/> */}
-    {/* <AboutUs/> */}
-    {/* <FeedbackForm/> */}
     <div>
 
       <Toaster />
@@ -22,6 +18,7 @@ const App = () => {
       <AllPatientRoutes/>
       <DoctorRoutes/>
       <AdminRoutes/>
+      <TeamRoutes/>
     </div>
     </>
 
