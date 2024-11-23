@@ -3,14 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { people_icon, doctor_icon } from '../../assets/assets_copy.js';  // Assuming you have local assets
 import Navbar from '../../components/admin/Navbar.jsx';
 import Sidebar from '../../components/admin/Sidebar.jsx';
-
-export const AdminallAppointments = () => {
+const AdminallAppointments = () => {
   const [appointmentData, setAppointmentData] = useState([]);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/admin/dashboard`, {
+        const response = await axios.get(`${process.env.VITE_SERVER_URL}/admin/dashboard`, {
           withCredentials: true
         });
   
@@ -102,3 +101,4 @@ export const AdminallAppointments = () => {
 
 
 
+export default AdminallAppointments
