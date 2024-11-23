@@ -9,21 +9,25 @@ const DoctorsList = () => {
   useEffect(() => {
     const fetchDoctorData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/admin/get-verified-doctors`, {
+        const response = await axios.get(`${process.env.VITE_SERVER_URL}/admin/get-verified-doctors`, {
           withCredentials: true
         });
-  
+
         if (response.status === 200) {
           setVerifiedDoctors(response.data.doctorData);
         }
       } catch (error) {
-        console.error('Error in Logging out', error);
+        console.error('Error in fetching doctors:', error);
       }
     };
 
     fetchDoctorData();
   }, []);
 
+  // Check if verifiedDoctors data is available before mapping
+  if (!verifiedDoctors || verifiedDoctors.length === 0) {
+    return <div>No verified doctors available.</div>; // Or a loading indicator
+  }
 
   return (
     <div>
@@ -41,11 +45,14 @@ const DoctorsList = () => {
                 <img 
                   className="bg-indigo-50 group-hover:bg-primary transition-all duration-500" 
                   src={item.image} 
-                  alt={`Image of ${item.image}`} 
+                  alt={`Image of ${item.userData.userName}`} 
                 />
                 <div className='p-4'>
                   <p className='text-neutral-800 text-lg font-medium'>{item.userData.userName}</p>
                   <p className='text-zinc-600 text-sm'>{item.specialty}</p>
+                  <p>{item.experience} years experience</p>
+                  <p>₹{item.fee} Consultation fee</p>
+                  <p>{item.rating}% Patient Satisfaction</p>
                 </div>
               </div>
             ))}
