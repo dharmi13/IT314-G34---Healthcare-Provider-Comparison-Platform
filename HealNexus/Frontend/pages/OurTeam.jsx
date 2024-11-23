@@ -1,51 +1,110 @@
 import React from "react";
-import "./OurTeam.css";
-import Harshit from '../assets/Harshit.png';
-import Zeel from '../assets/zeel.png';
-import Mihir from '../assets/mihir.png';
-import Shail from '../assets/shail.png';
-import Hitanshu from '../assets/hitanshu.jpg';
-import Aditya from '../assets/aditya.png';
-import Mentor from '../assets/prof.saurabh tiwary.png';
-import Malay from '../assets/malay.jpg';
-import Dharmi from '../assets/dharmi.png'
+import { useNavigate } from "react-router-dom";
+import Harshit from "../assets/Harshit.png";
+import Zeel from "../assets/zeel.png";
+import Mihir from "../assets/mihir.png";
+import Shail from "../assets/shail.png";
+import Hitanshu from "../assets/hitanshu.jpg";
+import Aditya from "../assets/aditya.png";
+import Mentor from "../assets/prof.saurabh tiwary.png";
+import Malay from "../assets/malay.jpg";
+import Dharmi from "../assets/dharmi.png";
+import Ayush from "../assets/Ayush_jpg.jpeg";
+import { Footer } from "./landingPage";
+
 
 
 const teamMembers = [
-  { name: "Shail Patel", id: "202201297", image: Shail },
-  { name: "Aditya Raina", id: "202201466", image: Aditya },
-  { name: " Dharmi Patel", id: "202201467", image: Dharmi },
-  { name: "Malay Sidapara", id: "202201488", image: Malay },
-  { name: "Harshit Prajapati", id: "202201500", image: Harshit },
-  { name: "Mihir Patel", id: "202201506", image: Mihir },
-  { name: "Zeel Danani", id: "202201507", image: Zeel },
-  { name: "Hitanshu Varia", id: "202201510", image: Hitanshu },
-  { name: "Ayush Chaudhry", id: "202201517", image: Harshit },
-  { name: "Prof. Saurabh Tiwary", id: "Mentor", image:Mentor },
+  { name: 'Zeel Danani', id: '202201507', image: Zeel },
+  { name: 'Mihir Patel', id: '202201506', image: Mihir },
+  { name: 'Harshit Prajapati', id: '202201500', image: Harshit },
+  { name: 'Shail Patel', id: '202201297', image: Shail },
+  { name: 'Malay Sidapara', id: '202201488', image: Malay },
+  { name: 'Ayush Chaudhari', id: '202201517', image: Ayush },
+  { name: 'Hitanshu Varia', id: '202201510', image: Hitanshu },
+  { name: 'Dharmi Patel', id: '202201467', image: Dharmi },
+  { name: 'Aditya Raina', id: '202201466', image: Aditya },
+  { name: 'Prof. Saurabh Tiwary', id: 'Mentor', image: Mentor },
 ];
 
+
+
+// Shuffle the teamMembers array manually on initial load
+
+
 const OurTeam = () => {
-  const goBackToHome = () => {
-    window.location.href = "/"; // Navigate to the home page
-  };
+  const navigate = useNavigate();
 
   return (
-     
-      <div>
-      <h2 className="header">Our Team</h2>
-      <div className="team-grid">
-        {teamMembers.map((member, index) => (
-          <div className="team-card" key={index}>
-            <img src={member.image} alt={member.name} className="team-image" />
-            <h3 className="team-name">{member.name}</h3>
-            <p className="team-id">{member.id}</p>
-          </div>
-        ))}
+    <div className="bg-gray-50">
+      <Appbar />
+
+      {/* Header Section */}
+      <div className="bg-gradient-to-r from-indigo-600 to-blue-600 py-16 text-center text-white shadow-lg">
+        <h1 className="text-5xl font-extrabold animate__animated animate__fadeIn">Meet Our Team</h1>
+        <p className="text-lg mt-4 max-w-xl mx-auto animate__animated animate__fadeIn animate__delay-1s">
+          A passionate group of individuals working together to make a difference.
+        </p>
       </div>
 
-      {/* Go Back Button */}
-      <button className="go-back-button" onClick={goBackToHome}>
-        Go Back to Home Page
+      {/* Team Members Section */}
+      <div className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl font-semibold text-gray-800 mb-12 text-center">
+          Our Dedicated Team
+        </h2>
+
+        {/* Grid Layout for Team Members */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-8">
+          {teamMembers.map((member, index) => (
+            <div
+              key={index}
+              className="bg-white shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 w-full transform hover:scale-105"
+            >
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-full h-56 object-cover transition-transform duration-500"
+              />
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-semibold text-gray-800 tracking-tight">{member.name}</h3>
+                <p className="text-gray-500 mt-2">{member.id}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Footer Section */}
+      <Footer />
+    </div>
+  );
+};
+
+const Appbar = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div
+      className="flex justify-between items-center px-6 py-4 bg-white border-b border-gray-200"
+      style={{
+        position: "sticky",
+        top: 0,
+        height: "80px",
+        zIndex: 50,
+      }}
+    >
+      {/* App Name */}
+      <div className="flex items-center">
+        <img src="/assets/heal_logo.png" alt="Logo" className="w-16 h-14 sm:w-20 sm:h-16" />
+        <h1 className="ml-4 text-xl sm:text-2xl font-bold text-gray-800">HealNexus</h1>
+      </div>
+
+      {/* Go to Home Page Button */}
+      <button
+        onClick={() => navigate("/")}
+        className="px-4 py-2 text-white bg-indigo-600 rounded-full hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105 text-sm sm:text-base"
+      >
+        Go to Home
       </button>
     </div>
   );

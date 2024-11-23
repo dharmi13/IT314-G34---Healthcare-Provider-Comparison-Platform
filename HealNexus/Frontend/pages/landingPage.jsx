@@ -76,7 +76,7 @@ export function Appbar({isLoggedIn,navigate}) {
           ABOUT
         </Link>
         <Link
-          to="/our-team"
+          to="/team"
           className="hover:text-blue-600 hover:border-b-2 border-blue-600"
         >
           OUR-TEAM
@@ -193,6 +193,7 @@ const AppointmentCTA = ({isLoggedIn,navigate}) => {
 
 
 
+
 export const Footer = () => {
   return (
     <footer className="bg-white mx-2 mt-4 pt-4 border-">
@@ -210,10 +211,10 @@ export const Footer = () => {
           <h2 className="font-bold mb-2">COMPANY</h2>
           <ul className="text-gray-600">
             <li className="mb-1">
-              <a href="#about" className="hover:text-blue-500">About us</a>
+              <Link to="/about-us" className="hover:text-blue-500">About us</Link>
             </li>
             <li className="mb-1">
-              <a href="#team" className="hover:text-blue-500">Team</a>
+              <Link to="/team" className="hover:text-blue-500">Team</Link>
             </li>
           </ul>
         </div>
