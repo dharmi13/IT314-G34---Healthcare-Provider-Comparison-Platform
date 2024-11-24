@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.28% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.28% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -96,9 +96,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -108,16 +108,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -125,9 +125,9 @@
 import getErrorDetails from "../Utilites/errorCodes.js";
 import nodemailer from 'nodemailer';
 &nbsp;
-const SendResetSuccessfulMail = <span class="fstat-no" title="function not covered" >as</span>ync (userName, email) =&gt; {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const transporter = <span class="cstat-no" title="statement not covered" >nodemailer.createTransport({</span>
+const SendResetSuccessfulMail = async (userName, email) =&gt; {
+  try {
+    const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port: Number(process.env.EMAIL_PORT),
       secure: true,
@@ -137,16 +137,16 @@ const SendResetSuccessfulMail = <span class="fstat-no" title="function not cover
       }
     });
 &nbsp;
-    const mailDetails = <span class="cstat-no" title="statement not covered" >{</span>
+    const mailDetails = {
       to: email,
       subject: 'Your Verification Code',
-      html: PasswordResetSuccessTemplate.replace("{Username}", userName ?? "Error getting Username!"),
+      html: PasswordResetSuccessTemplate.replace("{Username}", userName ?? <span class="branch-1 cbranch-no" title="branch not covered" >"Error getting Username!")</span>,
     };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    await transporter.sendMail(mailDetails);</span>
+    await transporter.sendMail(mailDetails);
   } catch (error) {
-    const code = <span class="cstat-no" title="statement not covered" >getErrorDetails('INTERNAL_SERVER_ERROR', `(Resetting password) ${error}`)</span>
-<span class="cstat-no" title="statement not covered" >    console.error(code);</span>
+    const code = getErrorDetails('INTERNAL_SERVER_ERROR', `(Resetting password) ${error}`)
+    console.error(code);
   }
 };
 &nbsp;
@@ -157,7 +157,7 @@ export default SendResetSuccessfulMail;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-11-15T15:46:53.066Z
+                at 2024-11-23T21:28:42.166Z
             </div>
         <script src="../prettify.js"></script>
         <script>
