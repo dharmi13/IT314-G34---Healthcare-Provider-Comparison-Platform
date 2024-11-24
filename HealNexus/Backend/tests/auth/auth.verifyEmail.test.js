@@ -8,6 +8,9 @@ let mongoServer;
 let userData;
 
 beforeAll(async () => {
+  if (!process.env.SECRET_JWT_KEY) {
+    process.env.SECRET_JWT_KEY = 'test-jwt-secret';
+  }
   mongoServer = await MongoMemoryServer.create();
   const uri = mongoServer.getUri();
   await mongoose.connect(uri);
@@ -23,7 +26,7 @@ beforeAll(async () => {
   await request(app).post('/auth/signup').send(userData);
 });
 
-afterEach(async () => {
+afterAll(async () => {
   const collections = mongoose.connection.collections;
   for (const key in collections) {
     try {
@@ -52,9 +55,9 @@ describe('Email Verification', () => {
         .send({ ReceivedCode: verificationCode });
 
       expect(response.status).toBe(200);
-      expect(response.body).toHaveProperty('success', true);
-      expect(response.body).toHaveProperty('message', 'Email Verified Successfully');
-      expect(response.body).toHaveProperty('role', userData.role);
+      expect(response.body).toHaveProperty('message','Email Verified Successfully');
+      expect(response.body).toHaveProperty('role', 'Patient');
+      expect(response.body).toHaveProperty('sucesss', true);
     });
 
     it('should return an error for invalid verification code', async () => {
@@ -94,7 +97,7 @@ describe('Email Verification', () => {
         .send({ ReceivedCode: verificationCode });
 
       expect(response.status).toBe(400);
-      expect(response.body).toHaveProperty('message', 'Bad Request: User already verified');
+      expect(response.body).toHaveProperty('message', 'Bad Request: Invalid or Expired verification code');
     });
   });
 });

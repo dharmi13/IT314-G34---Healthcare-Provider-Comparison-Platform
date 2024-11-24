@@ -4,8 +4,12 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 import app from '../../src/app.js'; 
 
+
 let mongoServer;
 beforeAll(async () => {
+  if (!process.env.SECRET_JWT_KEY) {
+    process.env.SECRET_JWT_KEY = 'test-jwt-secret';
+  }
   mongoServer = await MongoMemoryServer.create();
   const uri = mongoServer.getUri();
   await mongoose.connect(uri);

@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for api/routes/auth.routes.js</title>
+    <title>Code coverage report for data/models/appointment.models.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">api/routes</a> auth.routes.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">data/models</a> appointment.models.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -77,35 +77,41 @@
 <a name='L12'></a><a href='#L12'>12</a>
 <a name='L13'></a><a href='#L13'>13</a>
 <a name='L14'></a><a href='#L14'>14</a>
-<a name='L15'></a><a href='#L15'>15</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import express from 'express';
-import verifyToken from '../../middleware/verifyToken.js';
-import { signup, verifyEmail, forgetPassword, resetPassword, login, logout, getuserDetails } from '../controllers/auth.controller.js';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { model, Schema, Types } from 'mongoose';
 &nbsp;
-const router = express.Router();
-router.post("/signup", signup);
-router.post("/verify-email", verifyEmail);
-router.post("/forget-password", forgetPassword);
-router.post("/reset-password/:token", resetPassword);
-router.post("/login", login);
-router.post("/logout", logout);
-router.get("/get-user-details", verifyToken, getuserDetails);
+const appointmentSchema = new Schema({
+    patientID: { type: Types.ObjectId, ref: 'PatientProfile' },
+    doctorID: { type: Types.ObjectId, ref: 'DoctorProfile' },
+    slotTime: { type: String, required: true },
+    slotDate: { type: String, required: true },
+    amount: { type: Number, required: true },
+    date: { type: Number, required: true },
+    cancel: { type: Boolean, default: false },
+    payment: { type: Boolean, default: false },
+    isCompleted: { type: Boolean, default: false },
+    createdAt: { type: Date, default: Date.now }
+}, { timestamps: true });
 &nbsp;
-export default router;
-&nbsp;</pre></td></tr></table></pre>
+const Appointment = model("appointment", appointmentSchema);
+export default Appointment;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
