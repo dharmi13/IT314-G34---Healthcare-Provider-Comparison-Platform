@@ -4,6 +4,13 @@ import Navbar from '../../components/doctor/Navbar.jsx';
 import Sidebar from '../../components/doctor/Sidebar.jsx';
 import axios from 'axios';
 
+export const formatDate = (dateString) => {
+  const [day, month, year] = dateString.split("_");
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const monthName = months[parseInt(month, 10) - 1];
+  return `${day} ${monthName} ${year}`;
+};
+
 export const DoctorDashBoard = () => {
   const [totalAppointments, setTotalAppointments] = useState(0);
   const [totalEarnings, setTotalEarnings] = useState(0);

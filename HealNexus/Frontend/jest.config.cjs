@@ -11,4 +11,8 @@ module.exports = {
       "**/__tests__/**/*.[jt]s?(x)",
       "**/?(*.)+(spec|test).[jt]s?(x)"
     ],
+  transform: {
+    '^.+\\.jsx?$': 'babel-jest', // Transpile JS/JSX files
+  },
+  moduleFileExtensions: ['js', 'jsx', 'json', 'node'],
   };
