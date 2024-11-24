@@ -127,6 +127,7 @@ export function Appbar() {
         <button
           className={`p-2 text-blue-600 hover:text-blue-700 transition-all duration-300 ${isScrolled ? "shadow-md" : ""}`}
           onClick={(e) => {navigate('/my-profile')}}
+          data-testid = "pbutton"
         >
           <FaUserCircle className="w-8 h-8" /> {/* User icon */}
         </button>
