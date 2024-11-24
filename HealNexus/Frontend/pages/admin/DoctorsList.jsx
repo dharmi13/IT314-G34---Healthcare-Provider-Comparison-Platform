@@ -9,7 +9,7 @@ const DoctorsList = () => {
   useEffect(() => {
     const fetchDoctorData = async () => {
       try {
-        const response = await axios.get(`${process.env.VITE_SERVER_URL}/admin/get-verified-doctors`, {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/admin/get-verified-doctors`, {
           withCredentials: true
         });
 

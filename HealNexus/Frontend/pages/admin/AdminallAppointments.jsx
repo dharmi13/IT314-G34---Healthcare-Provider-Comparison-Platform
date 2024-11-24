@@ -9,7 +9,7 @@ const AdminallAppointments = () => {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const response = await axios.get(`${process.env.VITE_SERVER_URL}/admin/dashboard`, {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/admin/dashboard`, {
           withCredentials: true
         });
   
