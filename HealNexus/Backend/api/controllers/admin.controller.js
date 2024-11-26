@@ -5,10 +5,16 @@ import PharmacistProfile from '../../data/models/profile/profile.pharmacist.js';
 import Appointment from '../../data/models/appointment.models.js';
 import AdminProfile from '../../data/models/profile/profile.admin.js';
 import User from '../../data/models/user.model.js';
+import getErrorDetails from '../../Utilites/errorCodes.js'
+import jwt from 'jsonwebtoken';
+
 
 const getAdminProfile = async (req, res) => {
   try {
     const adminProfile = await AdminProfile.findById(req.params.id);
+    if (!adminProfile) {
+      return res.status(404).json({ message: 'Resource not found: Admin not found' });
+    }
     const response = { 
       address: adminProfile.address, 
       permissions: adminProfile.permissions 
@@ -33,11 +39,15 @@ const updateAdminProfile = async (req, res) => {
       permissions
     };
 
-    await AdminProfile.findByIdAndUpdate(
+   const updateAdmin = await AdminProfile.findByIdAndUpdate(
       req.params.id,
       oldAdminProfile,
       { new: true, runValidators: true }
     );
+
+    if (!updateAdmin) {
+      return res.status(404).json({ message: 'Admin not found' });
+    }
 
     const error = getErrorDetails('SUCCESS');
     res.status(error.code).json({
