@@ -4,9 +4,9 @@ import { getAdminProfile, updateAdminProfile, adminLogin, allVerifiedDoctors, al
 
 const router = express.Router();
 router.post("/signup", adminLogin);
-router.get("/get-profile", getAdminProfile);
-router.post("/update-profile/:id", updateAdminProfile);
-router.get("/get-verified-doctors", verifyToken, allVerifiedDoctors);
+router.get("/get-profile/:id", getAdminProfile);
+router.put("/update-profile/:id", updateAdminProfile);
+router.get("/get-verified-doctors",verifyToken, allVerifiedDoctors);
 router.get("/get-unverified-doctors", verifyToken, allUnVerifiedDoctors);
 router.put("/approve-doctor/:doctorID", verifyToken, approveDoctor);
 router.get("/appointments", verifyToken, appointmentsAdmin);
