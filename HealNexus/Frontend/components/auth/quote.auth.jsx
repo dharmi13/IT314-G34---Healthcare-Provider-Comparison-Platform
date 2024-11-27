@@ -1,12 +1,19 @@
-import React from "react"
-export function Quote(){
-    return <div className="flex flex-col justify-center  items-center ">
-        <div className="text-3xl font-bold max-w-md items-center ">"The customer service I received was exceptional. The support team went above and beyond to address my concerns".</div>
-        <div className="self-start max-w-md text-xl font-semibold mt-4">
-                Julis Winfield
-            </div>
-            <div className="self-start max-w-md text-sm font-semibold text-slate-400">
-                CEO,Acme Inc
-            </div>
+export function Quote() {
+    return (
+      <div className="relative w-full h-full">
+        {/* Health-related image */}
+        <img 
+          src="../assets/appointment_img.png" // Replace this with a real health/doctor image URL
+          alt="Health Icon"
+          className="w-full h-full object-cover rounded-lg shadow-lg" // Ensure the image covers the card, but doesn't exceed it
+        />
+        {/* Blue overlay */}
+        <div className="absolute inset-0 bg-blue-500 opacity-50 rounded-lg"></div>
+        
+        {/* Content placed over the image */}
+        <div className="relative z-10 text-white p-8">
+          {/* You can add any overlay content here if needed */}
         </div>
-}
+      </div>
+    );
+  }
