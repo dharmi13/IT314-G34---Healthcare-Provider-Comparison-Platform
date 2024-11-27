@@ -14,8 +14,23 @@ const DoctorsList = () => {
         });
 
         if (response.status === 200) {
-          setVerifiedDoctors(response.data.doctorData);
+          const doctorData = response.data.doctorData;
+          const updatedDoctorData = doctorData.map((doctor) => {
+            const ratings = doctor.ratings;
+        
+            const averageRatings = ratings?.length > 0
+              ? ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length
+              : 0;
+        
+            return {
+              ...doctor,
+              averageRatings, 
+            };
+          });
+        
+          setVerifiedDoctors(updatedDoctorData);
         }
+        
       } catch (error) {
         console.error('Error in fetching doctors:', error);
       }
@@ -24,9 +39,8 @@ const DoctorsList = () => {
     fetchDoctorData();
   }, []);
 
-  // Check if verifiedDoctors data is available before mapping
   if (!verifiedDoctors || verifiedDoctors.length === 0) {
-    return <div>No verified doctors available.</div>; // Or a loading indicator
+    return <div>No verified doctors available.</div>; 
   }
 
   return (
@@ -37,22 +51,22 @@ const DoctorsList = () => {
         <div className='m-5 max-h-[90vh] overflow-y-scroll'>
           <h1 className='text-lg font-medium'>All Doctors</h1>
           <div className='w-full flex flex-wrap gap-4 pt-5 gap-y-6'>
-            {verifiedDoctors.map((item, index) => (
-              <div 
-                className='border border-indigo-200 rounded-xl max-w-56 overflow-hidden cursor-pointer group' 
+            {verifiedDoctors.length > 0 && verifiedDoctors.map((item, index) => (
+              <div
+                className='border border-indigo-200 rounded-xl max-w-56 overflow-hidden cursor-pointer group'
                 key={index}
               >
-                <img 
-                  className="bg-indigo-50 group-hover:bg-primary transition-all duration-500" 
-                  src={item.image} 
-                  alt={`Image of ${item.userData.userName}`} 
+                <img
+                  className="bg-indigo-50 group-hover:bg-primary transition-all duration-500"
+                  src={item.image}
+                  alt={`Image of ${item.userData.userName}`}
                 />
                 <div className='p-4'>
                   <p className='text-neutral-800 text-lg font-medium'>{item.userData.userName}</p>
                   <p className='text-zinc-600 text-sm'>{item.specialty}</p>
                   <p>{item.experience} years experience</p>
-                  <p>₹{item.fee} Consultation fee</p>
-                  <p>{item.rating}% Patient Satisfaction</p>
+                  <p>₹{item.consultationFee} Consultation fee</p>
+                  <p>{item.ratings | 0} Ratings</p>
                 </div>
               </div>
             ))}

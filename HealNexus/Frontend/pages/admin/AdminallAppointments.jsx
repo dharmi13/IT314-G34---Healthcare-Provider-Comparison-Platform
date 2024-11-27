@@ -99,6 +99,4 @@ const AdminallAppointments = () => {
   );
 }
 
-
-
 export default AdminallAppointments
