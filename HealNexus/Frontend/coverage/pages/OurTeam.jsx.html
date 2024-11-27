@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -129,7 +129,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -142,18 +142,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">50x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -182,7 +182,7 @@ import Malay from '../assets/malay.jpg';
 import Dharmi from '../assets/dharmi.png'
 &nbsp;
 &nbsp;
-const teamMembers = [
+const teamMembers = <span class="cstat-no" title="statement not covered" >[</span>
   { name: "Shail Patel", id: "202201297", image: Shail },
   { name: "Aditya Raina", id: "202201466", image: Aditya },
   { name: " Dharmi Patel", id: "202201467", image: Dharmi },
@@ -195,18 +195,18 @@ const teamMembers = [
   { name: "Prof. Saurabh Tiwary", id: "Mentor", image:Mentor },
 ];
 &nbsp;
-const OurTeam = () =&gt; {
-  const goBackToHome = () =&gt; {
-    window.location.href = "/"; // Navigate to the home page
+const OurTeam = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+  const goBackToHome = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    window.location.href = "/"; </span>// Navigate to the home page
   };
 &nbsp;
-  return (
+<span class="cstat-no" title="statement not covered" >  return (</span>
      
       &lt;div&gt;
       &lt;h2 className="header"&gt;Our Team&lt;/h2&gt;
       &lt;div className="team-grid"&gt;
-        {teamMembers.map((member, index) =&gt; (
-          &lt;div className="team-card" key={index}&gt;
+        {teamMembers.map(<span class="fstat-no" title="function not covered" >(m</span>ember, index) =&gt; (
+<span class="cstat-no" title="statement not covered" >          &lt;div className="team-card" key={index}&gt;</span>
             &lt;img src={member.image} alt={member.name} className="team-image" /&gt;
             &lt;h3 className="team-name"&gt;{member.name}&lt;/h3&gt;
             &lt;p className="team-id"&gt;{member.id}&lt;/p&gt;
@@ -229,7 +229,7 @@ export default OurTeam;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-11-24T12:35:59.243Z
+                at 2024-11-24T13:19:04.351Z
             </div>
         <script src="../prettify.js"></script>
         <script>

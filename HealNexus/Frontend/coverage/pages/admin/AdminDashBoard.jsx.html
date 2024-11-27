@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.44% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/18</span>
+                <span class='fraction'>0/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.44% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/18</span>
+                <span class='fraction'>0/18</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -197,37 +197,37 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -299,7 +299,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -324,37 +324,37 @@ import Navbar from '../../components/admin/Navbar.jsx';
 import Sidebar from '../../components/admin/Sidebar.jsx';
 import axios from 'axios';
 &nbsp;
-const AdminDashBoard = () =&gt; {
-    const [dashboardData, setDashboardData] = useState({});
-    const [appointmentData, setAppointmentData] = useState([]);
+const AdminDashBoard = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+    const [dashboardData, setDashboardData] = <span class="cstat-no" title="statement not covered" >useState({});</span>
+    const [appointmentData, setAppointmentData] = <span class="cstat-no" title="statement not covered" >useState([]);</span>
 &nbsp;
-    useEffect(() =&gt; {
-        const fetchDashboardData = async () =&gt; {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/admin/dashboard`, {
+<span class="cstat-no" title="statement not covered" >    useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+        const fetchDashboardData = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            try {</span>
+                const response = <span class="cstat-no" title="statement not covered" >await axios.get(`${import.meta.env.VITE_SERVER_URL}/admin/dashboard`, {</span>
                     withCredentials: true
                 });
 &nbsp;
-                <span class="missing-if-branch" title="else path not taken" >E</span>if (response.status === 200) {
-                    setDashboardData(response.data.dashboardData);
-                    setAppointmentData(response.data.detailedAppointments);
+<span class="cstat-no" title="statement not covered" >                if (response.status === 200) {</span>
+<span class="cstat-no" title="statement not covered" >                    setDashboardData(response.data.dashboardData);</span>
+<span class="cstat-no" title="statement not covered" >                    setAppointmentData(response.data.detailedAppointments);</span>
                 }
             } catch (error) {
 <span class="cstat-no" title="statement not covered" >                console.error('Error in fetching dashboard data', error);</span>
             }
         };
 &nbsp;
-        fetchDashboardData();
+<span class="cstat-no" title="statement not covered" >        fetchDashboardData();</span>
     }, []);
 &nbsp;
-    function formatDate(dateString) {
-        const [day, month, year] = dateString.split("_");
-        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        const monthName = months[parseInt(month, 10) - 1];
-        return `${day} ${monthName} ${year}`;
+    function <span class="fstat-no" title="function not covered" >formatDate(</span>dateString) {
+        const [day, month, year] = <span class="cstat-no" title="statement not covered" >dateString.split("_");</span>
+        const months = <span class="cstat-no" title="statement not covered" >["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];</span>
+        const monthName = <span class="cstat-no" title="statement not covered" >months[parseInt(month, 10) - 1];</span>
+<span class="cstat-no" title="statement not covered" >        return `${day} ${monthName} ${year}`;</span>
     }
 &nbsp;
-    return (
+<span class="cstat-no" title="statement not covered" >    return (</span>
         &lt;div&gt;
             &lt;Navbar /&gt;
             &lt;div className='flex items-start bg-[#F8F8FF]'&gt;
@@ -425,8 +425,8 @@ const AdminDashBoard = () =&gt; {
                                 &lt;p className='font-semibold text-xl'&gt;Latest Bookings&lt;/p&gt;
                             &lt;/div&gt;
                             &lt;div className='pt-4 border border-t-0'&gt;
-                                {appointmentData.slice(0, 5).map((item, index) =&gt; (
-                                    &lt;div className='flex items-center px-8 py-4 gap-4 hover:bg-gray-100' key={index}&gt;
+                                {appointmentData.slice(0, 5).map(<span class="fstat-no" title="function not covered" >(i</span>tem, index) =&gt; (
+<span class="cstat-no" title="statement not covered" >                                    &lt;div className='flex items-center px-8 py-4 gap-4 hover:bg-gray-100' key={index}&gt;</span>
                                         &lt;img className='w-28 rounded-full' src={item.doctorimage} alt="Doctor" /&gt;
                                         &lt;div className='flex-1 text-base'&gt;
                                             &lt;p className='text-gray-800 font-medium'&gt;{item.doctorName}&lt;/p&gt;
@@ -451,7 +451,7 @@ export default AdminDashBoard; // Ensure this is a default export</pre></td></tr
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-11-24T12:35:59.243Z
+                at 2024-11-24T13:19:04.351Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

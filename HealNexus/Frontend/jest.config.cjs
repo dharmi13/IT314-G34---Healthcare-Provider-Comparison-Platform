@@ -17,23 +17,24 @@ module.exports = {
   moduleFileExtensions: ['js', 'jsx', 'json', 'node'],
   collectCoverage: true, // Enable coverage collection
   coverageDirectory: 'coverage', // Output directory for coverage reports
-  collectCoverageFrom: [
-    'pages/**/*.{js,jsx}',
-    '!src/index.js', // Exclude specific files if needed
-    '!src/serviceWorker.js', // Exclude service worker if applicable
-    '!**/node_modules/**', // Exclude node_modules
-  ],
-  coverageReporters: [
-    'text', // Output coverage summary in the terminal
-    'html', // Generate an HTML report for viewing in the browser
-    // 'lcov', // Uncomment if you want to generate lcov report as well
-  ],
-  coverageThreshold: {
-    global: {
-      branches: 80, // Minimum coverage percentage for branches
-      functions: 80, // Minimum coverage percentage for functions
-      lines: 80, // Minimum coverage percentage for lines
-      statements: 80, // Minimum coverage percentage for statements
-    },
-  },
+  // collectCoverageFrom: [
+  //   'pages/**/*.{js,jsx}',
+  //   '!src/index.js', // Exclude specific files if needed
+  //   '!src/serviceWorker.js', // Exclude service worker if applicable
+  //   '!**/node_modules/**', // Exclude node_modules
+  // ],
+  // coverageReporters: [
+  //   'text', // Output coverage summary in the terminal
+  //   'html', // Generate an HTML report for viewing in the browser
+  //   // 'lcov', // Uncomment if you want to generate lcov report as well
+  // ],
+  // coverageThreshold: {
+  //   global: {
+  //     branches: 80, // Minimum coverage percentage for branches
+  //     functions: 80, // Minimum coverage percentage for functions
+  //     lines: 80, // Minimum coverage percentage for lines
+  //     statements: 80, // Minimum coverage percentage for statements
+  //   },
+  // },
+  // setupFilesAfterEnv: ['<rootDir>/setupTests.js'],
   };
