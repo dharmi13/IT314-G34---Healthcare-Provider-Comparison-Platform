@@ -3,7 +3,7 @@ import DoctorProfile from '../../data/models/profile/profile.doctor.js';
 export const filterDoctorsByState = async (req, res) => {
   try {
     const { state } = req.body;
-    const doctors = await DoctorProfile.find({ state: state });
+    const doctors = await DoctorProfile.find({ 'clinicAddress.state': state });
 
     if (!doctors.length) {
       return res.status(404).json({ message: "No doctors found with the specified specialty" });
