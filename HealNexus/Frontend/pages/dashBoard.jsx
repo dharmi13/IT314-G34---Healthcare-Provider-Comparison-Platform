@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link ,useNavigate,NavLink} from 'react-router-dom';
 import { FaUserCircle} from 'react-icons/fa';
-
+import { Footer } from './landingPage';
 const DashBoard = () => {
   const [userName, setUserName] = useState('');
 
@@ -106,16 +106,16 @@ export function Appbar() {
           ALL DOCTORS
         </NavLink>
         <NavLink
-          to="/about"
+          to="/about-us"
           className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600' : 'hover:text-blue-600 hover:border-b-2 border-transparent'}
         >
           ABOUT
         </NavLink>
         <NavLink
-          to="/contact"
+          to="/team"
           className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600' : 'hover:text-blue-600 hover:border-b-2 border-transparent'}
         >
-          CONTACT
+            OUR-TEAM
         </NavLink>
       </div>
 
@@ -248,42 +248,3 @@ export function SpecialitySection() {
     </div>
   );
 }
-const Footer = () => {
-  return (
-    <footer className="bg-white mx-2 mt-4 pt-4 border-">
-      <div className="container mx-auto flex flex-col md:flex-row justify-around items-center">
-        {/* Logo and Description */}
-        <div className="mb-6 md:mb-0 md:text-center flex flex-col items-center">
-          <div className="flex items-center mb-4">
-            <img src="assets/heal_logo.png" alt="Logo" className="h-25 w-20 mr-2" />
-            <h1 className="text-2xl font-bold">HealNexus</h1>
-          </div>
-        </div>
-
-        {/* About Section */}
-        <div className="mb-6 md:mb-0 md:text-center flex flex-col items-center">
-          <h2 className="font-bold mb-2">COMPANY</h2>
-          <ul className="text-gray-600">
-            <li className="mb-1">
-              <a href="#about" className="hover:text-blue-500">About us</a>
-            </li>
-            <li className="mb-1">
-              <a href="#team" className="hover:text-blue-500">Team</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      {/* Copyright */}
-      <div className="text-center mt-8 border-t pt-4 text-gray-600">
-        © 2024 @ Group_34 @ Made with{' '}
-        <img
-          src="assets/Love_Heart_SVG.svg"
-          alt="icon"
-          className="inline-block w-4 h-4 align-middle"
-        />{' '}
-        - All Rights Reserved.
-      </div>
-    </footer>
-  );
-};
