@@ -232,6 +232,7 @@ export const createPharmacistProfile = async (req, res) => {
     });
 
   } catch (error) {
+    console.log(error)
     const error_response = getErrorDetails('INTERNAL_SERVER_ERROR', 'Error in creating the profile for Pharmacist');
     return res.status(error_response.code).json({message : error_response.message});
   }
