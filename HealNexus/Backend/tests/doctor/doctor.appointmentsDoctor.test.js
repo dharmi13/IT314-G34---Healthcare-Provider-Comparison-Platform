@@ -73,7 +73,6 @@ describe('Appointments Doctor Controller Tests', () => {
         userName: 'John Doe',
         email: 'john.doe@example.com',
         password: 'password123',
-        role: 'Patient',
       });
 
       const patientProfile = await PatientProfile.create({

@@ -5,25 +5,19 @@ import mongoose from 'mongoose';
 import User from '../../data/models/user.model.js';
 
 const bookAppointment = async (req, res) => {
-  const session = await mongoose.startSession();
-  session.startTransaction();
-
   try {
-    const { doctorID, slotTime, slotDate } = req.body;
-    const { userID } = req;
+    const { userID, doctorID, slotTime, slotDate } = req.body;
 
-    const patientData = await PatientProfile.findOne({ userID: userID }).session(session);
-    const doctorData = await DoctorProfile.findById(doctorID).session(session);
+    const patientData = await PatientProfile.findOne({ userID: userID });
+    const doctorData = await DoctorProfile.findById(doctorID);
 
     if (!patientData || !doctorData) {
-      await session.abortTransaction();
       return res.status(400).json({ message: "Patient or Doctor not found" });
     }
 
     let slot_booked = doctorData.slot_booked;
     if (slot_booked[slotDate]) {
       if (slot_booked[slotDate].includes(slotTime)) {
-        await session.abortTransaction();
         return res.status(400).json({ success: false, message: "Doctor not available at this time" });
       } else {
         slot_booked[slotDate].push(slotTime);
@@ -40,20 +34,18 @@ const bookAppointment = async (req, res) => {
       slotTime,
       date: Date.now(),
     });
-    await newAppointment.save({ session });
-    await DoctorProfile.findByIdAndUpdate(doctorID, { slot_booked });
 
-    await session.commitTransaction();
-    session.endSession();
+    // Save the new appointment and update doctor's slot booking
+    await newAppointment.save();
+    await DoctorProfile.findByIdAndUpdate(doctorID, { slot_booked });
 
     res.status(201).json({ message: "Appointment booked successfully" });
   } catch (error) {
-    await session.abortTransaction();
-    session.endSession();
     console.error("Error booking appointment:", error);
     res.status(500).json({ message: "Failed to book appointment" });
   }
 };
+
 
 const getPatientAppointments = async (req, res) => {
   try {
@@ -100,6 +92,7 @@ const getPatientAppointments = async (req, res) => {
 const cancelAppointment = async (req, res) => {
   try {
     const { userID } = req;
+    console.log(req.params);
     const { appointmentID } = req.params;
     const appointmentData = await Appointment.findById(appointmentID);
     const patientdata = await PatientProfile.find({userID: userID});
@@ -114,7 +107,7 @@ const cancelAppointment = async (req, res) => {
     const doctorData = await DoctorProfile.findById(doctorID)
 
     let slot_booked = doctorData.slot_booked;
-    slot_booked[slotDate] = slot_booked[slotDate].filter(e => e != slotTime)
+    slot_booked[slotDate] = slot_booked[slotDate].filter(e => e.slotTime !== slotTime)
 
     await DoctorProfile.findByIdAndUpdate(doctorID, { slot_booked });
     res.status(200).json({ success: true, message: "Appointment cancelled" })
