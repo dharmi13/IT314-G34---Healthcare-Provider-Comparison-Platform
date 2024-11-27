@@ -3,14 +3,16 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Footer } from './landingPage';
 import { Appbar } from './dashBoard';
+import { FaMapMarkerAlt, FaSearch} from 'react-icons/fa';
 
 export const Doctors = () => {
   const { speciality } = useParams();
   const [filterDoc, setFilterDoc] = useState([]);
   const [doctors, setDoctors] = useState([]);  
+  const [city, setCity] = useState(null);
+  const [state, setState] = useState(null);
   const navigate = useNavigate();
 
-  // Fetch doctors from backend
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
@@ -29,9 +31,31 @@ export const Doctors = () => {
     fetchDoctors();
   }, []);
 
+  const searchDoctors = () => {
+    if (city?.trim() && state?.trim()) {
+      setFilterDoc(doctors.filter(doc => 
+        doc.profile.clinicAddress.city === city && 
+        doc.profile.clinicAddress.state === state
+      ));
+    } else if (city?.trim() || state?.trim()) {
+      setFilterDoc(doctors.filter(doc => {
+        return (city?.trim() ? doc.profile.clinicAddress.city === city : true) &&
+               (state?.trim() ? doc.profile.clinicAddress.state === state : true);
+      }));
+    } else {
+      setCity(null);
+      setState(null); 
+      setFilterDoc(doctors);
+    }
+  };
+
+  useEffect(() => {
+    searchDoctors();
+  }, [city, state]);
+  
   const applyFilter = () => {
     if (speciality) {
-      setFilterDoc(doctors.filter(doc => doc.speciality === speciality));
+      setFilterDoc(doctors.filter(doc => doc.profile.specialty === speciality));
     } else {
       setFilterDoc(doctors);
     }
@@ -43,8 +67,37 @@ export const Doctors = () => {
   return (
     <div className='mt-2'>
       <Appbar />
+      
       <div className='mx-28 mt-4'>
-        <p className='text-gray-600'>Browse through the doctors by specialty.</p>
+        {/* Location and Search Inputs */}
+        <div className="flex justify-center items-center border border-gray-300 rounded-lg overflow-hidden w-2/3 md:w-1/2 mx-auto mb-8">
+          {/* Location Input */}
+          <div className="flex items-center px-4 py-2 w-full bg-white border-r border-gray-300">
+            <FaMapMarkerAlt className="text-gray-500 mr-2" />
+            <input
+              type="text"
+              placeholder="Search By City"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              className="outline-none"
+              style={{ minWidth: "60px" }}
+            />
+          </div>
+
+          {/* Search Input */}
+          <div className="flex items-center px-4 py-2 w-full">
+            <FaSearch className="text-gray-500 mr-2" />
+            <input
+              type="text"
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+              placeholder="Search By State"
+              className="w-full outline-none"
+            />
+          </div>
+        </div>
+
+        <p className='text-gray-600'>Search doctors by specialty.</p>
         <div className='flex flex-row item-start gap-5 mt-5'>
           <div className='flex flex-col gap-4 text-sm text-gray-600'>
             <p

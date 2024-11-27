@@ -1,8 +1,8 @@
 import React from 'react'
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Link ,useNavigate,NavLink} from 'react-router-dom'
-import { FaMapMarkerAlt, FaSearch ,FaUserCircle} from 'react-icons/fa';
+import { Link ,useNavigate,NavLink} from 'react-router-dom';
+import { FaUserCircle} from 'react-icons/fa';
 
 const DashBoard = () => {
   const [userName, setUserName] = useState('');
@@ -56,6 +56,20 @@ export function Appbar() {
       console.error('Error in Logging out', error);
     }
   };
+
+  const handleSearchByCity = async () => {
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/logout`, {
+        withCredentials: true
+      });
+
+      if (response.status === 200) {
+        navigate('/');
+      }
+    } catch (error) {
+      console.error('Error in Logging out', error);
+    }
+  };  
 
   return (
     <div
@@ -140,30 +154,6 @@ export function HeroSection({ userName }) {
   return (
     <div className="bg-white py-10">
       <div className="container mx-auto text-center">
-
-        {/* Location and Search Inputs */}
-        <div className="flex justify-center items-center border border-gray-300 rounded-lg overflow-hidden w-2/3 md:w-1/2 mx-auto">
-          {/* Location Input */}
-          <div className="flex items-center px-4 py-2 bg-white border-r border-gray-300">
-            <FaMapMarkerAlt className="text-gray-500 mr-2" />
-            <input
-              type="text"
-              placeholder="Enter Location"
-              className="outline-none"
-              style={{ minWidth: "60px" }}
-            />
-          </div>
-
-          {/* Search Input */}
-          <div className="flex items-center px-4 py-2 w-full">
-            <FaSearch className="text-gray-500 mr-2" />
-            <input
-              type="text"
-              placeholder="Search doctors, clinics, hospitals, etc."
-              className="w-full outline-none"
-            />
-          </div>
-        </div>
 
         {/* Service Options */}
         <div className="bg-blue-500 mx-8 rounded-lg mt-6">

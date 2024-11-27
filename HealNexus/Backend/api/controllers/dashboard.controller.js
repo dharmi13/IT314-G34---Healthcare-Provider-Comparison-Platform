@@ -1,14 +1,15 @@
-import DoctorProfile from '../models/profile.doctor.js';
+import DoctorProfile from '../../data/models/profile/profile.doctor.js';
 
-export const filterDoctorsBySpecialty = async (req, res) => {
+export const filterDoctorsByState = async (req, res) => {
   try {
-    const { specialty } = req.query;
-    const doctors = await DoctorProfile.find({ specialty: specialty });
+    const { state } = req.body;
+    const doctors = await DoctorProfile.find({ state: state });
 
     if (!doctors.length) {
       return res.status(404).json({ message: "No doctors found with the specified specialty" });
     }
 
+    console.log(doctors);
     res.status(200).json(doctors);
     
   } catch (error) {
@@ -19,7 +20,7 @@ export const filterDoctorsBySpecialty = async (req, res) => {
 
 export const filterDoctorsByCity = async (req, res) => {
     try {
-      const { city } = req.query;
+      const { city } = req.body;
       if (!city) {
         return res.status(400).json({ message: "City parameter is required" });
       }
@@ -29,6 +30,7 @@ export const filterDoctorsByCity = async (req, res) => {
         return res.status(404).json({ message: "No doctors found in the specified city" });
       }
   
+      console.log(doctors);
       res.status(200).json(doctors);
 
     } catch (error) {
