@@ -1,51 +1,45 @@
 import axios from "axios";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { signUpSchema } from "./AuthSchema.js";
-import {z} from 'zod';
+import { z } from "zod";
 
 export function Auth({ type }) {
-  const [userDetails, setUserDetails] = useState({ userName: "", email: "", password: "", confirmPassword: "", role: "" });
+  const [userDetails, setUserDetails] = useState({
+    userName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    role: "",
+  });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [showRoleSection, setShowRoleSection] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/login`, {
-        email: userDetails.email,
-        password: userDetails.password,
-      }, { withCredentials: true });
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/auth/login`,
+        {
+          email: userDetails.email,
+          password: userDetails.password,
+        },
+        { withCredentials: true }
+      );
 
-      if(response.status === 200 && response.data.role == 'Admin') {
-        toast.success("Welcome Admin");
-        navigate('/admin-dashboard');
-      }
-      else if (response.status === 200 && response.data.role == 'Doctor') {
-        toast.success("Welcome Doctor");
-        navigate('/doctor-dashboard');
-      }
-      else if(response.status === 200 && response.data.role == 'Patient') {
-        toast.success("Login successful");
-        navigate('/dashboard');
-      }
-      else if(response.status === 200 && response.data.role == 'Pharmacist') {
-        toast.success("Login successful");
-        navigate('/pharmacist-dashboard');
-      }
-      else {
-        toast.success("Login successful");
-        navigate('/lab-technician-dashboard');
+      if (response.status === 200) {
+        toast.success(`Welcome ${response.data.role}`);
+        navigate(`/${response.data.role.toLowerCase()}-dashboard`);
       }
     } catch (error) {
-  
       if (error instanceof z.ZodError) {
-        error.errors.forEach(err => toast.error(err.message));
+        error.errors.forEach((err) => toast.error(err.message));
       } else {
-        console.error('Error logging in:', error.response?.data || error.message);
-        const errorMessage = error.response?.data?.error || 'An error occurred. Please try again.';
+        const errorMessage =
+          error.response?.data?.error || "An error occurred. Please try again.";
         toast.error(errorMessage);
       }
     } finally {
@@ -56,25 +50,24 @@ export function Auth({ type }) {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      // Validate user details with Zod
       signUpSchema.parse(userDetails);
-
       setLoading(true);
-      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/signup`, userDetails, {
-        withCredentials: true,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/auth/signup`,
+        userDetails,
+        { withCredentials: true }
+      );
 
       if (response.status === 201) {
         toast.success("Sign up successful! Please verify your email.");
-        navigate('/verify-email');
+        navigate("/verify-email");
       }
     } catch (error) {
-      // Handle validation errors from Zod
       if (error instanceof z.ZodError) {
-        error.errors.forEach(err => toast.error(err.message));
+        error.errors.forEach((err) => toast.error(err.message));
       } else {
-        console.error('Error during sign up:', error.response?.data || error.message);
-        const errorMessage = error.response?.data?.error || 'An error occurred. Please try again.';
+        const errorMessage =
+          error.response?.data?.error || "An error occurred. Please try again.";
         toast.error(errorMessage);
       }
     } finally {
@@ -82,85 +75,116 @@ export function Auth({ type }) {
     }
   };
 
-
   return (
-    <div className="bg-white h-screen flex flex-col justify-center items-center">
-      <div className="text-center mb-6">
-        <h2 className="text-3xl font-extrabold">{type === 'login' ? 'Login' : 'Create an Account'}</h2>
-        <p className="text-slate-400">
-          {type === 'login' ? (
-            <>
-              Don't have an account?
-              <Link className="pl-2 underline text-blue-500" to="/signup">Sign Up</Link>
-            </>
-          ) : (
-            <>
-              Already have an account?
-              <Link className="pl-2 underline text-blue-500" to="/login">Login</Link>
-            </>
-          )}
-        </p>
-      </div>
-      <div className="w-80 flex flex-col space-y-4">
-        {type === 'signup' ? <RegisterAs onRoleChange={(e) => setUserDetails({ ...userDetails, role: e.target.value })} /> : null}
+    <div className="from-blue-500 via-blue-600 to-blue-700 flex justify-center items-center p-6 min-h-screen">
+      <div className="max-w-lg w-full bg-white rounded-2xl shadow-lg p-8">
+        <div className="text-center mb-6">
+          <img src="/assets/heal_logo.png" alt="Logo" className="w-16 mx-auto" />
+          <h2 className="text-2xl font-extrabold text-gray-800">
+            {type === "login" ? "Login to Your Account" : "Create Your Account"}
+          </h2>
+          <p className="text-sm text-gray-500 mt-2">
+            {type === "login" ? (
+              <>
+                Don't have an account?{" "}
+                <Link className="text-blue-600 hover:underline" to="/signup">
+                  Sign Up
+                </Link>
+              </>
+            ) : (
+              <>
+                Already have an account?{" "}
+                <Link className="text-blue-600 hover:underline" to="/login">
+                  Login
+                </Link>
+              </>
+            )}
+          </p>
+        </div>
 
-        {type === 'signup' ? <Inputbox
-          placeholder="Enter your username"
-          title="UserName"
-          type="text"
-          value={userDetails.userName}
-          onChange={(e) => setUserDetails({ ...userDetails, userName: e.target.value })}
-        /> : undefined
-        }
-
-        <Inputbox
-          placeholder="Enter your email"
-          title="Email"
-          type="text"
-          value={userDetails.email}
-          onChange={(e) => setUserDetails({ ...userDetails, email: e.target.value })}
-        />
-
-        <Inputbox
-          placeholder="......."
-          title="Password"
-          type="password"
-          value={userDetails.password}
-          onChange={(e) => setUserDetails({ ...userDetails, password: e.target.value })}
-        />
-
-        {type === 'signup' ? (
-          <Inputbox
-            placeholder="......."
-            title="Re-Enter Password"
-            type="password"
-            value={userDetails.confirmPassword}
-            onChange={(e) => setUserDetails({ ...userDetails, confirmPassword: e.target.value })}
-          />
-        ) : null}
-
-        <p className="text-slate-400">
-          {type === 'login' ? (
-            <div className="flex items-center justify-between">
-              <div className="text-sm">
-                <a
-                  onClick={() => { navigate('/forget-password') }}
-                  className="font-medium text-blue-500 hover:text-blue-400 cursor-pointer"
-                >
-                  Forgot Password?
-                </a>
+        <form onSubmit={type === "signup" ? handleSignUp : handleLogin}>
+          {type === "signup" && (
+            <div className="mb-4 bg-blue-50 p-4 rounded-lg border border-blue-300">
+              <div
+                className="flex justify-between items-center cursor-pointer"
+                onClick={() => setShowRoleSection(!showRoleSection)}
+              >
+                <p className="font-medium text-blue-700">
+                  Register Details:
+                </p>
+                <span className="text-sm text-gray-500">
+                  {showRoleSection ? "Hide" : "Show"}
+                </span>
               </div>
+              {showRoleSection && (
+                <>
+                  <Inputbox
+                    placeholder="Username"
+                    title="Username"
+                    type="text"
+                    value={userDetails.userName}
+                    onChange={(e) =>
+                      setUserDetails({ ...userDetails, userName: e.target.value })
+                    }
+                  />
+                  <RegisterAs
+                    onRoleChange={(e) =>
+                      setUserDetails({ ...userDetails, role: e.target.value })
+                    }
+                  />
+                </>
+              )}
             </div>
-          ) : undefined
-          }
-        </p>
+          )}
 
-        <button
-          className="bg-black text-white py-2 rounded-lg font-semibold hover:bg-gray-800"
-          onClick={type === "signup" ? handleSignUp : handleLogin}
-        >
-          {loading ? 'Loading...' : (type === 'login' ? 'Login' : 'Sign Up')}
-        </button>
+          <Inputbox
+            placeholder="Email"
+            title="Email"
+            type="email"
+            value={userDetails.email}
+            onChange={(e) =>
+              setUserDetails({ ...userDetails, email: e.target.value })
+            }
+          />
+          <Inputbox
+            placeholder="Password"
+            title="Password"
+            type="password"
+            value={userDetails.password}
+            onChange={(e) =>
+              setUserDetails({ ...userDetails, password: e.target.value })
+            }
+          />
+          {type === "signup" && (
+            <Inputbox
+              placeholder="Confirm Password"
+              title="Confirm Password"
+              type="password"
+              value={userDetails.confirmPassword}
+              onChange={(e) =>
+                setUserDetails({
+                  ...userDetails,
+                  confirmPassword: e.target.value,
+                })
+              }
+            />
+          )}
+
+          {type === "login" && (
+            <div className="flex justify-between items-center text-sm text-gray-500 mt-2 mb-4">
+              <Link to="/forget-password" className="text-blue-600 hover:underline">
+                Forgot Password?
+              </Link>
+            </div>
+          )}
+
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300"
+          >
+            {loading ? "Processing..." : type === "login" ? "Login" : "Sign Up"}
+          </button>
+        </form>
       </div>
     </div>
   );
@@ -168,11 +192,13 @@ export function Auth({ type }) {
 
 function Inputbox({ placeholder, title, type, value, onChange }) {
   return (
-    <div>
-      <label className="block mb-2 text-sm font-medium text-gray-900">{title}</label>
+    <div className="mb-4">
+      <label className="block mb-1 text-sm font-medium text-blue-700">
+        {title}
+      </label>
       <input
         type={type}
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        className="w-full border border-blue-300 rounded-lg bg-blue-50 p-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
         placeholder={placeholder}
         value={value}
         onChange={onChange}
@@ -184,30 +210,19 @@ function Inputbox({ placeholder, title, type, value, onChange }) {
 
 function RegisterAs({ onRoleChange }) {
   return (
-    <div className="bg-gray-100 p-4 rounded-lg border border-gray-300">
-      <p className="font-semibold text-gray-700 mb-2">Register as:</p>
-      <div className="space-y-2">
-        <label className="flex items-center">
-          <input type="radio" name="role" value="Admin" className="mr-2" onChange={onRoleChange} />
-          Admin
+    <div className="mt-2">
+      {["Admin", "Patient", "Doctor", "Pharmacist", "Lab Technician"].map((role) => (
+        <label key={role} className="flex items-center mb-2">
+          <input
+            type="radio"
+            name="role"
+            value={role}
+            className="mr-2 accent-blue-600"
+            onChange={onRoleChange}
+          />
+          {role}
         </label>
-        <label className="flex items-center">
-          <input type="radio" name="role" value="Patient" className="mr-2" onChange={onRoleChange} />
-          Patient
-        </label>
-        <label className="flex items-center">
-          <input type="radio" name="role" value="Doctor" className="mr-2" onChange={onRoleChange} />
-          Doctor
-        </label>
-        <label className="flex items-center">
-          <input type="radio" name="role" value="Pharmacist" className="mr-2" onChange={onRoleChange} />
-          Pharmacist
-        </label>
-        <label className="flex items-center">
-          <input type="radio" name="role" value="Lab Technician" className="mr-2" onChange={onRoleChange} />
-          Lab Technician
-        </label>
-      </div>
+      ))}
     </div>
   );
 }
