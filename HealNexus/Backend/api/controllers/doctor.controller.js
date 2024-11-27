@@ -106,8 +106,8 @@ const completeAppointment = async (req, res) => {
   try {
     const { userID, appointmentID } = req.body;
     const appointmentData = await Appointment.findById(appointmentID);
-
-    if (appointmentData && appointmentData.doctorID === userID) {
+   
+    if (appointmentData && appointmentData.doctorID.toString() === userID.toString()) {
       await Appointment.findByIdAndUpdate(appointmentID, { isCompleted: true })
       return res.json({ success: true, message: 'Appointment Completed' })
     } else {
@@ -124,7 +124,7 @@ const doctorDashboard = async (req, res) => {
   try {
     const { userID } = req.body;
     let appointments = await Appointment.find({ doctorID: userID })
-
+    console.log(appointments);
     let earings = 0;
     appointments.map((item) => {
       if (item.isCompleted || item.payment) {
