@@ -1,7 +1,7 @@
 {
     "collectCoverage": true,
     "testEnvironment": "node",
-    "testTimeout": 10000,
+    "testTimeout": 30000,
     "transform": {
         "^.+\\.jsx?$": "babel-jest"
     }

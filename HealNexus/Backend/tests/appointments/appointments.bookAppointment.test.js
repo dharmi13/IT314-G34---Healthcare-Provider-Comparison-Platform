@@ -1,16 +1,20 @@
 import request from 'supertest';
 import mongoose from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
-import jwt from 'jsonwebtoken'; // For generating token
+import jwt from 'jsonwebtoken';
 import app from '../../src/app'; // Adjust the path to your app.js or server.js
-import PatientProfile from '../../data/models/profile/profile.patient.js';
-import DoctorProfile from '../../data/models/profile/profile.doctor.js';
-import Appointment from '../../data/models/appointment.models.js';
 import User from '../../data/models/user.model.js';
+import DoctorProfile from '../../data/models/profile/profile.doctor.js';
+import PatientProfile from '../../data/models/profile/profile.patient.js';
+import Appointment from '../../data/models/appointment.models.js';
 
 let mongoServer;
-let adminToken; // Token for authorization
-let patientToken; // Token for patient authorization
+let patientToken;
+let doctorToken;
+let doctorProfile;
+let patientProfile;
+let doctor;
+let patient;
 
 describe('Book Appointment Route Tests', () => {
   beforeAll(async () => {
@@ -19,13 +23,64 @@ describe('Book Appointment Route Tests', () => {
     const uri = mongoServer.getUri();
     await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
+    // Set a secret key for JWT if not already set
     if (!process.env.SECRET_JWT_KEY) {
       process.env.SECRET_JWT_KEY = 'test-jwt-secret';
     }
 
-    // Generate tokens for patient and admin
-    adminToken = jwt.sign({ id: 'adminId123', role: 'admin' }, process.env.SECRET_JWT_KEY, { expiresIn: '1d' });
-    patientToken = jwt.sign({ id: 'patientId123' }, process.env.SECRET_JWT_KEY, { expiresIn: '1d' });
+    // Create a patient user and profile
+    patient = await User.create({
+      userName: 'Test Patient',  // Added userName field
+      email: 'patient@test.com',
+      password: 'password123',
+      role: 'Patient',  // Ensure 'patient' is a valid role in your User schema
+    });
+    patientProfile = await PatientProfile.create({
+      userID: patient._id,
+      age: 30,
+      gender: 'Male',
+      image: 'patient.jpg',
+      address: {
+        street: '123 Maple St',
+        city: 'Metropolis',
+        state: 'NY',
+        postalCode: '10101',
+        country: 'USA',
+      },
+    });
+
+    // Generate patient JWT token
+    patientToken = jwt.sign({ userID: patient._id }, process.env.SECRET_JWT_KEY, { expiresIn: '1d' });
+
+    // Create a doctor user and profile
+    doctor = await User.create({
+      userName: 'Dr. Test Doctor',  // Added userName field
+      email: 'doctor@test.com',
+      password: 'password123',
+      role: 'Doctor',  // Ensure 'doctor' is a valid role in your User schema
+    });
+    doctorProfile = await DoctorProfile.create({
+      userID: doctor._id,
+      specialty: 'General',
+      qualifications: ['MBBS'],
+      experience: 5,
+      contactNumber: '1234567890',
+      clinicAddress: {
+        street: '789 Willow Lane',
+        city: 'Metropolis',
+        state: 'NY',
+        postalCode: '10101',
+        country: 'USA',
+      },
+      image: 'doctor.jpg',
+      available: true,
+      isVerified: true,
+      slot_booked: {},
+      consultationFee: 100, // Make sure to set the consultation fee here
+    });
+
+    // Generate doctor JWT token
+    doctorToken = jwt.sign({ userID: doctor._id }, process.env.SECRET_JWT_KEY, { expiresIn: '1d' });
   });
 
   afterAll(async () => {
@@ -33,170 +88,61 @@ describe('Book Appointment Route Tests', () => {
     await mongoServer.stop();
   });
 
-  afterEach(async () => {
-    // Clear collections after each test
-    const collections = mongoose.connection.collections;
-    for (const key in collections) {
-      try {
-        await collections[key].deleteMany({});
-      } catch (err) {
-        console.error(`Error clearing collection ${key}:`, err);
-      }
-    }
-  });
+  describe('POST /appointment/book-appointment', () => {
+    it('should successfully book an appointment', async () => {
+      console.log('Patient Token:', patientToken);
+      console.log('Doctor ID:', doctorProfile._id);
 
-  test('POST /appointment/book-appointment - should successfully book appointment', async () => {
-    const session = await mongoose.startSession(); // Start session for DB transaction
-    session.startTransaction();
-
-    try {
-      // Create mock data for doctor and patient
-      const user = await User.create({
-        userName: 'Patient User',
-        email: 'patient@patient.com',
-        password: 'password123',
-        role: 'Patient',
-      });
-
-      const doctorUser = await User.create({
-        userName: 'Doctor User',
-        email: 'doctor@doctor.com',
-        password: 'password123',
-        role: 'Doctor',
-      });
-
-      const patientProfile = await PatientProfile.create({
-        userID: user._id,
-        age: 30,
-        gender: 'Male',
-        address: { street: '123 Main St', city: 'Metropolis', state: 'NY', postalCode: '10001', country: 'USA' },
-        image: 'patient.jpg',
-      });
-
-      const doctorProfile = await DoctorProfile.create({
-        userID: doctorUser._id,
-        specialty: 'Cardiology',
-        qualifications: ['MBBS', 'MD'],
-        experience: 10,
-        contactNumber: '1234567890',
-        clinicAddress: { street: '456 Elm St', city: 'Gotham', state: 'NY', postalCode: '10002', country: 'USA' },
-        image: 'doctor.jpg',
-        slot_booked: {}
-      });
-
-      // Send POST request to book appointment
       const response = await request(app)
         .post('/appointment/book-appointment')
         .set('Cookie', `jwt=${patientToken}`)
         .send({
+          userID: patient._id,
           doctorID: doctorProfile._id,
           slotDate: '2024-12-01',
-          slotTime: '10:00 AM'
+          slotTime: '10:00 AM',
         });
 
-      // Validate the response
+      console.log('Response Body:', response.body); // This will help debug the response
+
       expect(response.status).toBe(201);
       expect(response.body).toHaveProperty('message', 'Appointment booked successfully');
+    });
 
-      // Commit transaction
-      await session.commitTransaction();
-      session.endSession();
-    } catch (error) {
-      await session.abortTransaction();
-      session.endSession();
-      console.error("Error booking appointment:", error);
-    }
-  });
-
-  test('POST /appointment/book-appointment - should return 400 if doctor or patient not found', async () => {
-    const session = await mongoose.startSession(); // Start session for DB transaction
-    session.startTransaction();
-
-    try {
-      // Send POST request with invalid doctorID
+    it('should return 400 if patient or doctor not found', async () => {
+      const invalidDoctorID = new mongoose.Types.ObjectId(); // Invalid ObjectId
       const response = await request(app)
         .post('/appointment/book-appointment')
         .set('Cookie', `jwt=${patientToken}`)
         .send({
-          doctorID: 'invalidDoctorId',
+          userID: patient._id,
+          doctorID: invalidDoctorID,
           slotDate: '2024-12-01',
-          slotTime: '10:00 AM'
+          slotTime: '10:00 AM',
         });
 
       expect(response.status).toBe(400);
       expect(response.body).toHaveProperty('message', 'Patient or Doctor not found');
+    });
 
-      // Commit transaction (although this test will not reach here if error occurs)
-      await session.commitTransaction();
-      session.endSession();
-    } catch (error) {
-      await session.abortTransaction();
-      session.endSession();
-      console.error("Error booking appointment:", error);
-    }
-  });
+    it('should return 400 if doctor is not available at the requested time', async () => {
+      // Simulate the doctor having the requested slot booked already
+      doctorProfile.slot_booked['2024-12-01'] = ['10:00 AM'];
+      await doctorProfile.save();
 
-  test('POST /appointment/book-appointment - should return 400 if doctor is not available at this time', async () => {
-    const session = await mongoose.startSession(); // Start session for DB transaction
-    session.startTransaction();
-
-    try {
-      // Create mock data for doctor and patient
-      const user = await User.create({
-        userName: 'Patient User',
-        email: 'patient@patient.com',
-        password: 'password123',
-        role: 'Patient',
-      });
-
-      const doctorUser = await User.create({
-        userName: 'Doctor User',
-        email: 'doctor@doctor.com',
-        password: 'password123',
-        role: 'Doctor',
-      });
-
-      const patientProfile = await PatientProfile.create({
-        userID: user._id,
-        age: 30,
-        gender: 'Male',
-        address: { street: '123 Main St', city: 'Metropolis', state: 'NY', postalCode: '10001', country: 'USA' },
-        image: 'patient.jpg',
-      });
-
-      const doctorProfile = await DoctorProfile.create({
-        userID: doctorUser._id,
-        specialty: 'Cardiology',
-        qualifications: ['MBBS', 'MD'],
-        experience: 10,
-        contactNumber: '1234567890',
-        clinicAddress: { street: '456 Elm St', city: 'Gotham', state: 'NY', postalCode: '10002', country: 'USA' },
-        image: 'doctor.jpg',
-        slot_booked: {
-          '2024-12-01': ['10:00 AM'] // Doctor is already booked at this time
-        }
-      });
-
-      // Send POST request to book appointment for a time that is already booked
       const response = await request(app)
         .post('/appointment/book-appointment')
         .set('Cookie', `jwt=${patientToken}`)
         .send({
+          userID: patient._id,
           doctorID: doctorProfile._id,
           slotDate: '2024-12-01',
-          slotTime: '10:00 AM' // Already booked time
+          slotTime: '10:00 AM',
         });
 
       expect(response.status).toBe(400);
       expect(response.body).toHaveProperty('message', 'Doctor not available at this time');
+    });
 
-      // Commit transaction
-      await session.commitTransaction();
-      session.endSession();
-    } catch (error) {
-      await session.abortTransaction();
-      session.endSession();
-      console.error("Error booking appointment:", error);
-    }
   });
 });
