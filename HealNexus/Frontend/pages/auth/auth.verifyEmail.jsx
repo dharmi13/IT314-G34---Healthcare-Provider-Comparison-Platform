@@ -12,22 +12,28 @@ const VerifyEmail = () => {
     e.preventDefault();
     const ReceivedCode = otp.join("");
 
-    setLoading(true);  
+    setLoading(true);
     try {
-        const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/verify-email`, { ReceivedCode }, {
-          withCredentials: true
-        });
-        if(response.status === 200) {
-          toast.success("Email verified successfully");
-          setTimeout(() => {navigate(`/profile/${response.data.role.toLowerCase()}`)}, 1000);
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/auth/verify-email`,
+        { ReceivedCode },
+        {
+          withCredentials: true,
         }
-
+      );
+      if (response.status === 200) {
+        toast.success("Email verified successfully");
+        setTimeout(() => {
+          navigate(`/profile/${response.data.role.toLowerCase()}`);
+        }, 1000);
+      }
     } catch (error) {
-        console.error('Error logging in:', error.response?.data || error.message);
-        const errorMessage = error.response?.data?.error || "An error occurred. Please try again.";
-        toast.error(errorMessage);
+      console.error("Error verifying email:", error.response?.data || error.message);
+      const errorMessage =
+        error.response?.data?.error || "An error occurred. Please try again.";
+      toast.error(errorMessage);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -52,7 +58,7 @@ const VerifyEmail = () => {
 
   const handlePaste = (e) => {
     e.preventDefault();
-    const pasteData = e.clipboardData.getData("text").slice(0, 6); 
+    const pasteData = e.clipboardData.getData("text").slice(0, 6);
 
     if (/^\d+$/.test(pasteData)) {
       const newOtp = pasteData.split("").concat(new Array(6 - pasteData.length).fill(""));
@@ -65,46 +71,52 @@ const VerifyEmail = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-purple-100">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md text-center">
-        <h1 className="text-3xl font-semibold text-purple-700 mb-4">Heal Nexus</h1>
-        <h2 className="text-xl font-semibold text-gray-800 mb-2">Please check your email</h2>
-        <p className="text-gray-600 mb-6">
-          We've sent a code to <strong>mail</strong>
-        </p>
-
-        <div className="flex justify-center space-x-2 mb-6">
-          {otp.map((data, index) => (
-            <input
-              key={index}
-              type="text"
-              name="otp"
-              id={`otp-${index}`}
-              maxLength="1"
-              value={data}
-              onChange={(e) => handleChange(e.target, index)}
-              onKeyDown={(e) => e.key === "Backspace" && handleBackspace(e.target, index)}
-              onFocus={(e) => e.target.select()}
-              onPaste={handlePaste}
-              className="w-12 h-12 border rounded-lg text-center text-lg focus:border-purple-500 focus:outline-none"
-            />
-          ))}
+    <div className="from-blue-500 via-blue-600 to-blue-700 flex justify-center items-center p-6 min-h-screen">
+      <div className="max-w-lg w-full bg-white rounded-2xl shadow-lg p-8">
+        <div className="text-center mb-6">
+          <img src="/assets/heal_logo.png" alt="Logo" className="w-16 mx-auto" />
+          <h2 className="text-2xl font-extrabold text-gray-800">Verify Your Email</h2>
+          <p className="text-sm text-gray-500 mt-2">
+            We've sent a 6-digit code to your email. Enter it below to verify your email address.
+          </p>
         </div>
 
-        <button
-          type="button"
-          className="w-full bg-purple-600 text-white py-2 rounded-md font-medium hover:bg-purple-700 focus:outline-none"
-          onClick={handleSubmit}
-        >
-          {loading ? "Verifying..." : "Verify"}
-        </button>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="flex justify-center space-x-2">
+            {otp.map((data, index) => (
+              <input
+                key={index}
+                type="text"
+                name="otp"
+                id={`otp-${index}`}
+                maxLength="1"
+                value={data}
+                onChange={(e) => handleChange(e.target, index)}
+                onKeyDown={(e) => e.key === "Backspace" && handleBackspace(e.target, index)}
+                onFocus={(e) => e.target.select()}
+                onPaste={handlePaste}
+                className="w-12 h-12 border border-blue-300 rounded-lg bg-blue-50 text-center text-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            ))}
+          </div>
 
-        <p className="text-gray-600 mt-4">
-          Didn't receive an email? <span className="text-purple-600 cursor-pointer hover:underline">Resend</span>
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300"
+          >
+            {loading ? "Verifying..." : "Verify"}
+          </button>
+        </form>
+
+        <p className="text-center text-sm text-gray-500 mt-4">
+          Didn't receive the code?{" "}
+          <span className="text-blue-600 hover:underline cursor-pointer">
+            Resend
+          </span>
         </p>
       </div>
     </div>
   );
-}
+};
 
 export default VerifyEmail;

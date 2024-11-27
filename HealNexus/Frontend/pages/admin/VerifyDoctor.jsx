@@ -4,28 +4,26 @@ import Sidebar from '../../components/admin/Sidebar.jsx';
 import axios from 'axios';
 
 const UnverifiedDoctor = () => {
-  const [unverifiedDoctors, setUnverifiedDoctors] = useState([]);
+  const [unverifiedDoctors, setUnverifiedDoctors] = useState([]); // Initialize as an empty array
+  const [selectedDoctor, setSelectedDoctor] = useState(null); 
 
   useEffect(() => {
     const fetchDoctorData = async () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/admin/get-unverified-doctors`, {
-          withCredentials: true
+          withCredentials: true,
         });
-  
         if (response.status === 200) {
           console.log(response.data.doctorData);
-          setUnverifiedDoctors(response.data.doctorData);
+          setUnverifiedDoctors(response.data.doctorData || []); // Ensure it's an array
         }
       } catch (error) {
-        console.error('Error in Logging out', error);
+        console.error('Error fetching unverified doctors:', error);
       }
     };
 
     fetchDoctorData();
   }, []);
-
-  const [selectedDoctor, setSelectedDoctor] = useState(null); 
 
   const showDoctorProfile = (doctor) => {
     setSelectedDoctor(doctor);
@@ -38,19 +36,35 @@ const UnverifiedDoctor = () => {
   const verifyDoctor = async (doctor) => {
     try {
       const response = await axios.put(`${import.meta.env.VITE_SERVER_URL}/admin/approve-doctor/${doctor._id}`, null, {
-        withCredentials: true
+        withCredentials: true,
       });
 
       if (response.status === 200) {
-        window.location.reload();
+        setUnverifiedDoctors((prev) =>
+          prev.filter((doc) => doc._id !== doctor._id)
+        ); // Remove the approved doctor from the list
+        goBackToList();
       }
     } catch (error) {
-      console.error('Error in Logging out', error);
+      console.error('Error approving doctor:', error);
     }
   };
 
-  const rejectDoctor = () => {
+  const rejectDoctor = async (doctor) => {
+    try {
+      const response = await axios.put(`${import.meta.env.VITE_SERVER_URL}/admin/reject-doctor/${doctor._id}`, null, {
+        withCredentials: true,
+      });
 
+      if (response.status === 200) {
+        setUnverifiedDoctors((prev) =>
+          prev.filter((doc) => doc._id !== doctor._id)
+        ); // Remove the rejected doctor from the list
+        goBackToList();
+      }
+    } catch (error) {
+      console.error('Error rejecting doctor:', error);
+    }
   };
 
   if (selectedDoctor) {
@@ -66,7 +80,7 @@ const UnverifiedDoctor = () => {
               <div className="pt-4">
                 <p className="text-neutral-800 text-lg font-medium">{selectedDoctor.userData.userName}</p>
                 <p className="text-zinc-600 text-sm">{selectedDoctor.userData.email}</p>
-                <p className="text-zinc-600 text-sm">{selectedDoctor. contactNumber}</p>
+                <p className="text-zinc-600 text-sm">{selectedDoctor.contactNumber}</p>
                 <p className="text-zinc-600 text-sm">{selectedDoctor.specialty}</p>
                 <p className="text-zinc-600 text-sm">{selectedDoctor.qualifications}</p>
                 <p className="text-zinc-600 text-sm">{selectedDoctor.experience}</p>
@@ -81,19 +95,13 @@ const UnverifiedDoctor = () => {
               <div className="mt-4">
                 <button
                   style={{ color: 'white', backgroundColor: 'green', marginRight: '10px', width: '70px', height: '35px' }}
-                  onClick={() => {
-                    verifyDoctor(selectedDoctor);
-                    goBackToList();
-                  }}
+                  onClick={() => verifyDoctor(selectedDoctor)}
                 >
                   Approve
                 </button>
                 <button
                   style={{ color: 'white', backgroundColor: 'red', width: '70px', height: '35px' }}
-                  onClick={() => {
-                    rejectDoctor(selectedDoctor);
-                    goBackToList();
-                  }}
+                  onClick={() => rejectDoctor(selectedDoctor)}
                 >
                   Reject
                 </button>
@@ -119,30 +127,34 @@ const UnverifiedDoctor = () => {
         <div className="m-5 max-h-[90vh] overflow-y-scroll">
           <h1 className="text-lg font-medium">Unverified Doctors</h1>
           <div className="w-full flex flex-wrap gap-4 pt-5 gap-y-6">
-            {unverifiedDoctors.map((item, index) => (
-              <div
-                className="border border-indigo-200 rounded-xl max-w-56 overflow-hidden cursor-pointer group"
-                key={index}
-              >
-                <img
-                  className="bg-indigo-50 group-hover:bg-primary transition-all duration-500"
-                  src={item.image}
-                  alt="doctor"
-                />
-                <div className="p-4">
-                  <p className="text-neutral-800 text-lg font-medium">{item.userData.userName}</p>
-                  <p className="text-zinc-600 text-sm">{item.specialty}</p>
-                  <div className="mt-2 flex items-center gap-1 text-sm">
-                    <button
-                      style={{ color: 'white', backgroundColor: 'blue', width: '70px', height: '35px' }}
-                      onClick={() => showDoctorProfile(item)} 
-                    >
-                      Checkout
-                    </button>
+            {unverifiedDoctors.length > 0 ? (
+              unverifiedDoctors.map((item, index) => (
+                <div
+                  className="border border-indigo-200 rounded-xl max-w-56 overflow-hidden cursor-pointer group"
+                  key={index}
+                >
+                  <img
+                    className="bg-indigo-50 group-hover:bg-primary transition-all duration-500"
+                    src={item.image}
+                    alt="doctor"
+                  />
+                  <div className="p-4">
+                    <p className="text-neutral-800 text-lg font-medium">{item.userData.userName}</p>
+                    <p className="text-zinc-600 text-sm">{item.specialty}</p>
+                    <div className="mt-2 flex items-center gap-1 text-sm">
+                      <button
+                        style={{ color: 'white', backgroundColor: 'blue', width: '70px', height: '35px' }}
+                        onClick={() => showDoctorProfile(item)} 
+                      >
+                        Checkout
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p>No unverified doctors found.</p>
+            )}
           </div>
         </div>
       </div>

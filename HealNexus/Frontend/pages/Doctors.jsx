@@ -3,12 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Footer } from './landingPage';
 import { Appbar } from './dashBoard';
-import { FaMapMarkerAlt, FaSearch} from 'react-icons/fa';
+import { FaMapMarkerAlt, FaSearch } from 'react-icons/fa';
 
 export const Doctors = () => {
   const { speciality } = useParams();
-  const [filterDoc, setFilterDoc] = useState([]);
-  const [doctors, setDoctors] = useState([]);  
+  const [filterDoc, setFilterDoc] = useState([]); // Make sure it's initialized as an empty array
+  const [doctors, setDoctors] = useState([]); // Initialize as an empty array
   const [city, setCity] = useState(null);
   const [state, setState] = useState(null);
   const navigate = useNavigate();
@@ -21,10 +21,10 @@ export const Doctors = () => {
         });
 
         if (response.status === 200) {
-          setDoctors(response.data.doctorData);
+          setDoctors(response.data.doctorData || []); // Fallback to empty array if no data
         }
       } catch (error) {
-        console.error('Error in Logging out', error);
+        console.error('Error in fetching doctors', error);
       }
     };
 
@@ -32,30 +32,24 @@ export const Doctors = () => {
   }, []);
 
   const searchDoctors = () => {
-    if (city?.trim() && state?.trim()) {
-      setFilterDoc(doctors.filter(doc => 
-        doc.profile.clinicAddress.city === city && 
-        doc.profile.clinicAddress.state === state
+    // Make sure `doctors` is an array before calling .filter()
+    if (Array.isArray(doctors) && (city?.trim() || state?.trim())) {
+      setFilterDoc(doctors.filter(doc =>
+        doc.profile?.clinicAddress?.city === city &&
+        doc.profile?.clinicAddress?.state === state
       ));
-    } else if (city?.trim() || state?.trim()) {
-      setFilterDoc(doctors.filter(doc => {
-        return (city?.trim() ? doc.profile.clinicAddress.city === city : true) &&
-               (state?.trim() ? doc.profile.clinicAddress.state === state : true);
-      }));
-    } else {
-      setCity(null);
-      setState(null); 
-      setFilterDoc(doctors);
+    } else if (Array.isArray(doctors)) {
+      setFilterDoc(doctors); // If no filters, show all doctors
     }
   };
 
   useEffect(() => {
     searchDoctors();
-  }, [city, state]);
-  
+  }, [city, state, doctors]); // Dependency on `doctors` to re-run filter when new data is fetched
+
   const applyFilter = () => {
     if (speciality) {
-      setFilterDoc(doctors.filter(doc => doc.profile.specialty === speciality));
+      setFilterDoc(doctors.filter(doc => doc.profile?.specialty === speciality));
     } else {
       setFilterDoc(doctors);
     }
@@ -63,11 +57,12 @@ export const Doctors = () => {
 
   useEffect(() => {
     applyFilter();
-  }, [doctors, speciality]);
+  }, [doctors, speciality]); // Dependency on `doctors` to apply filter correctly
+
   return (
     <div className='mt-2'>
       <Appbar />
-      
+
       <div className='mx-28 mt-4'>
         {/* Location and Search Inputs */}
         <div className="flex justify-center items-center border border-gray-300 rounded-lg overflow-hidden w-2/3 md:w-1/2 mx-auto mb-8">
@@ -99,6 +94,7 @@ export const Doctors = () => {
 
         <p className='text-gray-600'>Search doctors by specialty.</p>
         <div className='flex flex-row item-start gap-5 mt-5'>
+          {/* Specialty Filter Options */}
           <div className='flex flex-col gap-4 text-sm text-gray-600'>
             <p
               onClick={() => speciality === 'General Physician' ? navigate('/doctors') : navigate('/doctors/General Physician')}
@@ -131,6 +127,8 @@ export const Doctors = () => {
               Gastroenterologist
             </p>
           </div>
+
+          {/* Doctors Grid */}
           <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
             {
               (filterDoc && filterDoc.length > 0) ? (
@@ -139,7 +137,11 @@ export const Doctors = () => {
                     key={index}
                     onClick={() => navigate(`/appointment/${item.profile._id}`)}
                     className='border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500'>
-                    <img className='bg-blue-500' src={item.profile.image} alt="" />
+                    <img
+                      className='bg-blue-500 w-full h-48 object-cover' // Fixed image size with object-cover to maintain aspect ratio
+                      src={item.profile.image}
+                      alt={item.user.userName}
+                    />
                     <div className='p-4'>
                       <div className='flex items-center gap-2 text-sm text-center text-gray text-green-500'>
                         <p className="w-2 h-2 bg-green-500 rounded-full"></p>
@@ -151,7 +153,7 @@ export const Doctors = () => {
                   </div>
                 ))
               ) : (
-                <p className='text-gray-600'>No doctors found.</p> 
+                <p className='text-gray-600'>No doctors found.</p>
               )
             }
           </div>
@@ -162,5 +164,3 @@ export const Doctors = () => {
     </div>
   );
 };
-
-
