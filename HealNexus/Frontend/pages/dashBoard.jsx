@@ -94,7 +94,7 @@ export function Appbar() {
       {/* Navigation Links (only visible on medium and up) */}
       <div className="hidden lg:flex space-x-8 text-gray-800 font-semibold">
         <NavLink
-          to="/dashboard"
+          to="/patient-dashboard"
           className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600' : 'hover:text-blue-600 hover:border-b-2 border-transparent'}
         >
           DASHBOARD

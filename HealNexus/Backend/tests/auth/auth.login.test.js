@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import request from 'supertest';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import app from '../../src/app.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import User from '../../data/models/user.model.js';
 import Profile from '../../data/models/profile/profile.admin.js'; // Add this import
 

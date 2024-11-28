@@ -6,7 +6,8 @@ import User from '../../data/models/user.model.js';
 
 const bookAppointment = async (req, res) => {
   try {
-    const { userID, doctorID, slotTime, slotDate } = req.body;
+    const { userID } = req;
+    const { doctorID, slotTime, slotDate } = req.body;
 
     const patientData = await PatientProfile.findOne({ userID: userID });
     const doctorData = await DoctorProfile.findById(doctorID);

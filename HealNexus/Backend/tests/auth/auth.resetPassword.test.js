@@ -2,7 +2,7 @@ import request from 'supertest';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 import app from '../../src/app.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import User from '../../data/models/user.model.js';
 import nodemailer from 'nodemailer';
 
