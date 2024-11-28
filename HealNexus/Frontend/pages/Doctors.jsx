@@ -7,8 +7,8 @@ import { FaMapMarkerAlt, FaSearch } from 'react-icons/fa';
 
 export const Doctors = () => {
   const { speciality } = useParams();
-  const [filterDoc, setFilterDoc] = useState([]); // Make sure it's initialized as an empty array
-  const [doctors, setDoctors] = useState([]); // Initialize as an empty array
+  const [filterDoc, setFilterDoc] = useState([]); 
+  const [doctors, setDoctors] = useState([]);
   const [city, setCity] = useState(null);
   const [state, setState] = useState(null);
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export const Doctors = () => {
         });
 
         if (response.status === 200) {
-          setDoctors(response.data.doctorData || []); // Fallback to empty array if no data
+          setDoctors(response.data.doctorData || []); 
         }
       } catch (error) {
         console.error('Error in fetching doctors', error);
@@ -32,20 +32,26 @@ export const Doctors = () => {
   }, []);
 
   const searchDoctors = () => {
-    // Make sure `doctors` is an array before calling .filter()
-    if (Array.isArray(doctors) && (city?.trim() || state?.trim())) {
-      setFilterDoc(doctors.filter(doc =>
-        doc.profile?.clinicAddress?.city === city &&
-        doc.profile?.clinicAddress?.state === state
+    if (city?.trim() && state?.trim()) {
+      setFilterDoc(doctors.filter(doc => 
+        doc.profile.clinicAddress.city === city && 
+        doc.profile.clinicAddress.state === state
       ));
-    } else if (Array.isArray(doctors)) {
-      setFilterDoc(doctors); // If no filters, show all doctors
+    } else if (city?.trim() || state?.trim()) {
+      setFilterDoc(doctors.filter(doc => {
+        return (city?.trim() ? doc.profile.clinicAddress.city === city : true) &&
+               (state?.trim() ? doc.profile.clinicAddress.state === state : true);
+      }));
+    } else {
+      setCity(null);
+      setState(null); 
+      setFilterDoc(doctors);
     }
   };
 
   useEffect(() => {
     searchDoctors();
-  }, [city, state, doctors]); // Dependency on `doctors` to re-run filter when new data is fetched
+  }, [city, state, doctors]); 
 
   const applyFilter = () => {
     if (speciality) {
@@ -57,16 +63,14 @@ export const Doctors = () => {
 
   useEffect(() => {
     applyFilter();
-  }, [doctors, speciality]); // Dependency on `doctors` to apply filter correctly
+  }, [doctors, speciality]); 
 
   return (
     <div className='mt-2'>
       <Appbar />
 
       <div className='mx-28 mt-4'>
-        {/* Location and Search Inputs */}
         <div className="flex justify-center items-center border border-gray-300 rounded-lg overflow-hidden w-2/3 md:w-1/2 mx-auto mb-8">
-          {/* Location Input */}
           <div className="flex items-center px-4 py-2 w-full bg-white border-r border-gray-300">
             <FaMapMarkerAlt className="text-gray-500 mr-2" />
             <input
@@ -79,7 +83,6 @@ export const Doctors = () => {
             />
           </div>
 
-          {/* Search Input */}
           <div className="flex items-center px-4 py-2 w-full">
             <FaSearch className="text-gray-500 mr-2" />
             <input
