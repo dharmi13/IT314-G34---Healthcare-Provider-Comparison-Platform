@@ -233,12 +233,12 @@ export function SpecialitySection() {
   const navigate = useNavigate();
 
   const specialities = [
-    { name: "General Physician", icon: "/assets/general_physician.svg" },
-    { name: "Gynecologist", icon: "/assets/gynecologist.svg" },
-    { name: "Dermatologist", icon: "/assets/dermatologist.svg" },
-    { name: "Pediatrician", icon: "/assets/pediatricians.svg" },
-    { name: "Neurologist", icon: "/assets/neurologist.svg" },
-    { name: "Gastroenterologist", icon: "/assets/gastroenterologist.svg" },
+    { name: "General Physician", icon: "./assets/general_physician.svg" },
+    { name: "Gynecologist", icon: "./assets/gynecologist.svg" },
+    { name: "Dermatologist", icon: "./assets/dermatologist.svg" },
+    { name: "Pediatrician", icon: "./assets/pediatricians.svg" },
+    { name: "Neurologist", icon: "./assets/neurologist.svg" },
+    { name: "Gastroenterologist", icon: "./assets/gastroenterologist.svg" },
   ];
 
 

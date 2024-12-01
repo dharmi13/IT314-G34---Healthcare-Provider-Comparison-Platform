@@ -2,7 +2,7 @@ import User from '../../data/models/user.model.js';
 import getErrorDetails from '../../Utilites/errorCodes.js';
 import PatientProfile from '../../data/models/profile/profile.patient.js';
 import DoctorProfile from '../../data/models/profile/profile.doctor.js';
-import LabTechnicianProfile from '../../data/models/profile/profile.labtechnician.js';
+import LabTechnicianProfile from '../../data/models/profile/profile.labTechnician.js';
 import PharmacistProfile from '../../data/models/profile/profile.pharmacist.js';
 import { v2 as cloudinary } from 'cloudinary';
 
