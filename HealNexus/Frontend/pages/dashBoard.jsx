@@ -1,8 +1,8 @@
 import React from 'react'
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Link ,useNavigate,NavLink} from 'react-router-dom';
-import { FaUserCircle} from 'react-icons/fa';
+import { Link, useNavigate, NavLink } from 'react-router-dom';
+import { FaUserCircle } from 'react-icons/fa';
 import { Footer } from './landingPage';
 const DashBoard = () => {
   const [userName, setUserName] = useState('');
@@ -69,7 +69,7 @@ export function Appbar() {
     } catch (error) {
       console.error('Error in Logging out', error);
     }
-  };  
+  };
 
   return (
     <div
@@ -115,7 +115,7 @@ export function Appbar() {
           to="/team"
           className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600' : 'hover:text-blue-600 hover:border-b-2 border-transparent'}
         >
-            OUR-TEAM
+          OUR-TEAM
         </NavLink>
       </div>
 
@@ -140,8 +140,8 @@ export function Appbar() {
         {/* Profile Icon */}
         <button
           className={`p-2 text-blue-600 hover:text-blue-700 transition-all duration-300 ${isScrolled ? "shadow-md" : ""}`}
-          onClick={(e) => {navigate('/my-profile')}}
-          data-testid = "pbutton"
+          onClick={(e) => { navigate('/my-profile') }}
+          data-testid="pbutton"
         >
           <FaUserCircle className="w-8 h-8" /> {/* User icon */}
         </button>
@@ -160,7 +160,7 @@ export function HeroSection({ userName }) {
           <div className="flex justify-between items-center max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <div>
               <h2 className="text-3xl text-left font-semibold text-white">Welcome {userName || "Guest"} to Heal Nexus!</h2>
-              <p class="text-sm text-white bg-blue-500 p-2 rounded-md">
+              <p className="text-sm text-white bg-blue-500 p-2 rounded-md">
                 Connecting you to care that truly matters.
               </p>
             </div>
@@ -178,12 +178,17 @@ export function HeroSection({ userName }) {
 }
 
 export function Services() {
+  const navigate = useNavigate();
   const services = [
-    { name: 'Period doubts or Pregnancy', action: 'CONSULT NOW', image: '/assets/irregular-painful+period.webp' },
-    { name: 'Acne, pimple or skin issues', action: 'CONSULT NOW', image: '/assets/Acne.webp' },
-    { name: 'Cold, cough or fever', action: 'CONSULT NOW', image: '/assets/coughing.webp' },
-    { name: 'Depression or anxiety', action: 'CONSULT NOW', image: '/assets/12-mental-wellness.webp' },
+    { name: "Period doubts or Pregnancy", action: "CONSULT NOW", image: "/assets/irregular-painful+period.webp" },
+    { name: "Acne, pimple or skin issues", action: "CONSULT NOW", image: "/assets/Acne.webp" },
+    { name: "Cold, cough or fever", action: "CONSULT NOW", image: "/assets/coughing.webp" },
+    { name: "Depression or anxiety", action: "CONSULT NOW", image: "/assets/12-mental-wellness.webp" },
   ];
+
+  const handleConsultClick = () => {
+    navigate("/doctors");
+  };
 
   return (
     <div className="bg-gray-50 py-12">
@@ -197,17 +202,21 @@ export function Services() {
               key={index}
               className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-all ease-in-out duration-300"
             >
-              <div className="hidden sm:block md:block mb-4">
+              {/* Image (hidden on sm breakpoint) */}
+              <div className="hidden md:block mb-4">
                 <img
                   src={service.image}
                   alt={service.name}
                   className="w-32 h-32 object-cover mb-4"
                 />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2 hidden sm:block md:block">
+              {/* Name (visible on all breakpoints) */}
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 {service.name}
               </h3>
-              <button className="mt-3 text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-300 px-6 py-2 border-2 border-blue-600 rounded-full">
+              {/* Button */}
+              <button onClick={handleConsultClick}
+                className="mt-3 text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-300 px-6 py-2 border-2 border-blue-600 rounded-full">
                 {service.action}
               </button>
             </div>
@@ -219,27 +228,42 @@ export function Services() {
 }
 
 
+
 export function SpecialitySection() {
+  const navigate = useNavigate();
+
   const specialities = [
-    { name: "General physician", icon: "/assets/general_physician.svg" },
+    { name: "General Physician", icon: "/assets/general_physician.svg" },
     { name: "Gynecologist", icon: "/assets/gynecologist.svg" },
     { name: "Dermatologist", icon: "/assets/dermatologist.svg" },
-    { name: "Pediatricians", icon: "/assets/pediatricians.svg" },
+    { name: "Pediatrician", icon: "/assets/pediatricians.svg" },
     { name: "Neurologist", icon: "/assets/neurologist.svg" },
     { name: "Gastroenterologist", icon: "/assets/gastroenterologist.svg" },
   ];
 
+
+
   return (
     <div className="py-16 px-4 md:px-8 lg:px-16 text-center mx-2">
-      <h2 className="text-3xl font-bold text-gray-800 mb-4">Book an appointment for an in-clinic consultation</h2>
+      <h2 className="text-3xl font-bold text-gray-800 mb-4">
+        Book an appointment for an in-clinic consultation
+      </h2>
       <p className="text-gray-600 mb-12">
         Find experienced doctors across all specialties
       </p>
       <div className="flex flex-wrap justify-center gap-8">
         {specialities.map((speciality, index) => (
-          <div key={index} className="flex flex-col items-center space-y-2">
+          <div
+            key={index}
+            className="flex flex-col items-center space-y-2 cursor-pointer"
+            onClick={() => navigate(`/doctors/${speciality.name}`)}
+          >
             <div className="bg-blue-100 rounded-full w-24 h-24 flex items-center justify-center transition-transform transform hover:scale-110 hover:translate-y-2 shadow-md">
-              <img src={speciality.icon} alt={speciality.name} className="w-12 h-12" />
+              <img
+                src={speciality.icon}
+                alt={speciality.name}
+                className="w-12 h-12"
+              />
             </div>
             <p className="text-gray-700 font-medium">{speciality.name}</p>
           </div>
