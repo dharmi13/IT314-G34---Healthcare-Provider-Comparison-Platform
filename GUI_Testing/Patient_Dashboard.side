@@ -1,0 +1,542 @@
+{
+  "id": "cf2af722-0d4f-44b3-bc5a-7603356a1775",
+  "version": "2.0",
+  "name": "Patient_Dashboard",
+  "url": "http://localhost:5173/patient-dashboard",
+  "tests": [{
+    "id": "0cd58119-4c48-4dfa-9ebb-48d2b915a750",
+    "name": "Redirect_ALL_DOCTORS",
+    "commands": [{
+      "id": "895e8664-ef4e-4ee2-8b8f-d3344a858394",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/patient-dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d7c0503c-0d2b-427b-90ad-961ac7a6d8ba",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "38ba5d78-6cd8-487c-8f1a-7d9b4a31da71",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=ALL DOCTORS",
+      "targets": [
+        ["linkText=ALL DOCTORS", "linkText"],
+        ["css=.hover\\3Atext-blue-600:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'ALL DOCTORS')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[2]/a[2]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/doctors')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'ALL DOCTORS')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "2c7a05e0-85da-4b47-b25b-07d822dc05ec",
+    "name": "Redirect_About",
+    "commands": [{
+      "id": "4dd12664-ed38-4d9a-a87e-d7b5590bf367",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/patient-dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6d0e8078-143f-4613-bd2c-4db3dba958dd",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "82216a5f-6bae-47ba-bce5-33f827a98e95",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=ABOUT",
+      "targets": [
+        ["linkText=ABOUT", "linkText"],
+        ["css=.hover\\3Atext-blue-600:nth-child(3)", "css:finder"],
+        ["xpath=//a[contains(text(),'ABOUT')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[2]/a[3]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/about-us')]", "xpath:href"],
+        ["xpath=//a[3]", "xpath:position"],
+        ["xpath=//a[contains(.,'ABOUT')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "2319abe9-45f0-403f-9357-5a2fffb5e72f",
+    "name": "Redirect_Our_Team",
+    "commands": [{
+      "id": "bb60ca50-2ec2-4dfe-aad2-443f5607d873",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/patient-dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a3a74ee8-b462-42b0-bb1e-604df3a73ba4",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "43c92664-c4db-453f-a738-e351d465e012",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=OUR-TEAM",
+      "targets": [
+        ["linkText=OUR-TEAM", "linkText"],
+        ["css=.hover\\3Atext-blue-600:nth-child(4)", "css:finder"],
+        ["xpath=//a[contains(text(),'OUR-TEAM')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[2]/a[4]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/team')]", "xpath:href"],
+        ["xpath=//a[4]", "xpath:position"],
+        ["xpath=//a[contains(.,'OUR-TEAM')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "076d31a9-2afe-4e2b-ad6b-f3039bd1b03f",
+    "name": "Redirect_My_Appointments",
+    "commands": [{
+      "id": "e4132745-a3f9-4d16-b143-6d97eb466de3",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/patient-dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "45ac6719-49c8-473e-921c-584fac118bca",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "03fdb792-659f-44eb-911b-392b7b4bc257",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=MyAppointments",
+      "targets": [
+        ["linkText=MyAppointments", "linkText"],
+        ["css=.bg-blue-600", "css:finder"],
+        ["xpath=//a[contains(text(),'MyAppointments')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/my-appointments')]", "xpath:href"],
+        ["xpath=//div[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'MyAppointments')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "5fb95aff-7098-4473-bad6-2fd7e90e4830",
+    "name": "Button_Logout",
+    "commands": [{
+      "id": "3eb13655-2149-49d5-890a-67d1ba3a2b6e",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/patient-dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9a9627a2-5153-455f-b08d-3d13fb1f26a4",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "806x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8f8f2724-6f38-4006-8976-648e402f1fef",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-red-600",
+      "targets": [
+        ["css=.bg-red-600", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "2d0caa64-01f2-4e43-a23b-0ecd299ab2c9",
+    "name": "Redirect_Consult_Now_1",
+    "commands": [{
+      "id": "7bf85458-c96b-4394-8484-bcb57e7d9d5f",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/patient-dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7702e7a2-348d-4c8c-a403-aea1023a4864",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3979a83c-e2cd-41d8-b2a7-62cde1c0823f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(1) > .mt-3",
+      "targets": [
+        ["css=.flex:nth-child(1) > .mt-3", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div[3]/div/div/div/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'CONSULT NOW')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "07f5377a-0f94-4bd3-8d4a-f83fdab8e365",
+    "name": "Redirect_Consult_Now_2",
+    "commands": [{
+      "id": "88bab736-e5dd-4b24-846d-65024ff603ee",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/patient-dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3aad95db-f27c-4a12-b09d-c303032c50e0",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "79be8673-cee9-41c7-af22-e00a02125b2e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(2) > .mt-3",
+      "targets": [
+        ["css=.flex:nth-child(2) > .mt-3", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div[3]/div/div/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "ca2bcf52-9681-45b9-a816-b5e3bf002e97",
+    "name": "Redirect_Consult_Now_3",
+    "commands": [{
+      "id": "3cbae537-c061-4b9d-a51a-ee6f4bf52374",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/patient-dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ba858acd-2b7e-47fd-ba89-1ced5c09e2d5",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c4059b45-f02c-4324-80ae-103979b3a5f1",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(3) > .mt-3",
+      "targets": [
+        ["css=.flex:nth-child(3) > .mt-3", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div[3]/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div[3]/button", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "8af4729a-44e2-4d19-92b8-b1737ce98992",
+    "name": "Redirect_Consult_Now_4",
+    "commands": [{
+      "id": "ad2fda75-2f50-49c7-8eca-b490ea700c16",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/patient-dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ba046b91-caaa-4bf2-a400-1033b1edd3c8",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5d6aea46-cbd9-4844-a19c-446a519ae342",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(4) > .mt-3",
+      "targets": [
+        ["css=.flex:nth-child(4) > .mt-3", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div[3]/div/div/div[4]/button", "xpath:idRelative"],
+        ["xpath=//div[4]/button", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "2db3ebc1-2224-48de-a356-20274161123b",
+    "name": "Redirect_General_Physician",
+    "commands": [{
+      "id": "05a4f371-32ff-4d33-8004-b67758bb8561",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/patient-dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "faea534c-cc14-4425-8f10-da1b605558fb",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cc2d92c1-4317-453b-84ef-67e912aca011",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(1) > .bg-blue-100 > .w-12",
+      "targets": [
+        ["css=.flex:nth-child(1) > .bg-blue-100 > .w-12", "css:finder"],
+        ["xpath=//img[@alt='General Physician']", "xpath:img"],
+        ["xpath=//div[@id='root']/div/div[2]/div[4]/div/div/div/img", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "40ff9d25-9b62-4dde-8735-2af02df8bc72",
+    "name": "Redirect_Gynecologist",
+    "commands": [{
+      "id": "f65cd84f-b21f-428c-8c19-9fd6a37ca528",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/patient-dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f2450fe8-494a-4c70-94f4-ee87c96e2d24",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "21db7a39-b834-4a73-b670-8c109b2e89e7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(2) .w-12",
+      "targets": [
+        ["css=.flex:nth-child(2) .w-12", "css:finder"],
+        ["xpath=//img[@alt='Gynecologist']", "xpath:img"],
+        ["xpath=//div[@id='root']/div/div[2]/div[4]/div/div[2]/div/img", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "aa7b55dd-03b4-4904-a606-8235db80e9e7",
+    "name": "Redirect_Dermatologist",
+    "commands": [{
+      "id": "bc1871ce-7f2a-47d5-a16c-cc2c371c4623",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/patient-dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bb4f9d2d-0f1c-43a2-ae6a-8125fdbd02d2",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "21edb9f4-fadf-4aca-b577-1ffb82132c92",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(3) > .bg-blue-100 > .w-12",
+      "targets": [
+        ["css=.flex:nth-child(3) > .bg-blue-100 > .w-12", "css:finder"],
+        ["xpath=//img[@alt='Dermatologist']", "xpath:img"],
+        ["xpath=//div[@id='root']/div/div[2]/div[4]/div/div[3]/div/img", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div[3]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "379e553e-a96c-4f53-9807-844344580a82",
+    "name": "Redirect_Pediatrician",
+    "commands": [{
+      "id": "bff43eb7-57e1-4555-b87f-3daf31b3622e",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/patient-dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2af3f511-fa69-48d5-b09a-e3648c7f2a31",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c9b43d26-b59b-4d25-b355-d62234d585ec",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(4) .w-12",
+      "targets": [
+        ["css=.flex:nth-child(4) .w-12", "css:finder"],
+        ["xpath=//img[@alt='Pediatrician']", "xpath:img"],
+        ["xpath=//div[@id='root']/div/div[2]/div[4]/div/div[4]/div/img", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div[4]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "eb40706b-35c6-47f5-95fe-5bd23eafae70",
+    "name": "Redirect_Neurologist",
+    "commands": [{
+      "id": "cfc5b1eb-5052-411b-9728-69b62df5ea3f",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/patient-dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0e3dd1d6-1593-4fc4-9bf4-211e234195f9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "84723733-ca8a-4e96-bd06-d5f608f96190",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(5) .w-12",
+      "targets": [
+        ["css=.flex:nth-child(5) .w-12", "css:finder"],
+        ["xpath=//img[@alt='Neurologist']", "xpath:img"],
+        ["xpath=//div[@id='root']/div/div[2]/div[4]/div/div[5]/div/img", "xpath:idRelative"],
+        ["xpath=//div[5]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "30ff70c4-ba31-4f51-bd69-813138617ff7",
+    "name": "Redirect_Gastroenterologist",
+    "commands": [{
+      "id": "4d96c7e2-7c81-4c73-984d-2c8785258dc9",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/patient-dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4e657eab-f9e4-4623-94a5-f315afc5ba63",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6c39ba8e-f90a-4208-9106-49b51b506494",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(6) .w-12",
+      "targets": [
+        ["css=.flex:nth-child(6) .w-12", "css:finder"],
+        ["xpath=//img[@alt='Gastroenterologist']", "xpath:img"],
+        ["xpath=//div[@id='root']/div/div[2]/div[4]/div/div[6]/div/img", "xpath:idRelative"],
+        ["xpath=//div[6]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "a9d101c8-3302-4d0f-a045-2e8c454ea94e",
+    "name": "Footer_About_Us",
+    "commands": [{
+      "id": "cdad892a-06f8-41aa-84dd-13be4577d291",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/patient-dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "82b2a20f-cc9e-4dd5-b10e-2ca3c213b52a",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "806x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6c24a2d3-02dc-47a2-8eb8-afcede7f4d81",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=About us",
+      "targets": [
+        ["linkText=About us", "linkText"],
+        ["css=.mb-1:nth-child(1) > .hover\\3Atext-blue-500", "css:finder"],
+        ["xpath=//a[contains(text(),'About us')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/footer/div/div[2]/ul/li/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/about-us')])[2]", "xpath:href"],
+        ["xpath=//li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'About us')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "3026cc4d-2a77-495c-a543-574fb038783f",
+    "name": "Footer_Team",
+    "commands": [{
+      "id": "22405e7d-3a4b-4b91-bb71-1b15b87ba129",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/patient-dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a6523041-76fa-4236-8b5e-a2062bf72ba5",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "808x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cc50e89d-532a-43e2-8c66-20a738d8b25a",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Team",
+      "targets": [
+        ["linkText=Team", "linkText"],
+        ["css=.mb-1:nth-child(2) > .hover\\3Atext-blue-500", "css:finder"],
+        ["xpath=//a[contains(text(),'Team')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/footer/div/div[2]/ul/li[2]/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/team')])[2]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Team')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "07fd89f2-cc55-4e2e-a9ce-7f0e29f4f623",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["0cd58119-4c48-4dfa-9ebb-48d2b915a750"]
+  }],
+  "urls": ["http://localhost:5173/patient-dashboard"],
+  "plugins": []
+}
