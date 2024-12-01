@@ -1,0 +1,114 @@
+{
+  "id": "70f821f7-e1df-4685-9e5f-f537042c36b0",
+  "version": "2.0",
+  "name": "Doctor_Dashboard",
+  "url": "http://localhost:5173/Doctor-Dashboard",
+  "tests": [{
+    "id": "e2dd705c-e74f-4d56-8bc0-2fe254642660",
+    "name": "Redirect_Appointments",
+    "commands": [{
+      "id": "e9f38e76-49da-4f6a-b444-141f98ef22e1",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/Doctor-Dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "80243e1a-c96f-4810-9f44-f0d3ddba36b3",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9f2a1c76-1d17-4398-a007-afa1e2c66354",
+      "comment": "",
+      "command": "click",
+      "target": "css=.gap-3:nth-child(2) > p",
+      "targets": [
+        ["css=.gap-3:nth-child(2) > p", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[3]/div/ul/a[2]/p", "xpath:idRelative"],
+        ["xpath=//a[2]/p", "xpath:position"],
+        ["xpath=//p[contains(.,'Appointments')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "ee6fd544-a965-4181-b175-1b4b9c23106a",
+    "name": "Button_Logout",
+    "commands": [{
+      "id": "779823db-bba4-407c-a885-b30c3a0e6967",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/Doctor-Dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "aab37222-1c3c-4404-8313-4e586fff0d28",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2ac9af26-3c72-47f8-8bdc-4f28770ae6f6",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-red-500",
+      "targets": [
+        ["css=.bg-red-500", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "95e01601-8c80-43c7-993e-bb531c0c919e",
+    "name": "Redirect_Profile",
+    "commands": [{
+      "id": "28324759-eaa8-41c3-89ad-4eed8534a1b4",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/Doctor-Dashboard",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4efd353a-ab92-4cb6-a71c-22d34460a3c2",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "30bc3773-e7c0-4e63-a8a5-011a3dbf34c8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.w-10",
+      "targets": [
+        ["css=.w-10", "css:finder"],
+        ["xpath=//img[@alt='Profile']", "xpath:img"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div/img", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "891f97bf-45c5-4681-97b6-64529badf660",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "65eebe16-dac0-47c6-a504-630ee9f82fd7",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["e2dd705c-e74f-4d56-8bc0-2fe254642660"]
+  }],
+  "urls": ["http://localhost:5173/Doctor-Dashboard"],
+  "plugins": []
+}
