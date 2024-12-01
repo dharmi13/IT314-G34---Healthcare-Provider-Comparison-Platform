@@ -1,0 +1,508 @@
+{
+  "id": "4791e677-ff3e-40ba-8f08-db22222dcfff",
+  "version": "2.0",
+  "name": "Landing_Page",
+  "url": "http://localhost:5173/",
+  "tests": [{
+    "id": "6799f589-e075-4843-980e-6734a84c082a",
+    "name": "Redirect_Dashboard",
+    "commands": [{
+      "id": "97cb3df2-856a-43eb-bf79-83e8f29b7018",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "368c4cca-2b9e-4466-9f1f-340f253c20a7",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1ab5c410-57d3-4dc7-bea7-2e44b18baf93",
+      "comment": "",
+      "command": "click",
+      "target": "css=.hover\\3Atext-blue-600:nth-child(1)",
+      "targets": [
+        ["css=.hover\\3Atext-blue-600:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[2]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'DASHBOARD')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "31a23832-5acb-42c6-a9e7-6d41b04617ec",
+    "name": "Redirect_ALL_DOCTORS",
+    "commands": [{
+      "id": "ce5e41b9-49d7-4053-9ae7-0ea0227ecd31",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9c4f0053-b581-4ace-b479-1ff5cc21d229",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1f0edf6f-4a42-4a6d-ab2c-4f74a346a4ef",
+      "comment": "",
+      "command": "click",
+      "target": "css=.hover\\3Atext-blue-600:nth-child(2)",
+      "targets": [
+        ["css=.hover\\3Atext-blue-600:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[2]/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'ALL DOCTORS')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "d6099a0f-1782-4e29-985d-ff0ec317750c",
+    "name": "Redirect_About",
+    "commands": [{
+      "id": "b1678da1-942c-4af9-90a8-7eb2c460f3a0",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f13053e1-3cc8-442e-bd25-827b4def6fc9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "04164de6-6a24-4ddc-9a61-416af9ae4545",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=ABOUT",
+      "targets": [
+        ["linkText=ABOUT", "linkText"],
+        ["css=.hover\\3Atext-blue-600:nth-child(3)", "css:finder"],
+        ["xpath=//a[contains(text(),'ABOUT')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/about-us')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'ABOUT')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "5743e6b8-8661-47a1-82a8-e4baa3808045",
+    "name": "Redirect_Our_Team",
+    "commands": [{
+      "id": "3d51b1d0-f644-4fb8-8be9-0c742393b681",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b169f644-b8c7-48a4-87aa-361cab0213cc",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4b3f1b19-407e-4f99-8048-355e9e1400ed",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=OUR-TEAM",
+      "targets": [
+        ["linkText=OUR-TEAM", "linkText"],
+        ["css=.hover\\3Atext-blue-600:nth-child(4)", "css:finder"],
+        ["xpath=//a[contains(text(),'OUR-TEAM')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[2]/a[2]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/team')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'OUR-TEAM')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "56354aa8-caca-4351-95e7-d37057bffc5b",
+    "name": "Redirect_Admin_Panel",
+    "commands": [{
+      "id": "db055031-7e09-4591-ab56-f269aa963821",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7b524b16-ea44-4585-96d2-321ee8c3f9f0",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "968c8eb3-083f-477c-91e6-33db11037604",
+      "comment": "",
+      "command": "click",
+      "target": "css=.sm\\3A flex",
+      "targets": [
+        ["css=.sm\\3A flex", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Admin Panel')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "1a92a649-01c1-4ccd-92e7-b61ccec121c7",
+    "name": "Redirect_Create_Account",
+    "commands": [{
+      "id": "a099c973-2abb-4936-b9fc-38b15fcf1da4",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "feec13ed-5500-4335-8ba5-1b4a6f240f8c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "20760e53-c37b-4147-9583-641a2eed9006",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-blue-600",
+      "targets": [
+        ["css=.bg-blue-600", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[3]/button[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Create account')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "36a56176-f9fa-4ec5-b052-265ff2a9ba7e",
+    "name": "Redirect_Book_Appointment",
+    "commands": [{
+      "id": "76a29b20-e2e7-49cc-acba-849b161d01a1",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "00c587cf-317e-4a4f-bed5-47283e4232b9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "eaab7693-cde0-4540-af57-4ec8b4d6414b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.hover\\3A bg-gray-200",
+      "targets": [
+        ["css=.hover\\3A bg-gray-200", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div/div/button", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Book appointment →')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "3187249c-1bcc-49c2-964e-af713ab71878",
+    "name": "Redirect_General_Physician",
+    "commands": [{
+      "id": "590f3c6c-998e-469f-9d50-743d491081b7",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0ceecd8c-3d3a-41e5-be95-ef214e45e8f0",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "efc34031-769b-46b5-ae14-1e8010335926",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(1) > .bg-blue-100 > .w-12",
+      "targets": [
+        ["css=.flex:nth-child(1) > .bg-blue-100 > .w-12", "css:finder"],
+        ["xpath=//img[@alt='General physician']", "xpath:img"],
+        ["xpath=//div[@id='root']/div/div[2]/div[3]/div/div/div/img", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "181ddeed-8f41-43a8-a583-6b4a07e4bb7c",
+    "name": "Redirect_Gynecologist",
+    "commands": [{
+      "id": "88c1ea0a-bac4-4e5a-ad3f-f15c0dc5dcdf",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cd5fd57f-0f87-430c-8149-4082ec277ea9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "96b56f31-b2e3-419d-bddc-b6eab19a738d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(2) .w-12",
+      "targets": [
+        ["css=.flex:nth-child(2) .w-12", "css:finder"],
+        ["xpath=//img[@alt='Gynecologist']", "xpath:img"],
+        ["xpath=//div[@id='root']/div/div[2]/div[3]/div/div[2]/div/img", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "6804422c-66fc-4f7d-81ca-e722c8218692",
+    "name": "Redirect_Dermatologist",
+    "commands": [{
+      "id": "caeecedb-c51e-4a2c-b47b-b2bba08e98bc",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c3129006-8d7f-478a-ba9b-0f7efd2d8ebb",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "06fc1c6e-08fb-4a0c-9970-60e41443c092",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(3) > .bg-blue-100 > .w-12",
+      "targets": [
+        ["css=.flex:nth-child(3) > .bg-blue-100 > .w-12", "css:finder"],
+        ["xpath=//img[@alt='Dermatologist']", "xpath:img"],
+        ["xpath=//div[@id='root']/div/div[2]/div[3]/div/div[3]/div/img", "xpath:idRelative"],
+        ["xpath=//div[3]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "ea0b4e26-be5f-4839-8689-b497f323773d",
+    "name": "Redirect_Pediatrician",
+    "commands": [{
+      "id": "b480cf03-af9f-4002-b311-af05b2664ba3",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2eefa659-5791-4096-97bc-50167d7bd349",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "22ef60a7-fad3-4467-a5eb-60b3cc47250c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(4) .w-12",
+      "targets": [
+        ["css=.flex:nth-child(4) .w-12", "css:finder"],
+        ["xpath=//img[@alt='Pediatricians']", "xpath:img"],
+        ["xpath=//div[@id='root']/div/div[2]/div[3]/div/div[4]/div/img", "xpath:idRelative"],
+        ["xpath=//div[4]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "fd3e5b38-ef0a-443b-99b5-d2e99fda0241",
+    "name": "Redirect_Neurologist",
+    "commands": [{
+      "id": "5fcf348a-8f20-44ab-8731-5993ec4a71d8",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d5b762a9-cbd5-4a16-ab05-1b7092fec62f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c29cb5ec-8cf1-4d91-9a87-cd3aec8b2c23",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(5) .w-12",
+      "targets": [
+        ["css=.flex:nth-child(5) .w-12", "css:finder"],
+        ["xpath=//img[@alt='Neurologist']", "xpath:img"],
+        ["xpath=//div[@id='root']/div/div[2]/div[3]/div/div[5]/div/img", "xpath:idRelative"],
+        ["xpath=//div[5]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "9b035d85-73b9-4c8f-be93-30638f83e657",
+    "name": "Redirect_Gastroenterologist",
+    "commands": [{
+      "id": "59034252-a54f-448c-98bd-68ac3759cf2f",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9bcee626-e075-45cf-973d-58db038fbf0f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4118e8a5-c903-4a7d-a7d9-eea3479133b5",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex:nth-child(6) .w-12",
+      "targets": [
+        ["css=.flex:nth-child(6) .w-12", "css:finder"],
+        ["xpath=//img[@alt='Gastroenterologist']", "xpath:img"],
+        ["xpath=//div[@id='root']/div/div[2]/div[3]/div/div[6]/div/img", "xpath:idRelative"],
+        ["xpath=//div[6]/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "dc1d676a-c599-441f-ae02-d6013b691baa",
+    "name": "Redirect_Create_Account_2",
+    "commands": [{
+      "id": "c074dec7-fa01-4180-91cb-3fa79b872a08",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "01eb5bd3-9c3c-4d64-8122-a03ad3ec2938",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6887a7c6-5630-43e6-97fd-c5a73536eede",
+      "comment": "",
+      "command": "click",
+      "target": "css=.md\\3A bg-white",
+      "targets": [
+        ["css=.md\\3A bg-white", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div[4]/div/button", "xpath:idRelative"],
+        ["xpath=//div[4]/div/button", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "e9e69aca-279d-418c-b5b8-09c59ff26b06",
+    "name": "Footer_About_Us",
+    "commands": [{
+      "id": "545ad97b-482d-41e7-9a1e-79d4955ba8de",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "531f5e92-18af-45ce-a94b-1131258483c6",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "569aeee1-8a09-4f1e-a06e-1842ac65982e",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=About us",
+      "targets": [
+        ["linkText=About us", "linkText"],
+        ["css=.mb-1:nth-child(1) > .hover\\3Atext-blue-500", "css:finder"],
+        ["xpath=//a[contains(text(),'About us')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/footer/div/div[2]/ul/li/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/about-us')])[2]", "xpath:href"],
+        ["xpath=//li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'About us')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "8b18bcbe-efde-481f-9d1c-f04040f3b108",
+    "name": "Footer_Team",
+    "commands": [{
+      "id": "15bc5460-50c9-42c7-8542-1afe5c9263fd",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "737ac445-2ded-440f-baaf-6dbc4e9eb595",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b1b4dbc6-00b5-4540-9963-768eebfca592",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Team",
+      "targets": [
+        ["linkText=Team", "linkText"],
+        ["css=.mb-1:nth-child(2) > .hover\\3Atext-blue-500", "css:finder"],
+        ["xpath=//a[contains(text(),'Team')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/footer/div/div[2]/ul/li[2]/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/team')])[2]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Team')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "7d464c1d-a988-425c-a765-5abb7a375157",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["6799f589-e075-4843-980e-6734a84c082a"]
+  }],
+  "urls": ["http://localhost:5173/"],
+  "plugins": []
+}
