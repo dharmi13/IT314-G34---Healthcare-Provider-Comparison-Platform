@@ -1,0 +1,431 @@
+{
+  "id": "ab3ed26f-b1d4-4513-aadb-dcb6f8c49c40",
+  "version": "2.0",
+  "name": "All_Doctor_Page",
+  "url": "http://localhost:5173/doctors",
+  "tests": [{
+    "id": "1f88f133-4129-486f-b910-fd69caecde04",
+    "name": "Search_By_City",
+    "commands": [{
+      "id": "75fd6b81-5fc5-4228-b7e8-6b68ae2515fa",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/doctors",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7db1dcd2-a60e-4a05-96be-530368598e6c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "abbca7a3-fc70-41a2-8ff3-44b79dd49a8c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-white > .outline-none",
+      "targets": [
+        ["css=.bg-white > .outline-none", "css:finder"],
+        ["xpath=//input[@value='']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "44d2ac85-9a80-4e61-bde5-5435502a5b8a",
+      "comment": "",
+      "command": "type",
+      "target": "css=.bg-white > .outline-none",
+      "targets": [
+        ["css=.bg-white > .outline-none", "css:finder"],
+        ["xpath=//input[@value='Delhi']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Delhi"
+    }]
+  }, {
+    "id": "0cf5eaa5-ca22-402c-83bd-04fde65eb7bd",
+    "name": "Search_By_State",
+    "commands": [{
+      "id": "4f07689f-4162-4f07-841c-2c41fb00c831",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/doctors",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "898c0426-85de-418b-80db-22185da14918",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6676b01f-7a6f-47be-a842-6343ce3979e7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.px-4 > .w-full",
+      "targets": [
+        ["css=.px-4 > .w-full", "css:finder"],
+        ["xpath=(//input[@value=''])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9ed21124-0480-410d-aa48-77a216913eaf",
+      "comment": "",
+      "command": "click",
+      "target": "css=.px-4 > .w-full",
+      "targets": [
+        ["css=.px-4 > .w-full", "css:finder"],
+        ["xpath=(//input[@value=''])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9803f242-75a1-40de-a87e-e47564e7da11",
+      "comment": "",
+      "command": "type",
+      "target": "css=.px-4 > .w-full",
+      "targets": [
+        ["css=.px-4 > .w-full", "css:finder"],
+        ["xpath=//input[@value='Gujarat']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Gujarat"
+    }]
+  }, {
+    "id": "1f519e8d-7e0d-4fae-aba5-f22d938ce51b",
+    "name": "Doctor_Types",
+    "commands": [{
+      "id": "9922dca1-6ade-43a5-bdc6-7a3d494a5041",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/doctors",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "214479d8-97b4-411b-922e-6dc50d11832c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "806x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2c64a7c9-a4f8-4130-8d22-677ea7bc3295",
+      "comment": "",
+      "command": "click",
+      "target": "css=.w-auto:nth-child(1)",
+      "targets": [
+        ["css=.w-auto:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div[2]/div/p", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/p", "xpath:position"],
+        ["xpath=//p[contains(.,'General Physician')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1adfddf4-0d09-4976-8b59-4d43334cf587",
+      "comment": "",
+      "command": "click",
+      "target": "css=.w-auto:nth-child(2)",
+      "targets": [
+        ["css=.w-auto:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div[2]/div/p[2]", "xpath:idRelative"],
+        ["xpath=//p[2]", "xpath:position"],
+        ["xpath=//p[contains(.,'Gynecologist')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "614ade57-052b-42e6-894b-81d46dc0b34e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.w-auto:nth-child(3)",
+      "targets": [
+        ["css=.w-auto:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div[2]/div/p[3]", "xpath:idRelative"],
+        ["xpath=//p[3]", "xpath:position"],
+        ["xpath=//p[contains(.,'Dermatologist')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5574cb35-a8c4-48c5-a85d-3b59162e33da",
+      "comment": "",
+      "command": "click",
+      "target": "css=.w-auto:nth-child(4)",
+      "targets": [
+        ["css=.w-auto:nth-child(4)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div[2]/div/p[4]", "xpath:idRelative"],
+        ["xpath=//p[4]", "xpath:position"],
+        ["xpath=//p[contains(.,'Pediatrician')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c786d422-0dd3-4ef0-82df-366a51bece91",
+      "comment": "",
+      "command": "click",
+      "target": "css=.w-auto:nth-child(5)",
+      "targets": [
+        ["css=.w-auto:nth-child(5)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div[2]/div/p[5]", "xpath:idRelative"],
+        ["xpath=//p[5]", "xpath:position"],
+        ["xpath=//p[contains(.,'Neurologist')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "03a62b92-3630-46a7-8a8a-ea2ec430d8f4",
+      "comment": "",
+      "command": "click",
+      "target": "css=.w-auto:nth-child(6)",
+      "targets": [
+        ["css=.w-auto:nth-child(6)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div[2]/div/p[6]", "xpath:idRelative"],
+        ["xpath=//p[6]", "xpath:position"],
+        ["xpath=//p[contains(.,'Gastroenterologist')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "3e5f2ca8-5d1d-4166-92f3-ee4b511f25a8",
+    "name": "Redirect_My_Appointments",
+    "commands": [{
+      "id": "3febb09d-481f-4c2f-9825-52bb154c1b72",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/doctors",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e109f999-28bd-4586-9e95-5a554adee1d1",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "808x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "55459b68-3ea8-47cb-84e8-91269f735e1a",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=MyAppointments",
+      "targets": [
+        ["linkText=MyAppointments", "linkText"],
+        ["css=.bg-blue-600", "css:finder"],
+        ["xpath=//a[contains(text(),'MyAppointments')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/my-appointments')]", "xpath:href"],
+        ["xpath=//div[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'MyAppointments')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "09731c9a-32f7-4bbc-9158-8154f5913903",
+    "name": "Button_Logout",
+    "commands": [{
+      "id": "8e369434-37e2-4dde-8357-6a613dbd7482",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/doctors",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "645647af-2e33-4079-b2e9-90dceb03eb3c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "806x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ee47a5ed-72e4-497b-88fe-5295654d88b1",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-red-600",
+      "targets": [
+        ["css=.bg-red-600", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "b3ad0e82-a247-4715-9a59-619c5fc9382d",
+    "name": "Redirect_Dashboard",
+    "commands": [{
+      "id": "fd33ca7f-e1f1-431b-a576-cb1bd2911adf",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/doctors",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2b3bfbec-5436-4d6d-b5b3-f1297e0053d5",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "558357b8-4f5f-4caa-96ab-a2b0781e4fe6",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=DASHBOARD",
+      "targets": [
+        ["linkText=DASHBOARD", "linkText"],
+        ["css=.hover\\3Atext-blue-600:nth-child(1)", "css:finder"],
+        ["xpath=//a[contains(text(),'DASHBOARD')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/patient-dashboard')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'DASHBOARD')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "cfb7121a-f322-4536-81e8-9c702527a48e",
+    "name": "Redirect_About",
+    "commands": [{
+      "id": "692853e6-2796-4102-a9be-21361ac8b8ea",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/doctors",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "059ad321-3b6b-4e3e-a812-2194fdbe4866",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d3b89d27-47d4-436c-a562-3f10356ac864",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=ABOUT",
+      "targets": [
+        ["linkText=ABOUT", "linkText"],
+        ["css=.hover\\3Atext-blue-600:nth-child(3)", "css:finder"],
+        ["xpath=//a[contains(text(),'ABOUT')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[2]/a[3]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/about-us')]", "xpath:href"],
+        ["xpath=//a[3]", "xpath:position"],
+        ["xpath=//a[contains(.,'ABOUT')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "bef60c52-2d9a-4906-a751-408bf22c9d7c",
+    "name": "Redirect_Our_Team",
+    "commands": [{
+      "id": "15799261-79d2-4a3d-9f56-f24552feebd8",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/doctors",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8ffb74c5-8f4f-400d-b9e5-100322195f6c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x832",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a9440fb6-c3fd-4eb3-b709-27d829fb0a04",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=OUR-TEAM",
+      "targets": [
+        ["linkText=OUR-TEAM", "linkText"],
+        ["css=.hover\\3Atext-blue-600:nth-child(4)", "css:finder"],
+        ["xpath=//a[contains(text(),'OUR-TEAM')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[2]/a[4]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/team')]", "xpath:href"],
+        ["xpath=//a[4]", "xpath:position"],
+        ["xpath=//a[contains(.,'OUR-TEAM')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "c3dea16f-91d7-47df-bbab-8896035ada3b",
+    "name": "Footer_About_Us",
+    "commands": [{
+      "id": "4a6c86f2-8de0-4f70-8e01-b82d11811957",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/doctors",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "61fcba0c-8c3d-4e81-a0e9-b1228666facc",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "808x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "40a7a1d8-d9e3-4995-ae23-a15dfabc5362",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=About us",
+      "targets": [
+        ["linkText=About us", "linkText"],
+        ["css=.mb-1:nth-child(1) > .hover\\3Atext-blue-500", "css:finder"],
+        ["xpath=//a[contains(text(),'About us')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/footer/div/div[2]/ul/li/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/about-us')])[2]", "xpath:href"],
+        ["xpath=//li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'About us')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "10fc17fc-ecb6-4fe9-bcd1-ac19f8b4389a",
+    "name": "Footer_Team",
+    "commands": [{
+      "id": "9cbd7cea-7e12-4d0e-b28d-6d44e94aa5d9",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/doctors",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "37491db3-1475-45a3-b536-be2ecd4b8954",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "808x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "14224b04-d4b9-4de0-b099-338fc505cde2",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Team",
+      "targets": [
+        ["linkText=Team", "linkText"],
+        ["css=.mb-1:nth-child(2) > .hover\\3Atext-blue-500", "css:finder"],
+        ["xpath=//a[contains(text(),'Team')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/footer/div/div[2]/ul/li[2]/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '/team')])[2]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Team')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "09f1ed8d-a58f-4727-b280-1c2f9bc8c2b1",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["1f88f133-4129-486f-b910-fd69caecde04"]
+  }],
+  "urls": ["http://localhost:5173/doctors"],
+  "plugins": []
+}
