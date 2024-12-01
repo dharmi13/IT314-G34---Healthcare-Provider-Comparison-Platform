@@ -83,7 +83,7 @@ export function Appbar() {
     >
       {/* Logo and Text */}
       <div className="flex items-center justify-between">
-        <img src="/assets/heal_logo.png" alt="Logo" className="w-25 h-20" />
+        <img src="./assets/heal_logo.png" alt="Logo" className="w-25 h-20" />
 
         {/* Center the text on small screens */}
         <div className="hidden sm:block text-2xl font-bold text-gray-800 sm:text-left text-center w-full sm:w-auto">
@@ -180,10 +180,10 @@ export function HeroSection({ userName }) {
 export function Services() {
   const navigate = useNavigate();
   const services = [
-    { name: "Period doubts or Pregnancy", action: "CONSULT NOW", image: "/assets/irregular-painful+period.webp" },
-    { name: "Acne, pimple or skin issues", action: "CONSULT NOW", image: "/assets/Acne.webp" },
-    { name: "Cold, cough or fever", action: "CONSULT NOW", image: "/assets/coughing.webp" },
-    { name: "Depression or anxiety", action: "CONSULT NOW", image: "/assets/12-mental-wellness.webp" },
+    { name: "Period doubts or Pregnancy", action: "CONSULT NOW", image: "./assets/irregular-painful+period.webp" },
+    { name: "Acne, pimple or skin issues", action: "CONSULT NOW", image: "./assets/Acne.webp" },
+    { name: "Cold, cough or fever", action: "CONSULT NOW", image: "./assets/coughing.webp" },
+    { name: "Depression or anxiety", action: "CONSULT NOW", image: "./assets/12-mental-wellness.webp" },
   ];
 
   const handleConsultClick = () => {
