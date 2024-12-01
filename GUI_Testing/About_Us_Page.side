@@ -1,0 +1,113 @@
+{
+  "id": "69fe74ae-8301-4777-8833-67a26f55f75b",
+  "version": "2.0",
+  "name": "About_Us_Page",
+  "url": "http://localhost:5173/about-us",
+  "tests": [{
+    "id": "bad172d3-11a2-480c-ab3b-6cebd8be9af6",
+    "name": "Redirect_Home_Page",
+    "commands": [{
+      "id": "87921655-9622-4d05-960e-75effd603955",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/about-us",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6351083b-6508-4e43-ac10-d606890b95b9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "804x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c858fb83-46b2-4013-881a-6df6603d2191",
+      "comment": "",
+      "command": "click",
+      "target": "css=.px-6",
+      "targets": [
+        ["css=.px-6", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Go Back to Home Page')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "6d990b5c-a1a6-437d-8a18-c02b35425826",
+    "name": "Redirect_About_Us",
+    "commands": [{
+      "id": "5c413a70-a984-4d7e-852a-0bdd8a2fa4fb",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/about-us",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b1eeee59-1bb6-424e-b5f8-a597cc8fa85a",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "802x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "665a881f-42b5-4f68-91e6-2f59981f79b1",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=About us",
+      "targets": [
+        ["linkText=About us", "linkText"],
+        ["css=.mb-1:nth-child(1) > .hover\\3Atext-blue-500", "css:finder"],
+        ["xpath=//a[contains(text(),'About us')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/footer/div/div[2]/ul/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/about-us')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'About us')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "2cb5ea3a-0644-4f53-b4e2-2d8c28e5512d",
+    "name": "Redirect_Team",
+    "commands": [{
+      "id": "bd69e995-ef63-4b10-8161-74850e7148ad",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/about-us",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "360e6452-a115-4cfe-9ce7-f857d7949d11",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "804x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "05c9276a-15c6-41eb-9006-21e1c0f7a43b",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Team",
+      "targets": [
+        ["linkText=Team", "linkText"],
+        ["css=.mb-1:nth-child(2) > .hover\\3Atext-blue-500", "css:finder"],
+        ["xpath=//a[contains(text(),'Team')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/footer/div/div[2]/ul/li[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/team')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Team')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "99cac003-5386-4fa3-9d0e-5954238c9c88",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["bad172d3-11a2-480c-ab3b-6cebd8be9af6"]
+  }],
+  "urls": ["http://localhost:5173/about-us"],
+  "plugins": []
+}
