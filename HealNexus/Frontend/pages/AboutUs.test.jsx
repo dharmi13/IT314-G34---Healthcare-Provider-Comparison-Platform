@@ -1,11 +1,26 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { BrowserRouter, useNavigate } from 'react-router-dom';
 import AboutUs from './AboutUs';
 import '@testing-library/jest-dom';
 
+// Mock useNavigate
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: jest.fn(),
+}));
+
 describe('AboutUs Component', () => {
+  const mockNavigate = jest.fn();
+
   beforeEach(() => {
-    render(<AboutUs />);
+    useNavigate.mockImplementation(() => mockNavigate);
+
+    render(
+      <BrowserRouter>
+        <AboutUs />
+      </BrowserRouter>
+    );
   });
 
   test('renders the About Us header', () => {
@@ -14,7 +29,7 @@ describe('AboutUs Component', () => {
   });
 
   test('renders the about us description', () => {
-    const descriptionElement = screen.getByText(/The Healthcare Provider Comparison Platform is designed to help patients efficiently compare and choose healthcare providers/i);
+    const descriptionElement = screen.getByText(/Heal Nexus is a comprehensive platform designed to simplify healthcare access. It allows patients to compare and select healthcare providers, manage appointments, and utilize a wide range of medical services. The platform enhances the patient experience with features like appointment booking, specialist search, medicine orders, report generation, and secure payment processing./i);
     expect(descriptionElement).toBeInTheDocument();
   });
 
@@ -49,12 +64,7 @@ describe('AboutUs Component', () => {
 
   test('navigates to home page when Go Back button is clicked', () => {
     const buttonElement = screen.getByRole('button', { name: /Go Back to Home Page/i });
-
-    // Mock window.location.href
-    delete window.location;
-    window.location = { href: '' };
-
     fireEvent.click(buttonElement);
-    expect(window.location.href).toBe('/');
+    expect(mockNavigate).toHaveBeenCalledWith('/'); 
   });
 });

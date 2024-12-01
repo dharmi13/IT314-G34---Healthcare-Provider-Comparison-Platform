@@ -1,0 +1,162 @@
+{
+  "id": "db100123-e0a6-4531-9551-3c458cf2f369",
+  "version": "2.0",
+  "name": "Login_Page",
+  "url": "http://localhost:5173/login",
+  "tests": [{
+    "id": "f924a8ee-038f-4856-b80e-a5c6220608d5",
+    "name": "Text_Fields",
+    "commands": [{
+      "id": "64d35998-4aaf-4aac-bf25-c1ecbcca21fa",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9d0a8f58-f295-4f95-bf86-5d12c62b4ed4",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "802x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3951abcb-8db5-49b9-897e-a0d80d8c3d5f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mb-4:nth-child(1) > .w-full",
+      "targets": [
+        ["css=.mb-4:nth-child(1) > .w-full", "css:finder"],
+        ["xpath=//input[@value='']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div/div/div/form/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6d47ff52-4f21-47f2-8daa-53c468870b72",
+      "comment": "",
+      "command": "type",
+      "target": "css=.mb-4:nth-child(1) > .w-full",
+      "targets": [
+        ["css=.mb-4:nth-child(1) > .w-full", "css:finder"],
+        ["xpath=//input[@value='msp008987@gmail.com']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div/div/div/form/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "msp008987@gmail.com"
+    }, {
+      "id": "a4123df5-76b8-4b89-b8f8-a9a515adbdcd",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mb-4:nth-child(2) > .w-full",
+      "targets": [
+        ["css=.mb-4:nth-child(2) > .w-full", "css:finder"],
+        ["xpath=//input[@value='']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div/div/div/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f8388cfe-ad33-4c4f-9791-da2fbf8ecbc6",
+      "comment": "",
+      "command": "type",
+      "target": "css=.mb-4:nth-child(2) > .w-full",
+      "targets": [
+        ["css=.mb-4:nth-child(2) > .w-full", "css:finder"],
+        ["xpath=//input[@value='Mihir@1105']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div/div/div/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "guitestingbymihir@M"
+    }, {
+      "id": "413d506b-bef6-433d-ab2a-7bbc7fe502e0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-blue-600",
+      "targets": [
+        ["css=.bg-blue-600", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div/div/div/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "b246cc82-e37b-4e05-925e-805eacd906ca",
+    "name": "Redirect_Sign_Up",
+    "commands": [{
+      "id": "50501b60-284f-4ba4-8c70-83b3b3f85d7e",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "84a3cb81-9b20-43a5-829a-5f7553d47add",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "802x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a7ec526b-777a-43fe-baae-03dc722cf612",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Sign Up",
+      "targets": [
+        ["linkText=Sign Up", "linkText"],
+        ["css=.text-center .text-blue-600", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign Up')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div/div/div/div/p/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/signup')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Sign Up')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "363c71b2-2cb6-4ede-bde2-a677638f161f",
+    "name": "Redirect_Forgot_Password",
+    "commands": [{
+      "id": "aec69c41-622c-4f0d-b157-9e7bef5686e5",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8af7c56a-aa17-410c-b4ca-de44ea4baa6f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "802x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "febe3d67-9b32-4094-96d8-326b0e23d1da",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Forgot Password?",
+      "targets": [
+        ["linkText=Forgot Password?", "linkText"],
+        ["css=.flex > .text-blue-600", "css:finder"],
+        ["xpath=//a[contains(text(),'Forgot Password?')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/div/div/div/form/div[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/forget-password')]", "xpath:href"],
+        ["xpath=//div[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Forgot Password?')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "10407be8-19bb-4c3e-a6d8-727b0bb637b0",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["f924a8ee-038f-4856-b80e-a5c6220608d5"]
+  }],
+  "urls": ["http://localhost:5173/login"],
+  "plugins": []
+}
