@@ -1,0 +1,235 @@
+{
+  "id": "a4c92c3d-5793-476c-8c9d-7bfdb7c5033f",
+  "version": "2.0",
+  "name": "Pharmacist_Profile",
+  "url": "http://localhost:5173/profile/pharmacist",
+  "tests": [{
+    "id": "cb2ccfd4-7291-4116-a1fe-4f73201b1b2d",
+    "name": "Save_Button",
+    "commands": [{
+      "id": "22f47884-b9fa-4cf1-baa1-9026dc35a598",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/profile/pharmacist",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3502c113-63c8-4b4b-8867-e99bc669c07e",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "802x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6b1ba847-1e37-4b76-8a5e-91c6b2aa2602",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-indigo-600",
+      "targets": [
+        ["css=.bg-indigo-600", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Save')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "0fe07f76-a0c1-42db-b21b-a7a04c89923c",
+    "name": "Text_Fields",
+    "commands": [{
+      "id": "ab1989cd-9382-49d1-9467-94700820702c",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/profile/pharmacist",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7ed6ff8d-c438-4968-8ddb-a66a60c25f43",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "804x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3f19804e-7d5b-4960-8b66-997784aa0e52",
+      "comment": "",
+      "command": "click",
+      "target": "name=certification",
+      "targets": [
+        ["name=certification", "name"],
+        ["css=.p-2:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='certification']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ddf681c1-0c5d-4723-a882-78f087d508d7",
+      "comment": "",
+      "command": "type",
+      "target": "name=certification",
+      "targets": [
+        ["name=certification", "name"],
+        ["css=.p-2:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='certification']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Pharmacy"
+    }, {
+      "id": "494606c1-95e4-4b1f-8000-f900be0353d4",
+      "comment": "",
+      "command": "click",
+      "target": "name=pharmacyName",
+      "targets": [
+        ["name=pharmacyName", "name"],
+        ["css=.w-full:nth-child(3)", "css:finder"],
+        ["xpath=//input[@name='pharmacyName']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fcea5ae0-b973-4145-a915-1870f29cf925",
+      "comment": "",
+      "command": "type",
+      "target": "name=pharmacyName",
+      "targets": [
+        ["name=pharmacyName", "name"],
+        ["css=.w-full:nth-child(3)", "css:finder"],
+        ["xpath=//input[@name='pharmacyName']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Mihir Labs"
+    }, {
+      "id": "a13fc863-b935-4659-bdfa-7d690bf3bffc",
+      "comment": "",
+      "command": "click",
+      "target": "name=yearsOfExperience",
+      "targets": [
+        ["name=yearsOfExperience", "name"],
+        ["css=.w-full:nth-child(4)", "css:finder"],
+        ["xpath=//input[@name='yearsOfExperience']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ce82119b-ec41-4fbf-b7ea-09526744fed0",
+      "comment": "",
+      "command": "type",
+      "target": "name=yearsOfExperience",
+      "targets": [
+        ["name=yearsOfExperience", "name"],
+        ["css=.w-full:nth-child(4)", "css:finder"],
+        ["xpath=//input[@name='yearsOfExperience']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": "3"
+    }, {
+      "id": "4352e9ce-a52c-40cb-a583-bb0abc855c2c",
+      "comment": "",
+      "command": "click",
+      "target": "name=contactNumber",
+      "targets": [
+        ["name=contactNumber", "name"],
+        ["css=.w-full:nth-child(5)", "css:finder"],
+        ["xpath=//input[@name='contactNumber']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[4]", "xpath:idRelative"],
+        ["xpath=//input[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f428724e-2d38-47e2-aae4-e1033caad7e6",
+      "comment": "",
+      "command": "type",
+      "target": "name=contactNumber",
+      "targets": [
+        ["name=contactNumber", "name"],
+        ["css=.w-full:nth-child(5)", "css:finder"],
+        ["xpath=//input[@name='contactNumber']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[4]", "xpath:idRelative"],
+        ["xpath=//input[4]", "xpath:position"]
+      ],
+      "value": "6355211130"
+    }, {
+      "id": "d8bcb2f7-b0dd-4f4f-989b-fe109a4b96d1",
+      "comment": "",
+      "command": "click",
+      "target": "name=street",
+      "targets": [
+        ["name=street", "name"],
+        ["css=.w-full:nth-child(7)", "css:finder"],
+        ["xpath=//input[@name='street']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[5]", "xpath:idRelative"],
+        ["xpath=//input[5]", "xpath:position"]
+      ],
+      "value": "Main Market"
+    }, {
+      "id": "88005b60-abd1-4c82-9187-d27c629bc938",
+      "comment": "",
+      "command": "click",
+      "target": "name=city",
+      "targets": [
+        ["name=city", "name"],
+        ["css=.w-full:nth-child(8)", "css:finder"],
+        ["xpath=//input[@name='city']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[6]", "xpath:idRelative"],
+        ["xpath=//input[6]", "xpath:position"]
+      ],
+      "value": "Dehgam"
+    }, {
+      "id": "3b37f5a0-7388-48a0-a04f-e14322b05dc7",
+      "comment": "",
+      "command": "click",
+      "target": "name=state",
+      "targets": [
+        ["name=state", "name"],
+        ["css=.w-full:nth-child(9)", "css:finder"],
+        ["xpath=//input[@name='state']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[7]", "xpath:idRelative"],
+        ["xpath=//input[7]", "xpath:position"]
+      ],
+      "value": "Gujarat"
+    }, {
+      "id": "516a1b0e-b600-469e-b0ce-a1c86d766efa",
+      "comment": "",
+      "command": "click",
+      "target": "name=postalCode",
+      "targets": [
+        ["name=postalCode", "name"],
+        ["css=.w-full:nth-child(10)", "css:finder"],
+        ["xpath=//input[@name='postalCode']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[8]", "xpath:idRelative"],
+        ["xpath=//input[8]", "xpath:position"]
+      ],
+      "value": "382305"
+    }, {
+      "id": "75ff0231-cb57-4a07-910c-053bc1167b75",
+      "comment": "",
+      "command": "click",
+      "target": "name=country",
+      "targets": [
+        ["name=country", "name"],
+        ["css=.w-full:nth-child(11)", "css:finder"],
+        ["xpath=//input[@name='country']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[9]", "xpath:idRelative"],
+        ["xpath=//input[9]", "xpath:position"]
+      ],
+      "value": "India"
+    }]
+  }],
+  "suites": [{
+    "id": "5f64a736-eaad-444f-a31c-b9453c4d49b0",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://localhost:5173/profile/pharmacist"],
+  "plugins": []
+}
