@@ -9,7 +9,7 @@ const DoctorsList = () => {
   useEffect(() => {
     const fetchDoctorData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/admin/get-verified-doctors`, {
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/admin/get-verified-doctors`, {
           withCredentials: true
         });
 
@@ -17,20 +17,20 @@ const DoctorsList = () => {
           const doctorData = response.data.doctorData;
           const updatedDoctorData = doctorData.map((doctor) => {
             const ratings = doctor.ratings;
-        
+
             const averageRatings = ratings?.length > 0
               ? ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length
               : 0;
-        
+
             return {
               ...doctor,
-              averageRatings, 
+              averageRatings,
             };
           });
-        
+
           setVerifiedDoctors(updatedDoctorData);
         }
-        
+
       } catch (error) {
         console.error('Error in fetching doctors:', error);
       }
@@ -40,7 +40,7 @@ const DoctorsList = () => {
   }, []);
 
   if (!verifiedDoctors || verifiedDoctors.length === 0) {
-    return <div>No verified doctors available.</div>; 
+    return <div>No verified doctors available.</div>;
   }
 
   return (
@@ -59,14 +59,16 @@ const DoctorsList = () => {
                 <img
                   className="bg-indigo-50 group-hover:bg-primary transition-all duration-500"
                   src={item.image}
-                  alt={`Image of ${item.userData.userName}`}
+                  alt={`Image of ${item.userData ? item.userData.userName : 'Unknown'}`}
                 />
                 <div className='p-4'>
-                  <p className='text-neutral-800 text-lg font-medium'>{item.userData.userName}</p>
+                  <p className='text-neutral-800 text-lg font-medium'>
+                    {item.userData ? item.userData.userName : 'Unknown User'}
+                  </p>
                   <p className='text-zinc-600 text-sm'>{item.specialty}</p>
                   <p>{item.experience} years experience</p>
                   <p>₹{item.consultationFee} Consultation fee</p>
-                  <p>{item.ratings | 0} Ratings</p>
+                  <p>{item.averageRatings || 0} Ratings</p>
                 </div>
               </div>
             ))}

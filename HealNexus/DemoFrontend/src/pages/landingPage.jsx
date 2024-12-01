@@ -49,7 +49,7 @@ export function Appbar({isLoggedIn,navigate}) {
     >
       {/* Logo and Text */}
       <div className="flex items-center justify-between">
-        <img src="./assets/heal_logo.png" alt="Logo" className="w-25 h-20" />
+        <img src="/assets/heal_logo.png" alt="Logo" className="w-25 h-20" />
         <div className="text-2xl font-bold text-gray-800 sm:text-left text-center w-full sm:w-auto">
           HealNexus
         </div>
@@ -126,7 +126,7 @@ export function AppointmentSection({isLoggedIn,navigate}) {
       
     
       <div className="">
-        <img src='./assets/header_img.png' className="self-end" alt="Doctor" />
+        <img src='/assets/header_img.png' className="self-end" alt="Doctor" />
       </div>
     </div>
   );
@@ -135,12 +135,12 @@ export function AppointmentSection({isLoggedIn,navigate}) {
 
 export function SpecialitySection({isLoggedIn,navigate}) {
   const specialities = [
-    { name: "General physician", icon: "./assets/general_physician.svg" },
-    { name: "Gynecologist", icon: "./assets/gynecologist.svg" },
-    { name: "Dermatologist", icon: "./assets/dermatologist.svg" },
-    { name: "Pediatricians", icon: "./assets/pediatricians.svg" },
-    { name: "Neurologist", icon: "./assets/neurologist.svg" },
-    { name: "Gastroenterologist", icon: "./assets/gastroenterologist.svg" },
+    { name: "General physician", icon: "/assets/general_physician.svg" },
+    { name: "Gynecologist", icon: "/assets/gynecologist.svg" },
+    { name: "Dermatologist", icon: "/assets/dermatologist.svg" },
+    { name: "Pediatricians", icon: "/assets/pediatricians.svg" },
+    { name: "Neurologist", icon: "/assets/neurologist.svg" },
+    { name: "Gastroenterologist", icon: "/assets/gastroenterologist.svg" },
   ];
 
   return (

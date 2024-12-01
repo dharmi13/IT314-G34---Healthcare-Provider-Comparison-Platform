@@ -13,7 +13,7 @@ const ForgetPassword = () => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/auth/forget-password`,
+        `${process.env.REACT_APP_SERVER_URL}/auth/forget-password`,
         { email }
       );
       if (response.status === 200) {

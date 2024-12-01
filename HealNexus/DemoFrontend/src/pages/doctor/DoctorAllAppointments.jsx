@@ -9,7 +9,7 @@ export const DoctorAllAppointments = () => {
   useEffect(() => {
     const getTotalAppointments = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/patient/appointments`, {
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/patient/appointments`, {
           withCredentials: true
         });
   
@@ -58,7 +58,7 @@ export const DoctorAllAppointments = () => {
               <div className='flex items-center gap-2'>
                 {item.patientData && (
                   <>
-                    <img className='w-8 rounded-full' src={item.patientData.image || './assets/people_icon.svg'} alt="User" />
+                    <img className='w-8 rounded-full' src={item.patientData.image || '/assets/people_icon.svg'} alt="User" />
                     <p className='text-ellipsis overflow-hidden max-w-[150px]'>{item.patientData.userName}</p>
                   </>
                 )}

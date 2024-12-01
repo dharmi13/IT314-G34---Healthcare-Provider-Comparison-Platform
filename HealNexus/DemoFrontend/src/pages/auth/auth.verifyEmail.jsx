@@ -15,7 +15,7 @@ const VerifyEmail = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/auth/verify-email`,
+        `${process.env.REACT_APP_SERVER_URL}/auth/verify-email`,
         { ReceivedCode },
         {
           withCredentials: true,

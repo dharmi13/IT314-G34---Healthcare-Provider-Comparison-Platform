@@ -7,7 +7,7 @@ import { FaMapMarkerAlt, FaSearch } from 'react-icons/fa';
 
 export const Doctors = () => {
   const { speciality } = useParams();
-  const [filterDoc, setFilterDoc] = useState([]); 
+  const [filterDoc, setFilterDoc] = useState([]);
   const [doctors, setDoctors] = useState([]);
   const [city, setCity] = useState(null);
   const [state, setState] = useState(null);
@@ -16,12 +16,12 @@ export const Doctors = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/patient/doctor-list`, {
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/patient/doctor-list`, {
           withCredentials: true
         });
 
         if (response.status === 200) {
-          setDoctors(response.data.doctorData || []); 
+          setDoctors(response.data.doctorData || []);
         }
       } catch (error) {
         console.error('Error in fetching doctors', error);
@@ -33,25 +33,25 @@ export const Doctors = () => {
 
   const searchDoctors = () => {
     if (city?.trim() && state?.trim()) {
-      setFilterDoc(doctors.filter(doc => 
-        doc.profile.clinicAddress.city === city && 
+      setFilterDoc(doctors.filter(doc =>
+        doc.profile.clinicAddress.city === city &&
         doc.profile.clinicAddress.state === state
       ));
     } else if (city?.trim() || state?.trim()) {
       setFilterDoc(doctors.filter(doc => {
         return (city?.trim() ? doc.profile.clinicAddress.city === city : true) &&
-               (state?.trim() ? doc.profile.clinicAddress.state === state : true);
+          (state?.trim() ? doc.profile.clinicAddress.state === state : true);
       }));
     } else {
       setCity(null);
-      setState(null); 
+      setState(null);
       setFilterDoc(doctors);
     }
   };
 
   useEffect(() => {
     searchDoctors();
-  }, [city, state, doctors]); 
+  }, [city, state, doctors]);
 
   const applyFilter = () => {
     if (speciality) {
@@ -63,7 +63,7 @@ export const Doctors = () => {
 
   useEffect(() => {
     applyFilter();
-  }, [doctors, speciality]); 
+  }, [doctors, speciality]);
 
   return (
     <div className='mt-2'>
@@ -138,20 +138,20 @@ export const Doctors = () => {
                 filterDoc.map((item, index) => (
                   <div
                     key={index}
-                    onClick={() => navigate(`/appointment/${item.profile._id}`)}
+                    onClick={() => navigate(`/appointment/${item.profile?._id}`)}
                     className='border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500'>
                     <img
                       className='bg-blue-500 w-full h-48 object-cover' // Fixed image size with object-cover to maintain aspect ratio
-                      src={item.profile.image}
-                      alt={item.user.userName}
+                      src={item.profile?.image || '/default-doctor-image.jpg'} // Use a default image if none is provided
+                      alt={item.user?.userName || 'Doctor Image'} // Safely access userName
                     />
                     <div className='p-4'>
                       <div className='flex items-center gap-2 text-sm text-center text-gray text-green-500'>
                         <p className="w-2 h-2 bg-green-500 rounded-full"></p>
                         <p>Available</p>
                       </div>
-                      <p className='text-gray-900 text-lg font-medium'>{item.user.userName}</p>
-                      <p className='text-gray-600 text-sm'>{item.profile.specialty}</p>
+                      <p className='text-gray-900 text-lg font-medium'>{item.user?.userName || 'Unknown Doctor'}</p>
+                      <p className='text-gray-600 text-sm'>{item.profile?.specialty || 'Specialty not available'}</p>
                     </div>
                   </div>
                 ))
@@ -160,6 +160,7 @@ export const Doctors = () => {
               )
             }
           </div>
+
 
         </div>
       </div>

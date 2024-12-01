@@ -14,7 +14,7 @@ const Appointment = () => {
     const fetchDoctorDetails = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_SERVER_URL}/profile/get-doctor/${id}`,
+          `${process.env.REACT_APP_SERVER_URL}/profile/get-doctor/${id}`,
           { withCredentials: true }
         );
         if (response.status === 200) {
@@ -64,7 +64,7 @@ const Appointment = () => {
   const confirmBooking = async () => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/appointment/book-appointment`,
+        `${process.env.REACT_APP_SERVER_URL}/appointment/book-appointment`,
         {
           doctorID: id,
           slotDate: doctorSlots[selectedDayIndex].date,
