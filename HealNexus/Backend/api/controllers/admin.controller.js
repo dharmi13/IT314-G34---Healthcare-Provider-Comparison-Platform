@@ -1,6 +1,6 @@
 import DoctorProfile from '../../data/models/profile/profile.doctor.js';
 import PatientProfile from '../../data/models/profile/profile.patient.js';
-import LabTechnicianProfile from '../../data/models/profile/profile.labtechnician.js';
+import LabTechnicianProfile from '../../data/models/profile/profile.labTechnician.js';
 import PharmacistProfile from '../../data/models/profile/profile.pharmacist.js';
 import Appointment from '../../data/models/appointment.models.js';
 import AdminProfile from '../../data/models/profile/profile.admin.js';
