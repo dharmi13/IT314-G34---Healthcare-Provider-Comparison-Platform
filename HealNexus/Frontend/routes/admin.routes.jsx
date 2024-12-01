@@ -1,8 +1,8 @@
 import {Routes,Route} from 'react-router-dom'
 import  AdminallAppointments  from '../pages/admin/AdminallAppointments'
 import  AdminDashBoard  from '../pages/admin/AdminDashBoard'
-import UnverifiedDoctor from '../pages/Admin/VerifyDoctor'
-import DoctorsList from '../pages/Admin/DoctorsList'
+import UnverifiedDoctor from '../pages/admin/VerifyDoctor'
+import DoctorsList from '../pages/admin/DoctorsList'
 
 export function AdminRoutes(){
     return <Routes> <Route path='/admin-dashboard' element={<AdminDashBoard/>}></Route>
