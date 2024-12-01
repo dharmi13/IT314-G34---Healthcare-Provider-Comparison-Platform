@@ -5,7 +5,7 @@ import AboutUs from "../pages/AboutUs"
 
 export function TeamRoutes(){
    return <Routes>
-        {/* <Route path="/team" element={<OurTeam/>} /> */}
+        <Route path="/team" element={<OurTeam/>} /> 
         <Route path="/about-us" element={<AboutUs/>} />
     </Routes>
 }

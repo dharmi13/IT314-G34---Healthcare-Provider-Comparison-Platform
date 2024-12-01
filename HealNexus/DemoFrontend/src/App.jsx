@@ -18,7 +18,7 @@ const App = () => {
       <AllPatientRoutes/>
       <DoctorRoutes/>
       <AdminRoutes/>
-      {/* <TeamRoutes/> */}
+      <TeamRoutes/>
     </div>
     </>
 
