@@ -1,0 +1,352 @@
+{
+  "id": "17ac3c37-0135-45b5-8e62-0073137f772c",
+  "version": "2.0",
+  "name": "Lab_Technician_Profile",
+  "url": "http://localhost:5173/profile/lab-technician",
+  "tests": [{
+    "id": "3e183015-43b8-4cf4-8e44-9f29613a3f2a",
+    "name": "Text_Fields",
+    "commands": [{
+      "id": "500f5826-91bd-43b6-9e81-9f495a6e0750",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/profile/lab-technician",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bac1473f-0c3c-42db-a48a-410df0a12909",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "804x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5d38c953-ccdd-4ac1-98b6-358b54c796e1",
+      "comment": "",
+      "command": "click",
+      "target": "name=qualifications",
+      "targets": [
+        ["name=qualifications", "name"],
+        ["css=.p-2:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='qualifications']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c00be427-8834-4ceb-93c7-dc24000e43de",
+      "comment": "",
+      "command": "type",
+      "target": "name=qualifications",
+      "targets": [
+        ["name=qualifications", "name"],
+        ["css=.p-2:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='qualifications']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Pharmacy"
+    }, {
+      "id": "52b97fce-0c6c-4f7f-8588-3b63cd21bc9c",
+      "comment": "",
+      "command": "click",
+      "target": "name=associatedLab",
+      "targets": [
+        ["name=associatedLab", "name"],
+        ["css=.w-full:nth-child(3)", "css:finder"],
+        ["xpath=//input[@name='associatedLab']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a0f816db-3fe3-402f-b7f3-17f584c38082",
+      "comment": "",
+      "command": "type",
+      "target": "name=associatedLab",
+      "targets": [
+        ["name=associatedLab", "name"],
+        ["css=.w-full:nth-child(3)", "css:finder"],
+        ["xpath=//input[@name='associatedLab']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Mihir Labs"
+    }, {
+      "id": "71e1c553-c621-4e4f-9c87-33e9b9f493b8",
+      "comment": "",
+      "command": "click",
+      "target": "name=specialization",
+      "targets": [
+        ["name=specialization", "name"],
+        ["css=.w-full:nth-child(4)", "css:finder"],
+        ["xpath=//input[@name='specialization']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6898888c-a140-4d3f-b70c-32449cb04dac",
+      "comment": "",
+      "command": "type",
+      "target": "name=specialization",
+      "targets": [
+        ["name=specialization", "name"],
+        ["css=.w-full:nth-child(4)", "css:finder"],
+        ["xpath=//input[@name='specialization']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": "Pharmacy "
+    }, {
+      "id": "08d5d47e-3513-45d1-9745-f93bc11acb33",
+      "comment": "",
+      "command": "click",
+      "target": "name=yearsOfExperience",
+      "targets": [
+        ["name=yearsOfExperience", "name"],
+        ["css=.w-full:nth-child(5)", "css:finder"],
+        ["xpath=//input[@name='yearsOfExperience']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[4]", "xpath:idRelative"],
+        ["xpath=//input[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7fa123e7-b5e8-422c-8138-eb7ee25b30ed",
+      "comment": "",
+      "command": "type",
+      "target": "name=yearsOfExperience",
+      "targets": [
+        ["name=yearsOfExperience", "name"],
+        ["css=.w-full:nth-child(5)", "css:finder"],
+        ["xpath=//input[@name='yearsOfExperience']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[4]", "xpath:idRelative"],
+        ["xpath=//input[4]", "xpath:position"]
+      ],
+      "value": "3"
+    }, {
+      "id": "b2f24464-c984-4207-a521-6c80893d45fa",
+      "comment": "",
+      "command": "click",
+      "target": "name=certifications",
+      "targets": [
+        ["name=certifications", "name"],
+        ["css=.w-full:nth-child(6)", "css:finder"],
+        ["xpath=//input[@name='certifications']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[5]", "xpath:idRelative"],
+        ["xpath=//input[5]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "143a4b3b-61f9-408e-b9c9-c2852d1dbe6c",
+      "comment": "",
+      "command": "type",
+      "target": "name=certifications",
+      "targets": [
+        ["name=certifications", "name"],
+        ["css=.w-full:nth-child(6)", "css:finder"],
+        ["xpath=//input[@name='certifications']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[5]", "xpath:idRelative"],
+        ["xpath=//input[5]", "xpath:position"]
+      ],
+      "value": "Gold Medalist In Pharmacy"
+    }, {
+      "id": "18bd56e6-1ac8-4a74-ab9b-34051d24c9fa",
+      "comment": "",
+      "command": "click",
+      "target": "name=contactNumber",
+      "targets": [
+        ["name=contactNumber", "name"],
+        ["css=.w-full:nth-child(7)", "css:finder"],
+        ["xpath=//input[@name='contactNumber']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[6]", "xpath:idRelative"],
+        ["xpath=//input[6]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "142eeb34-89f0-422d-9623-1a8d1f836052",
+      "comment": "",
+      "command": "type",
+      "target": "name=contactNumber",
+      "targets": [
+        ["name=contactNumber", "name"],
+        ["css=.w-full:nth-child(7)", "css:finder"],
+        ["xpath=//input[@name='contactNumber']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[6]", "xpath:idRelative"],
+        ["xpath=//input[6]", "xpath:position"]
+      ],
+      "value": "6355211130"
+    }, {
+      "id": "36bbfc79-26b6-48db-a904-a45d9253427b",
+      "comment": "",
+      "command": "click",
+      "target": "name=street",
+      "targets": [
+        ["name=street", "name"],
+        ["css=.w-full:nth-child(9)", "css:finder"],
+        ["xpath=//input[@name='street']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[7]", "xpath:idRelative"],
+        ["xpath=//input[7]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bde6b16c-4161-4358-8461-cca82bdc5662",
+      "comment": "",
+      "command": "type",
+      "target": "name=street",
+      "targets": [
+        ["name=street", "name"],
+        ["css=.w-full:nth-child(9)", "css:finder"],
+        ["xpath=//input[@name='street']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[7]", "xpath:idRelative"],
+        ["xpath=//input[7]", "xpath:position"]
+      ],
+      "value": "Main Market"
+    }, {
+      "id": "95234451-e874-47bc-8154-22c56da2299e",
+      "comment": "",
+      "command": "click",
+      "target": "name=city",
+      "targets": [
+        ["name=city", "name"],
+        ["css=.w-full:nth-child(10)", "css:finder"],
+        ["xpath=//input[@name='city']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[8]", "xpath:idRelative"],
+        ["xpath=//input[8]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d6ce99a5-7ab8-40ad-903b-bf49e5805ac8",
+      "comment": "",
+      "command": "type",
+      "target": "name=city",
+      "targets": [
+        ["name=city", "name"],
+        ["css=.w-full:nth-child(10)", "css:finder"],
+        ["xpath=//input[@name='city']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[8]", "xpath:idRelative"],
+        ["xpath=//input[8]", "xpath:position"]
+      ],
+      "value": "Dehgam"
+    }, {
+      "id": "f18ac3a3-f5dd-4be4-8f2c-d37e824d2625",
+      "comment": "",
+      "command": "click",
+      "target": "name=state",
+      "targets": [
+        ["name=state", "name"],
+        ["css=.w-full:nth-child(11)", "css:finder"],
+        ["xpath=//input[@name='state']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[9]", "xpath:idRelative"],
+        ["xpath=//input[9]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f27c66d5-bd96-451a-b14c-7e02acce239b",
+      "comment": "",
+      "command": "type",
+      "target": "name=state",
+      "targets": [
+        ["name=state", "name"],
+        ["css=.w-full:nth-child(11)", "css:finder"],
+        ["xpath=//input[@name='state']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[9]", "xpath:idRelative"],
+        ["xpath=//input[9]", "xpath:position"]
+      ],
+      "value": "Gujarat"
+    }, {
+      "id": "6ae06587-f5af-44e2-8228-c4836fa0b6f1",
+      "comment": "",
+      "command": "click",
+      "target": "name=postalCode",
+      "targets": [
+        ["name=postalCode", "name"],
+        ["css=.w-full:nth-child(12)", "css:finder"],
+        ["xpath=//input[@name='postalCode']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[10]", "xpath:idRelative"],
+        ["xpath=//input[10]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3dac693e-3584-4a08-a207-ace80a394f72",
+      "comment": "",
+      "command": "type",
+      "target": "name=postalCode",
+      "targets": [
+        ["name=postalCode", "name"],
+        ["css=.w-full:nth-child(12)", "css:finder"],
+        ["xpath=//input[@name='postalCode']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[10]", "xpath:idRelative"],
+        ["xpath=//input[10]", "xpath:position"]
+      ],
+      "value": "382305"
+    }, {
+      "id": "980c31a1-f0a6-499b-952a-06c9e7a7e3bf",
+      "comment": "",
+      "command": "click",
+      "target": "name=country",
+      "targets": [
+        ["name=country", "name"],
+        ["css=.w-full:nth-child(13)", "css:finder"],
+        ["xpath=//input[@name='country']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[11]", "xpath:idRelative"],
+        ["xpath=//input[11]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c1131ea8-05c7-4eaa-89e4-a4ba497a0597",
+      "comment": "",
+      "command": "type",
+      "target": "name=country",
+      "targets": [
+        ["name=country", "name"],
+        ["css=.w-full:nth-child(13)", "css:finder"],
+        ["xpath=//input[@name='country']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/input[11]", "xpath:idRelative"],
+        ["xpath=//input[11]", "xpath:position"]
+      ],
+      "value": "India"
+    }]
+  }, {
+    "id": "9f9f9ff9-a2bd-47aa-afca-feb94a25e143",
+    "name": "Save_Button",
+    "commands": [{
+      "id": "4ab5879c-ae43-47d5-8767-a88de75a84d9",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/profile/lab-technician",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b2e3dc79-8bc1-4394-9e5e-59ffa622290d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "802x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "81f2f3a9-8fd4-4f9a-a2e5-bec63b4254fe",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-indigo-600",
+      "targets": [
+        ["css=.bg-indigo-600", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Save')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "8cb6cfdd-0b71-4075-902d-bd40d4da0288",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://localhost:5173/profile/lab-technician"],
+  "plugins": []
+}
