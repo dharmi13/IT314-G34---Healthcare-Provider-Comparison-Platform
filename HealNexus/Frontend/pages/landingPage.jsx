@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import toast from 'react-hot-toast';
-
+import React from "react";
 function LandingPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
@@ -106,7 +106,7 @@ export function Appbar({isLoggedIn,navigate}) {
   );
 }
 
-function AppointmentSection({isLoggedIn,navigate}) {
+export function AppointmentSection({isLoggedIn,navigate}) {
   return (
     <div className="bg-blue-500 flex items-center justify-between px-4 mx-2 md:px-8  lg:px-16 rounded-lg mt-4">
       <div className="max-w-4xl flex flex-col md:flex-row items-center">
@@ -164,7 +164,7 @@ export function SpecialitySection({isLoggedIn,navigate}) {
 }
 
 
-const AppointmentCTA = ({isLoggedIn,navigate}) => {
+export const AppointmentCTA = ({isLoggedIn,navigate}) => {
   return (
     <div className="bg-white sm:bg-blue-500 text-white mx-2 px-10 rounded-lg flex flex-col items-center md:justify-center md:text-center lg:flex-row lg:justify-between">
       {/* Unified Text and Button Section */}

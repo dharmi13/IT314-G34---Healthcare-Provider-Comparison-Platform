@@ -1,11 +1,26 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { BrowserRouter, useNavigate } from 'react-router-dom';
 import OurTeam from './OurTeam';
 import '@testing-library/jest-dom';
 
+// Mock useNavigate
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: jest.fn(),
+}));
+
 describe('OurTeam Component', () => {
+  const mockNavigate = jest.fn(); 
+
   beforeEach(() => {
-    render(<OurTeam />);
+    useNavigate.mockImplementation(() => mockNavigate); 
+
+    render(
+      <BrowserRouter>
+        <OurTeam />
+      </BrowserRouter>
+    );
   });
 
   test('renders the team header', () => {
@@ -23,7 +38,7 @@ describe('OurTeam Component', () => {
       "Mihir Patel",
       "Zeel Danani",
       "Hitanshu Varia",
-      "Ayush Chaudhry",
+      "Ayush Chaudhari",
       "Prof. Saurabh Tiwary"
     ];
 
@@ -35,22 +50,17 @@ describe('OurTeam Component', () => {
 
   test('renders the correct number of team members', () => {
     const teamCards = screen.getAllByRole('heading', { level: 3 });
-    expect(teamCards.length).toBe(10); // There are 10 team members
+    expect(teamCards.length).toBe(10); 
   });
 
   test('renders the Go Back button', () => {
-    const buttonElement = screen.getByRole('button', { name: /Go Back to Home Page/i });
+    const buttonElement = screen.getByRole('button', { name: /Go to Home/i });
     expect(buttonElement).toBeInTheDocument();
   });
 
   test('navigates to home page when Go Back button is clicked', () => {
-    const buttonElement = screen.getByRole('button', { name: /Go Back to Home Page/i });
-
-    // Mock window.location.href
-    delete window.location;
-    window.location = { href: '' };
-
+    const buttonElement = screen.getByRole('button', { name: /Go to Home/i });
     fireEvent.click(buttonElement);
-    expect(window.location.href).toBe('/');
+    expect(mockNavigate).toHaveBeenCalledWith('/'); 
   });
 });
