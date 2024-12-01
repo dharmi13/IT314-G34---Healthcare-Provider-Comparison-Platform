@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Harshit from "../assets/Harshit.png";
+import Harshit from "../assets/harshit.png";
 import Zeel from "../assets/zeel.png";
 import Mihir from "../assets/mihir.png";
 import Shail from "../assets/shail.png";
