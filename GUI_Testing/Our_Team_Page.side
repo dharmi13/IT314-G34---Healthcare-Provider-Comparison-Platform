@@ -1,0 +1,113 @@
+{
+  "id": "31820ba5-5ea6-46f7-b7ab-69a093b958e2",
+  "version": "2.0",
+  "name": "Our_Team_Page",
+  "url": "http://localhost:5173/team",
+  "tests": [{
+    "id": "9e3f46ba-19ed-4f35-ba6a-49bd08a1522d",
+    "name": "Redirect_Home_Page",
+    "commands": [{
+      "id": "88c7d401-acc6-4f10-8441-7efa73d06564",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/team",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "59a6cf97-8f93-4683-84e0-9f83cfd56ebd",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "804x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4cf0b476-4734-42a2-b2e3-b48ecd7d71f2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.py-2",
+      "targets": [
+        ["css=.py-2", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Go to Home')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "005c99a1-6054-49d7-b543-ccfc5ef08fe6",
+    "name": "Redirect_About_Us",
+    "commands": [{
+      "id": "dcfa59b6-9b8e-4c6f-bfbc-6fa731c608ab",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/team",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e0a26508-6bd9-4711-8ab7-bab8d413c380",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "802x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "afc2025e-c47e-40b9-b01b-ad94b7f4682d",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=About us",
+      "targets": [
+        ["linkText=About us", "linkText"],
+        ["css=.mb-1:nth-child(1) > .hover\\3Atext-blue-500", "css:finder"],
+        ["xpath=//a[contains(text(),'About us')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/footer/div/div[2]/ul/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/about-us')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'About us')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "1bbc23f9-8970-4e09-b464-5991e4124e38",
+    "name": "Redirect_Team",
+    "commands": [{
+      "id": "3cecdccf-f43f-4924-a3ce-a81c9fba85b5",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5173/team",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c326e3b5-73c3-47aa-b0d3-dfc2de46987e",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "802x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9c36e524-9db0-4941-a4f1-46e285120d8a",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Team",
+      "targets": [
+        ["linkText=Team", "linkText"],
+        ["css=.mb-1:nth-child(2) > .hover\\3Atext-blue-500", "css:finder"],
+        ["xpath=//a[contains(text(),'Team')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/footer/div/div[2]/ul/li[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/team')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Team')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "b18f76e1-a524-402b-82eb-b7a0b7118ea4",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["9e3f46ba-19ed-4f35-ba6a-49bd08a1522d"]
+  }],
+  "urls": ["http://localhost:5173/team"],
+  "plugins": []
+}
