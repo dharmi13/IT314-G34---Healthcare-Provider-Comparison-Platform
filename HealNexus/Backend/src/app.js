@@ -15,6 +15,17 @@ import { dirname } from 'path';
 dotenv.config();
 const app = express(); 
 
+const allowedOrigins = process.env.CLIENT_URL ? [process.env.CLIENT_URL] : []; 
+console.log(allowedOrigins);
+
+const corsOptions = {
+  origin: allowedOrigins,
+  credentials: true,      
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+};
+
+app.use(cors(corsOptions));  
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -22,17 +33,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/public', express.static(path.join(__dirname, '../public')));
 app.use('/public/Images', express.static(path.join(__dirname, '../public/Images')));
-app.use(cors({
-  origin: '*', // Allows access from any URL
-  credentials: true // Note: This is typically used for specific origins
-}));
-
-app.use((_, res, next) => {
-  res.header("Access-Control-Allow-Origin", process.env.CLIENT_URL);
-  res.header("Access-Control-Allow-Headers", "*");
-  res.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
 
 app.use("/auth", authroutes);
 app.use("/profile", profileroutes);

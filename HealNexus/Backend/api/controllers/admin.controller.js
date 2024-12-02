@@ -164,9 +164,6 @@ const adminDashboard = async (req, res) => {
           return null;  // or handle as you see fit (e.g., return a default value or error message)
         }
 
-        console.log(patientData);
-        console.log(doctorData);
-
         return {
           slotDate: appointment.slotDate, 
           slotTime: appointment.slotTime,
