@@ -7,11 +7,11 @@ const GenerateJWTTokenAndCookie = (userID, res) => {
     }
 
     const token = jwt.sign({userID}, key, {expiresIn: "10d"});
-    console.log("Ayushhhhhhhhhhhhh",process.env.MODE);
     res.cookie("jwt", token, {
         maxAge: 10*24*60*60*1000,
         httpOnly: true,
-        secure: process.env.MODE !== "development"
+        sameSite: true,
+        secure: true
     })
 };
 
