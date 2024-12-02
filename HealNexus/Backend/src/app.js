@@ -15,8 +15,8 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: process.env.CLIENT_URL,
-  credentials: true
+  origin: '*', // Allows access from any URL
+  credentials: true // Note: This is typically used for specific origins
 }));
 
 app.use((_, res, next) => {
