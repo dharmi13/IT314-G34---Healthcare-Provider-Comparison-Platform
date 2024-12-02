@@ -8,12 +8,20 @@ import appointmentroutes from '../api/routes/appointments.routes.js';
 import patientroutes from '../api/routes/patient.routes.js';
 import Filterroutes from '../api/routes/Filter.routes.js';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 dotenv.config();
 const app = express(); 
 
-app.use(express.json());
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+app.use(express.json());  
 app.use(cookieParser());
+app.use('/public', express.static(path.join(__dirname, '../public')));
+app.use('/public/Images', express.static(path.join(__dirname, '../public/Images')));
 app.use(cors({
   origin: '*', // Allows access from any URL
   credentials: true // Note: This is typically used for specific origins

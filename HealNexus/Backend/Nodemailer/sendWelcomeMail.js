@@ -1,6 +1,9 @@
 import { WelcomeEmailTemplate } from "./emailTemplates.js";
 import getErrorDetails from "../Utilites/errorCodes.js";
 import nodemailer from 'nodemailer';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 const SendWelcomeMail = async (email, userName) => {
   try {
@@ -14,10 +17,24 @@ const SendWelcomeMail = async (email, userName) => {
       }
     });
 
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = dirname(__filename);
+    const LogoPath = path.join(__dirname, '../public/Images/Logo.png');
+    const WelcomeEmailTemplatePath = path.join(__dirname, '../public/Images/WelcomeTemplate.png');
+
     const mailDetails = {
       to: email,
       subject: 'Your Verification Code',
-      html: WelcomeEmailTemplate.replace("{Username}", userName ?? "Error getting Username!")
+      html: WelcomeEmailTemplate.replace("{Username}", userName ?? "Error getting Username!"),
+      attachments: [{
+        filename: 'Logo.png',
+        path: LogoPath,
+        cid: '../public/Images/Logo.png'
+      }, {
+        filename: 'WelcomeTemplate.png',
+        path: WelcomeEmailTemplatePath,
+        cid: '../public/Images/WelcomeTemplate.png'
+      }]
     };
 
     await transporter.sendMail(mailDetails);

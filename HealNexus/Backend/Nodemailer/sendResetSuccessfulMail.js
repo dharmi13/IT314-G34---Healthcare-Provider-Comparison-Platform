@@ -1,6 +1,9 @@
 import { PasswordResetSuccessTemplate } from "./emailTemplates.js";
 import getErrorDetails from "../Utilites/errorCodes.js";
 import nodemailer from 'nodemailer';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 const SendResetSuccessfulMail = async (userName, email) => {
   try {
@@ -14,10 +17,24 @@ const SendResetSuccessfulMail = async (userName, email) => {
       }
     });
 
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = dirname(__filename);
+    const LogoPath = path.join(__dirname, '../public/Images/Logo.png');
+      const PasswordResetSuccessTemplatePath = path.join(__dirname, '../public/Images/PasswordResetSuccessTemplate.png');
+
     const mailDetails = {
       to: email,
       subject: 'Your Verification Code',
       html: PasswordResetSuccessTemplate.replace("{Username}", userName ?? "Error getting Username!"),
+      attachments: [{
+        filename: 'Logo.png',
+        path: LogoPath,
+        cid: '../public/Images/Logo.png' 
+    }, {
+        filename: 'PasswordResetSuccessTemplate.png',
+        path: PasswordResetSuccessTemplatePath,
+        cid: '../public/Images/PasswordResetSuccessTemplate.png' 
+    }]
     };
 
     await transporter.sendMail(mailDetails);

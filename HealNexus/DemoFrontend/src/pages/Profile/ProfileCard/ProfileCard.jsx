@@ -13,7 +13,7 @@ export function ProfileCard() {
     return (
         <div className="bg-white min-h-screen p-6 flex flex-col items-center">
             <h1 className="text-4xl font-bold mb-6">{`${Role} Profile`}</h1>
-            <div className="w-full max-w-md">
+            <div className="w-auto">
                 {role === "admin" ? (
                     <AdminProfile />
                 ) : role === "patient" ? (

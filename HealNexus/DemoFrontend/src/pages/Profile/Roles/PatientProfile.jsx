@@ -28,7 +28,7 @@ export default function PatientProfile() {
   const [loading, setLoading] = useState(false);
 
   const handleFileChange = (e) => {
-    setDocImg(e.target.files[0]); 
+    setDocImg(e.target.files[0]);
   };
 
   const handleChange = (e) => {
@@ -70,7 +70,7 @@ export default function PatientProfile() {
     formData.append("address[postalCode]", userDetails.address.postalCode);
     formData.append("address[country]", userDetails.address.country);
     if (docImg) {
-      formData.append("image", docImg); 
+      formData.append("image", docImg);
     }
 
     try {
@@ -92,96 +92,154 @@ export default function PatientProfile() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-green-100 p-4 rounded-lg shadow-md">
-      <h2 className="text-2xl font-semibold mb-4">Patient Profile</h2>
-      <input
-        name="age"
-        value={userDetails.age}
-        onChange={handleChange}
-        className="w-full p-2 mb-3 border border-gray-300 rounded-lg"
-        placeholder="Age"
-      />
-      <input
-        name="gender"
-        value={userDetails.gender}
-        onChange={handleChange}
-        className="w-full p-2 mb-3 border border-gray-300 rounded-lg"
-        placeholder="Gender"
-      />
-      <input
-        name="contactNumber"
-        value={userDetails.contactNumber}
-        onChange={handleChange}
-        className="w-full p-2 mb-3 border border-gray-300 rounded-lg"
-        placeholder="Contact Number"
-      />
-      <input
-        name="emergencyContact.name"
-        value={userDetails.emergencyContact.name}
-        onChange={handleChange}
-        className="w-full p-2 mb-3 border border-gray-300 rounded-lg"
-        placeholder="Emergency ContactName"
-      />
-      <input
-        name="emergencyContact.relationship"
-        value={userDetails.emergencyContact.relationship}
-        onChange={handleChange}
-        className="w-full p-2 mb-3 border border-gray-300 rounded-lg"
-        placeholder="Relationship"
-      />
-      <input
-        name="emergencyContact.contactNumber"
-        value={userDetails.emergencyContact.contactNumber}
-        onChange={handleChange}
-        className="w-full p-2 mb-3 border border-gray-300 rounded-lg"
-        placeholder="Emergency ContactNumber"
-      />
-      <input
-        name="address.street"
-        value={userDetails.address.street}
-        onChange={handleChange}
-        className="w-full p-2 mb-3 border border-gray-300 rounded-lg"
-        placeholder="Street Address"
-      />
-      <input
-        name="address.city"
-        value={userDetails.address.city}
-        onChange={handleChange}
-        className="w-full p-2 mb-3 border border-gray-300 rounded-lg"
-        placeholder="City"
-      />
-      <input
-        name="address.state"
-        value={userDetails.address.state}
-        onChange={handleChange}
-        className="w-full p-2 mb-3 border border-gray-300 rounded-lg"
-        placeholder="State"
-      />
-      <input
-        name="address.postalCode"
-        value={userDetails.address.postalCode}
-        onChange={handleChange}
-        className="w-full p-2 mb-3 border border-gray-300 rounded-lg"
-        placeholder="Postal Code"
-      />
-      <input
-        name="address.country"
-        value={userDetails.address.country}
-        onChange={handleChange}
-        className="w-full p-2 mb-3 border border-gray-300 rounded-lg"
-        placeholder="Country"
-      />
-      <input
-        name="medicalHistory"
-        value={userDetails.medicalHistory}
-        onChange={handleChange}
-        className="w-full p-2 mb-3 border border-gray-300 rounded-lg"
-        placeholder="Medical History"
-      />
-      <input type="file" onChange={handleFileChange} className="w-full p-2 mb-3 border border-gray-300 rounded-lg" id="doc-img"  />
+    <form
+      onSubmit={handleSubmit}
+      className="bg-blue-50 p-6 rounded-lg shadow-lg w-auto mt-2 border border-blue-200"
+    >
+      <div className="flex flex-col md:flex-row">
+        {/* Left Section */}
+        <div className="md:w-1/2 pr-6 border-r border-blue-300">
+          <h3 className="text-lg font-medium text-blue-700 mb-4">Patient Details</h3>
+          <input
+            name="age"
+            value={userDetails.age}
+            onChange={handleChange}
+            className="w-full p-2 mb-3 border border-blue-300 rounded-lg"
+            placeholder="Age"
+            autoComplete="off"
+          />
+          <input
+            name="gender"
+            value={userDetails.gender}
+            onChange={handleChange}
+            className="w-full p-2 mb-3 border border-blue-300 rounded-lg"
+            placeholder="Gender"
+            autoComplete="off"
+          />
+          <input
+            name="contactNumber"
+            value={userDetails.contactNumber}
+            onChange={handleChange}
+            className="w-full p-2 mb-3 border border-blue-300 rounded-lg"
+            placeholder="Contact Number"
+            autoComplete="off"
+          />
+
+          <h3 className="text-lg font-medium text-blue-700 mb-4 mt-4">Emergency Contact</h3>
+          <input
+            name="emergencyContact.name"
+            value={userDetails.emergencyContact.name}
+            onChange={handleChange}
+            className="w-full p-2 mb-3 border border-blue-300 rounded-lg"
+            placeholder="Name"
+            autoComplete="off"
+          />
+          <input
+            name="emergencyContact.relationship"
+            value={userDetails.emergencyContact.relationship}
+            onChange={handleChange}
+            className="w-full p-2 mb-3 border border-blue-300 rounded-lg"
+            placeholder="Relationship"
+            autoComplete="off"
+          />
+          <input
+            name="emergencyContact.contactNumber"
+            value={userDetails.emergencyContact.contactNumber}
+            onChange={handleChange}
+            className="w-full p-2 mb-3 border border-blue-300 rounded-lg"
+            placeholder="Contact Number"
+            autoComplete="off"
+          />
+          <h3 className="text-lg font-medium text-blue-700 mb-4 mt-4">Upload Profile Pic</h3>
+          <div className="relative">
+            <input
+              type="file"
+              onChange={handleFileChange}
+              className="hidden"
+              id="doc-img"
+              accept="image/*"
+            />
+            <label
+              htmlFor="doc-img"
+              className="flex items-center justify-center w-full p-3 border-2 border-dashed border-blue-300 rounded-lg cursor-pointer hover:border-blue-500 transition-colors"
+            >
+              <div className="flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span className="text-blue-500">Click to upload profile picture</span>
+                <span className="text-sm text-gray-500 mt-1">{docImg ? docImg.name : 'JPG, PNG up to 5MB'}</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        {/* Right Section */}
+        <div className="md:w-1/2 pl-6">
+          <h3 className="text-lg font-medium text-blue-700 mb-4">Address</h3>
+          <div className="flex gap-3 mb-3">
+            <input
+              name="address.street"
+              value={userDetails.address.street}
+              onChange={handleChange}
+              className="w-1/2 p-2 border border-blue-300 rounded-lg"
+              placeholder="Street Address"
+              autoComplete="off"
+            />
+            <input
+              name="address.city"
+              value={userDetails.address.city}
+              onChange={handleChange}
+              className="w-1/2 p-2 border border-blue-300 rounded-lg"
+              placeholder="City"
+              autoComplete="off"
+            />
+          </div>
+          <div className="flex gap-3 mb-3">
+            <input
+              name="address.state"
+              value={userDetails.address.state}
+              onChange={handleChange}
+              className="w-1/2 p-2 border border-blue-300 rounded-lg"
+              placeholder="State"
+              autoComplete="off"
+            />
+            <input
+              name="address.postalCode"
+              value={userDetails.address.postalCode}
+              onChange={handleChange}
+              className="w-1/2 p-2 border border-blue-300 rounded-lg"
+              placeholder="Postal Code"
+              autoComplete="off"
+            />
+          </div>
+          <div className="flex gap-3 mb-3">
+            <input
+              name="address.country"
+              value={userDetails.address.country}
+              onChange={handleChange}
+              className="w-1/2 p-2 border border-blue-300 rounded-lg"
+              placeholder="Country"
+              autoComplete="off"
+            />
+            <div className="w-1/2"></div>
+          </div>
+
+          <h3 className="text-lg font-medium text-blue-700 mb-4 mt-4">Medical History</h3>
+          <textarea
+            name="medicalHistory"
+            value={userDetails.medicalHistory}
+            onChange={handleChange}
+            className="w-full p-2 mb-3 border border-blue-300 rounded-lg !bg-white"
+            placeholder="Medical History"
+            autoComplete="off"
+          />
+        </div>
+      </div>
+
       <button
         type="submit"
-        className="bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 w-full mt-4"
+        className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 w-full mt-4"
         disabled={loading}
       >
         {loading ? "Saving..." : "Save"}

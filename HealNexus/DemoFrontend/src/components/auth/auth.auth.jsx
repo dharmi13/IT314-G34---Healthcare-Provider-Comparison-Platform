@@ -34,21 +34,34 @@ export function Auth({ type }) {
         },
         { withCredentials: true } // Send cookies with the request
       );
-  
-      // Check response status
-      if (response.status === 200) {
-        // Show success toast message
+
+      if (response.status === 200 && response.data.message === 'Profile is yet to be verified by Admin!') {
+        toast.error("Your profile is yet to be verified by the Admin! Please wait for approval.", {
+          duration: 5000,
+          position: 'top-center',
+          style: {
+            background: '#fff',
+            color: '#333',
+            padding: '16px',
+            borderRadius: '8px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+            maxWidth: '400px',
+            textAlign: 'center'
+          },
+        });
+        navigate('/login');
+        return;
+      }
+      else if (response.status === 200) {
         toast.success(`Welcome ${response.data.role}`);
-        // Navigate to the role-specific dashboard
         navigate(`/${response.data.role.toLowerCase()}-dashboard`);
       }
     } catch (error) {
       console.error(error); // Log the error for debugging
-  
       if (error instanceof z.ZodError) {
-        // Handle validation errors from loginSchema
         error.errors.forEach((err) => toast.error(err.message));
-      } else {
+      } 
+      else {
         // Handle other types of errors (e.g., server or network errors)
         const errorMessage =
           error.response?.data?.error || "An error occurred. Please try again.";

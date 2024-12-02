@@ -16,7 +16,6 @@ import PatientProfile from '../../data/models/profile/profile.patient.js';
 const profileModels = {
   Doctor: DoctorProfile,
   Patient: PatientProfile,
-  // Add other roles as needed
 };
 
 const signup = async (req, res) => {
@@ -29,8 +28,12 @@ const signup = async (req, res) => {
 
     const EmailalreadyExists = await User.findOne({email});
     if(EmailalreadyExists) {
-      const error = getErrorDetails('BAD_REQUEST', 'Email already Exists! Please choose a different Email!')
-      return res.status(error.code).json({ message: error.message });
+      if(EmailalreadyExists.isVerified) {
+        const error = getErrorDetails('BAD_REQUEST', 'Email already exists! Please choose a different Email!')
+        return res.status(error.code).json({ message: error.message });
+      } else {
+        await User.deleteOne({email: EmailalreadyExists.email});
+      }
     }
 
     if(password !== confirmPassword) {
@@ -201,9 +204,12 @@ const login = async (req, res) => {
       return res.status(error.code).json({ message: error.message });
     }
 
-    if (!profile.isVerified) {
-      const error = getErrorDetails('UNAUTHORIZED', 'Profile is yet to be verified by Admin!');
-      return res.status(error.code).json({ message: error.message });
+    if (user.role !== 'Patient' && user.role !== 'Admin') {
+      if (!profile.isVerified) {
+        return res.status(200).json({ 
+          message: 'Profile is yet to be verified by Admin!'
+        });
+      }
     }
 
     GenerateJWTTokenAndCookie(user._id, res);
