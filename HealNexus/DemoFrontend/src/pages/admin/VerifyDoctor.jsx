@@ -10,7 +10,7 @@ const UnverifiedDoctor = () => {
   useEffect(() => {
     const fetchDoctorData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/admin/get-unverified-doctors`, {
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/admin/get-unverified-doctors`, {
           withCredentials: true,
         });
         if (response.status === 200) {
@@ -35,7 +35,7 @@ const UnverifiedDoctor = () => {
 
   const verifyDoctor = async (doctor) => {
     try {
-      const response = await axios.put(`${import.meta.env.VITE_SERVER_URL}/admin/approve-doctor/${doctor._id}`, null, {
+      const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/admin/approve-doctor/${doctor._id}`, null, {
         withCredentials: true,
       });
 
@@ -52,7 +52,7 @@ const UnverifiedDoctor = () => {
 
   const rejectDoctor = async (doctor) => {
     try {
-      const response = await axios.put(`${import.meta.env.VITE_SERVER_URL}/admin/reject-doctor/${doctor._id}`, null, {
+      const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/admin/reject-doctor/${doctor._id}`, null, {
         withCredentials: true,
       });
 

@@ -18,7 +18,7 @@ export const DoctorDashBoard = () => {
   useEffect(() => {
     const getTotalAppointments = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/patient/appointments`, {
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/patient/appointments`, {
           withCredentials: true
         });
   
@@ -53,7 +53,7 @@ export const DoctorDashBoard = () => {
               {/* Doctor Metrics */}
               <div className='flex items-center gap-4 bg-white p-6 min-w-72 rounded-lg border-2 border-fary-100 cursor-pointer hover:scale-105 transition-all'>
                 <div className='w-16'>
-                  <img src='./assets/doctor_icon.svg' alt="Doctor Icon" />
+                  <img src='/assets/doctor_icon.svg' alt="Doctor Icon" />
                 </div>
                 <div>
                   <p className='text-2xl font-semibold text-gray-600'>{totalEarnings}</p>
@@ -64,7 +64,7 @@ export const DoctorDashBoard = () => {
               {/* Appointments Metrics */}
               <div className='flex items-center gap-4 bg-white p-6 min-w-72 rounded-lg border-2 border-fary-100 cursor-pointer hover:scale-105 transition-all'>
                 <div className='w-16'>
-                  <img src='./assets/appointments_icon.svg' alt="Appointments Icon" />
+                  <img src='/assets/appointments_icon.svg' alt="Appointments Icon" />
                 </div>
                 <div>
                   <p className='text-2xl font-semibold text-gray-600'>{totalAppointments}</p>
@@ -76,7 +76,7 @@ export const DoctorDashBoard = () => {
             {/* Latest Bookings Section */}
             <div className='bg-white mt-10'>
               <div className='flex items-center gap-3 px-6 py-5 rounded-t-lg border'>
-                <img src='./assets/list_icon.svg' alt="List Icon" />
+                <img src='/assets/list_icon.svg' alt="List Icon" />
                 <p className='font-semibold text-xl'>Top Appointments</p>
               </div>
 

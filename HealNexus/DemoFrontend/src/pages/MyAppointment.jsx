@@ -12,7 +12,7 @@ const MyAppointments = () => {
   useEffect(() => {
     const fetchPatientAppointmentDetails = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/appointment/get-patient-appointments`, { 
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/appointment/get-patient-appointments`, { 
           withCredentials: true 
         });
         
@@ -62,7 +62,7 @@ const MyAppointments = () => {
   const cancelAppointment = async (appointmentId) => {
     try {
       const response = await axios.put(
-        `${import.meta.env.VITE_SERVER_URL}/appointment/cancel-appointment/${appointmentId}`, null, {
+        `${process.env.REACT_APP_SERVER_URL}/appointment/cancel-appointment/${appointmentId}`, null, {
           withCredentials: true,
         }
       );
@@ -84,7 +84,7 @@ const MyAppointments = () => {
   const bookAppointment = async (appointmentId) => {
     try {
       const response = await axios.put(
-        `${import.meta.env.VITE_SERVER_URL}/appointment/pay-book-appointment/${appointmentId}`, null, {
+        `${process.env.REACT_APP_SERVER_URL}/appointment/pay-book-appointment/${appointmentId}`, null, {
           withCredentials: true,
         }
       );

@@ -75,7 +75,7 @@ export default function PatientProfile() {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/profile/create-patient`,
+        `${process.env.REACT_APP_SERVER_URL}/profile/create-patient`,
         formData,
         { withCredentials: true }
       );

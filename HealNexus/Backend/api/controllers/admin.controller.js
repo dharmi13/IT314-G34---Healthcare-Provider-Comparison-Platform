@@ -144,29 +144,44 @@ const adminDashboard = async (req, res) => {
   try {
     const users = await PatientProfile.find({});
     const doctors = await DoctorProfile.find({});
-    const appointments = await Appointment.find({isCompleted: false});
+    const appointments = await Appointment.find({ isCompleted: false });
     const labTechnicians = await LabTechnicianProfile.find({});
     const pharmacists = await PharmacistProfile.find({});
 
     const detailedAppointments = await Promise.all(
       appointments.map(async (appointment) => {
+        // Fetch patient and doctor details
         const patient = await PatientProfile.findById(appointment.patientID); 
-        const patientData = await User.findById(patient.userID); 
         const doctor = await DoctorProfile.findById(appointment.doctorID); 
-        const doctorData = await User.findById(doctor.userID); 
+
+        // Fetch user details for patient and doctor
+        const patientData = patient ? await User.findById(patient.userID) : null;
+        const doctorData = doctor ? await User.findById(doctor.userID) : null;
+
+        // Handle missing user data
+        if (!patientData || !doctorData) {
+          console.error('Missing user data for patient or doctor');
+          return null;  // or handle as you see fit (e.g., return a default value or error message)
+        }
+
+        console.log(patientData);
+        console.log(doctorData);
 
         return {
           slotDate: appointment.slotDate, 
           slotTime: appointment.slotTime,
           amount: appointment.amount, 
           patientName: patientData.userName, 
-          patientimage: patient.image,
-          patientage: patient.age, 
+          patientImage: patient.image,
+          patientAge: patient.age, 
           doctorName: doctorData.userName,
-          doctorimage: doctor.image
+          doctorImage: doctor.image
         };
       })
     );
+
+    // Filter out null values in detailedAppointments if any user data is missing
+    const validDetailedAppointments = detailedAppointments.filter(item => item !== null);
 
     const dashboardData = {
       users: users.length,
@@ -174,15 +189,16 @@ const adminDashboard = async (req, res) => {
       appointments: appointments.length,
       labTechnicians: labTechnicians.length,
       pharmacists: pharmacists.length,
-      latestappointments: appointments.reverse().slice(0, 5)
+      latestAppointments: appointments.reverse().slice(0, 5)
     };
 
-    res.status(200).json({ success: true, dashboardData, detailedAppointments});
+    res.status(200).json({ success: true, dashboardData, detailedAppointments: validDetailedAppointments });
 
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: 'Server error' });
   }
 };
+
 
 export { getAdminProfile, updateAdminProfile, adminLogin, allVerifiedDoctors, allUnVerifiedDoctors, approveDoctor, appointmentsAdmin, adminDashboard };

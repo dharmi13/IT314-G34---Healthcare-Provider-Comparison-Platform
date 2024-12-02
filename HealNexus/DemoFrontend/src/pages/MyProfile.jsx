@@ -12,7 +12,7 @@ const MyProfile = () => {
     useEffect(() => {
         const fetchProfileData = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/profile/get-patient`, {
+                const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/profile/get-patient`, {
                     withCredentials: true
                 });
 
@@ -47,7 +47,7 @@ const MyProfile = () => {
                 formData.append("image", image);
             }
 
-            const response = await axios.put(`${import.meta.env.VITE_SERVER_URL}/profile/update-patient`, formData, {
+            const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/profile/update-patient`, formData, {
                 withCredentials: true
             });
 

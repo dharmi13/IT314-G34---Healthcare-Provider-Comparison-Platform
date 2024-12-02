@@ -3,7 +3,7 @@ export function Quote() {
       <div className="relative w-full h-full">
         {/* Health-related image */}
         <img 
-          src="../assets/appointment_img.png" // Replace this with a real health/doctor image URL
+          src="/assets/appointment_img.png" // Replace this with a real health/doctor image URL
           alt="Health Icon"
           className="w-full h-full object-cover rounded-r-3xl shadow-r-3xl" // Ensure the image covers the card, but doesn't exceed it
         />

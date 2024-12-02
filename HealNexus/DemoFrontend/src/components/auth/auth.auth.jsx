@@ -2,7 +2,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { signUpSchema } from "./AuthSchema.js";
+import { signUpSchema,loginSchema } from "./AuthSchema.js";
 import { z } from "zod";
 
 export function Auth({ type }) {
@@ -18,34 +18,48 @@ export function Auth({ type }) {
   const [showRoleSection, setShowRoleSection] = useState(false);
 
   const handleLogin = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission behavior
     try {
-      setLoading(true);
+      // Validate userDetails against loginSchema
+      loginSchema.parse(userDetails);
+  
+      setLoading(true); // Set loading state to true while request is in progress
+  
+      // Make the API call to login
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/auth/login`,
+        `${process.env.REACT_APP_SERVER_URL}/auth/login`,
         {
-          email: userDetails.email,
-          password: userDetails.password,
+          email: userDetails.email, // Email from userDetails
+          password: userDetails.password, // Password from userDetails
         },
-        { withCredentials: true }
+        { withCredentials: true } // Send cookies with the request
       );
-
+  
+      // Check response status
       if (response.status === 200) {
+        // Show success toast message
         toast.success(`Welcome ${response.data.role}`);
+        // Navigate to the role-specific dashboard
         navigate(`/${response.data.role.toLowerCase()}-dashboard`);
       }
     } catch (error) {
+      console.error(error); // Log the error for debugging
+  
       if (error instanceof z.ZodError) {
+        // Handle validation errors from loginSchema
         error.errors.forEach((err) => toast.error(err.message));
       } else {
+        // Handle other types of errors (e.g., server or network errors)
         const errorMessage =
           error.response?.data?.error || "An error occurred. Please try again.";
         toast.error(errorMessage);
       }
     } finally {
+      // Ensure loading state is reset
       setLoading(false);
     }
   };
+  
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -53,7 +67,7 @@ export function Auth({ type }) {
       signUpSchema.parse(userDetails);
       setLoading(true);
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/auth/signup`,
+        `${process.env.REACT_APP_SERVER_URL}/auth/signup`,
         userDetails,
         { withCredentials: true }
       );

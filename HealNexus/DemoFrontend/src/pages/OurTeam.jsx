@@ -6,16 +6,16 @@ import { Footer } from "./landingPage";
 
 
 const teamMembers = [
-  { name: 'Zeel Danani', id: '202201507', image: './assets/zeel.png' },
-  { name: 'Mihir Patel', id: '202201506', image: './assets/mihir.png' },
-  { name: 'Harshit Prajapati', id: '202201500', image:  './assets/harshit.png'},
-  { name: 'Shail Patel', id: '202201297', image: './assets/shail.png' },
-  { name: 'Malay Sidapara', id: '202201488', image:  './assets/malay.jpg'},
-  { name: 'Ayush Chaudhari', id: '202201517', image:  './assets/Ayush_jpg.jpeg'},
-  { name: 'Hitanshu Varia', id: '202201510', image: './assets/hitanshu.jpg' },
+  { name: 'Zeel Danani', id: '202201507', image: '/assets/zeel.png' },
+  { name: 'Mihir Patel', id: '202201506', image: '/assets/mihir.png' },
+  { name: 'Harshit Prajapati', id: '202201500', image:  '/assets/harshit.png'},
+  { name: 'Shail Patel', id: '202201297', image: '/assets/shail.png' },
+  { name: 'Malay Sidapara', id: '202201488', image:  '/assets/malay.jpg'},
+  { name: 'Ayush Chaudhari', id: '202201517', image:  '/assets/Ayush_jpg.jpeg'},
+  { name: 'Hitanshu Varia', id: '202201510', image: '/assets/hitanshu.jpg' },
   { name: 'Dharmi Patel', id: '202201467', image:'/assets/dharmi.png'  },
-  { name: 'Aditya Raina', id: '202201466', image: './assets/aditya.png' },
-  { name: 'Prof. Saurabh Tiwary', id: 'Mentor', image: './assets/prof.saurabh tiwary.png'},
+  { name: 'Aditya Raina', id: '202201466', image: '/assets/aditya.png' },
+  { name: 'Prof. Saurabh Tiwary', id: 'Mentor', image: '/assets/prof.saurabh tiwary.png'},
 ];
 
 

@@ -8,7 +8,7 @@ const AdminallAppointments = () => {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/admin/dashboard`, {
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/admin/dashboard`, {
           withCredentials: true
         });
   
@@ -70,7 +70,7 @@ const AdminallAppointments = () => {
               <div className='flex items-center gap-2'>
                 {item.patientName && (
                   <>
-                    <img className='w-8 rounded-full' src={item.patientimage || './assets/people_icon.svg'} alt="User" />
+                    <img className='w-8 rounded-full' src={item.patientimage || '/assets/people_icon.svg'} alt="User" />
                     <p className='text-ellipsis overflow-hidden max-w-[150px]'>{item.patientName}</p>
                   </>
                 )}
@@ -80,7 +80,7 @@ const AdminallAppointments = () => {
               <div className='flex items-center gap-2'>
                 {item.doctorName && (
                   <>
-                    <img className='w-8 rounded-full' src={item.doctorimage || './assets/doctor_icon.svg'} alt="Doctor" />
+                    <img className='w-8 rounded-full' src={item.doctorimage || '/assets/doctor_icon.svg'} alt="Doctor" />
                     <p className='text-ellipsis overflow-hidden max-w-[150px]'>{item.doctorName}</p>
                   </>
                 )}

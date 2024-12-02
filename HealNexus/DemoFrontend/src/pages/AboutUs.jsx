@@ -11,7 +11,7 @@ const AboutUs = () => {
       <div className="max-w-4xl mx-auto p-6 sm:p-8 mt-12 bg-white rounded-2xl shadow-lg flex-1">
         <div className="text-center mb-12">
           <img 
-            src='./assets/heal_logo.png'
+            src='/assets/heal_logo.png'
             alt="Heal Nexus Logo" 
             className="mx-auto mb-6 w-48 sm:w-80 transition-transform transform hover:scale-110 duration-300" 
           />

@@ -11,7 +11,7 @@ const DashBoard = () => {
     const fetchUserName = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_SERVER_URL}/auth/get-user-details`,
+          `${process.env.REACT_APP_SERVER_URL}/auth/get-user-details`,
           { withCredentials: true }
         );
         if (response.status === 200) {
@@ -45,7 +45,7 @@ export function Appbar() {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/logout`, {
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/logout`, {
         withCredentials: true
       });
 
@@ -59,7 +59,7 @@ export function Appbar() {
 
   const handleSearchByCity = async () => {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/logout`, {
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/logout`, {
         withCredentials: true
       });
 
@@ -83,7 +83,7 @@ export function Appbar() {
     >
       {/* Logo and Text */}
       <div className="flex items-center justify-between">
-        <img src="./assets/heal_logo.png" alt="Logo" className="w-25 h-20" />
+        <img src="/assets/heal_logo.png" alt="Logo" className="w-25 h-20" />
 
         {/* Center the text on small screens */}
         <div className="hidden sm:block text-2xl font-bold text-gray-800 sm:text-left text-center w-full sm:w-auto">
@@ -180,11 +180,12 @@ export function HeroSection({ userName }) {
 export function Services() {
   const navigate = useNavigate();
   const services = [
-    { name: "Period doubts or Pregnancy", action: "CONSULT NOW", image: "./assets/irregular-painful+period.webp" },
-    { name: "Acne, pimple or skin issues", action: "CONSULT NOW", image: "./assets/Acne.webp" },
-    { name: "Cold, cough or fever", action: "CONSULT NOW", image: "./assets/coughing.webp" },
-    { name: "Depression or anxiety", action: "CONSULT NOW", image: "./assets/12-mental-wellness.webp" },
+    { name: "Period doubts or Pregnancy", action: "CONSULT NOW", image: "/assets/irregular-painful+period.webp" },
+    { name: "Acne, pimple or skin issues", action: "CONSULT NOW", image: "/assets/Acne.webp" },
+    { name: "Cold, cough or fever", action: "CONSULT NOW", image: "/assets/coughing.webp" },
+    { name: "Depression or anxiety", action: "CONSULT NOW", image: "/assets/12-mental-wellness.webp" },
   ];
+
 
   const handleConsultClick = () => {
     navigate("/doctors");
@@ -233,12 +234,12 @@ export function SpecialitySection() {
   const navigate = useNavigate();
 
   const specialities = [
-    { name: "General Physician", icon: "./assets/general_physician.svg" },
-    { name: "Gynecologist", icon: "./assets/gynecologist.svg" },
-    { name: "Dermatologist", icon: "./assets/dermatologist.svg" },
-    { name: "Pediatrician", icon: "./assets/pediatricians.svg" },
-    { name: "Neurologist", icon: "./assets/neurologist.svg" },
-    { name: "Gastroenterologist", icon: "./assets/gastroenterologist.svg" },
+    { name: "General Physician", icon: "/assets/general_physician.svg" },
+    { name: "Gynecologist", icon: "/assets/gynecologist.svg" },
+    { name: "Dermatologist", icon: "/assets/dermatologist.svg" },
+    { name: "Pediatrician", icon: "/assets/pediatricians.svg" },
+    { name: "Neurologist", icon: "/assets/neurologist.svg" },
+    { name: "Gastroenterologist", icon: "/assets/gastroenterologist.svg" },
   ];
 
 

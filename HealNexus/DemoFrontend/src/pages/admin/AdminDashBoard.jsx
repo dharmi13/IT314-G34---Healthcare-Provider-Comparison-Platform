@@ -11,7 +11,7 @@ const AdminDashBoard = () => {
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/admin/dashboard`, {
+                const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/admin/dashboard`, {
                     withCredentials: true
                 });
 
@@ -45,7 +45,7 @@ const AdminDashBoard = () => {
                             {/* Doctors Metrics */}
                             <div className='flex items-center gap-4 bg-white p-6 min-w-72 rounded-lg border-2 border-fary-100 cursor-pointer hover:scale-105 transition-all'>
                                 <div className='w-16'>
-                                    <img src='./assets/doctor_icon.svg' alt="" />
+                                    <img src='/assets/doctor_icon.svg' alt="" />
                                 </div>
                                 <div>
                                     <p className='text-2xl font-semibold text-gray-600'>{dashboardData.doctors}</p>
@@ -56,7 +56,7 @@ const AdminDashBoard = () => {
                             {/* Appointments Metrics */}
                             <div className='flex items-center gap-4 bg-white p-6 min-w-72 rounded-lg border-2 border-fary-100 cursor-pointer hover:scale-105 transition-all'>
                                 <div className='w-16'>
-                                    <img src={'./assets/appointments_icon.svg'} alt="" />
+                                    <img src={'/assets/appointments_icon.svg'} alt="" />
                                 </div>
                                 <div>
                                     <p className='text-2xl font-semibold text-gray-600'>{dashboardData.appointments}</p>
@@ -67,7 +67,7 @@ const AdminDashBoard = () => {
                             {/* Patients Metrics */}
                             <div className='flex items-center gap-4 bg-white p-6 min-w-72 rounded-lg border-2 border-fary-100 cursor-pointer hover:scale-105 transition-all'>
                                 <div className='w-16'>
-                                    <img src='./assets/patients_icon.svg' alt="" />
+                                    <img src='/assets/patients_icon.svg' alt="" />
                                 </div>
                                 <div>
                                     <p className='text-2xl font-semibold text-gray-600'>{dashboardData.users}</p>
@@ -78,7 +78,7 @@ const AdminDashBoard = () => {
                             {/* Lab Technicians Metrics */}
                             <div className='flex items-center gap-4 bg-white p-6 min-w-72 rounded-lg border-2 border-fary-100 cursor-pointer hover:scale-105 transition-all'>
                                 <div className='w-16'>
-                                    <img src='./assets/doctor_icon.svg' alt="dacter" />
+                                    <img src='/assets/doctor_icon.svg' alt="dacter" />
                                 </div>
                                 <div>
                                     <p className='text-2xl font-semibold text-gray-600'>{dashboardData.labTechnicians}</p>
@@ -89,7 +89,7 @@ const AdminDashBoard = () => {
                             {/* Pharmacists Metrics */}
                             <div className='flex items-center gap-4 bg-white p-6 min-w-72 rounded-lg border-2 border-fary-100 cursor-pointer hover:scale-105 transition-all'>
                                 <div className='w-16'>
-                                    <img src='./assets/doctor_icon.svg' alt="dacter" />
+                                    <img src='/assets/doctor_icon.svg' alt="dacter" />
                                 </div>
                                 <div>
                                     <p className='text- 2xl font-semibold text-gray-600'>{dashboardData.pharmacists}</p>
@@ -101,7 +101,7 @@ const AdminDashBoard = () => {
                         {/* Latest Bookings Section */}
                         <div className='bg-white mt-10'>
                             <div className='flex items-center gap-3 px-6 py-5 rounded-t-lg border'>
-                                <img src={'./assets/list_icon.svg'} alt="" />
+                                <img src={'/assets/list_icon.svg'} alt="" />
                                 <p className='font-semibold text-xl'>Latest Bookings</p>
                             </div>
                             <div className='pt-4 border border-t-0'>
