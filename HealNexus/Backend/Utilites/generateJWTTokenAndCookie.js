@@ -12,7 +12,6 @@ const GenerateJWTTokenAndCookie = (userID, res) => {
         httpOnly: true,
         sameSite: 'none',
         secure: true
-        // on localhost samesite ='lax' secxure false
     })
 };
 
