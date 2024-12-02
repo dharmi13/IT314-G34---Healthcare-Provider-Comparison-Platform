@@ -2,7 +2,7 @@ import app from '../src/app.js';
 import connectToDB from '../data/database/connectToDB.js';
 import connectCloudinary from '../data/database/cloudinary.js';
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   connectToDB();
   connectCloudinary();

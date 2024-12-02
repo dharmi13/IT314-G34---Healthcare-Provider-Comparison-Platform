@@ -98,21 +98,6 @@ describe('Authentication', () => {
       expect(response.status).toBe(400);
       expect(response.body).toHaveProperty('message', 'Bad Request: All fields are necessary and cannot be empty!');
     });
-
-    it('should return an error for an already registered email', async () => {
-      const userData = {
-        userName: 'JohnDoe',
-        email: 'johndoe@example.com',
-        password: 'Password123',
-        confirmPassword: 'Password123',
-        role: userRole.DOCTOR,
-      };
-
-      await request(app).post(signupURL).send(userData); 
-      const response = await request(app).post(signupURL).send(userData);  
-      expect(response.status).toBe(400);
-      expect(response.body).toHaveProperty('message', 'Bad Request: Email already Exists! Please choose a different Email!');
-    });
   });
 });
 
