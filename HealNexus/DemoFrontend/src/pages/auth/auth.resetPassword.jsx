@@ -31,7 +31,7 @@ const ResetPassword = () => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/auth/reset-password/${token}`,
+        `${process.env.REACT_APP_SERVER_URL}/auth/reset-password/${token}`,
         { password }
       );
       if (response.status === 200) {
