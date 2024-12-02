@@ -139,7 +139,7 @@ const UnverifiedDoctor = () => {
                     alt="doctor"
                   />
                   <div className="p-4">
-                    <p className="text-neutral-800 text-lg font-medium">{item.userData.userName}</p>
+                    <p className="text-neutral-800 text-lg font-medium">{item.userData?.userName || "Doctor-2"}</p>
                     <p className="text-zinc-600 text-sm">{item.specialty}</p>
                     <div className="mt-2 flex items-center gap-1 text-sm">
                       <button
