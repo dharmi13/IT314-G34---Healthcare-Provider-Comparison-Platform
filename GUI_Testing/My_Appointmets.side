@@ -1,0 +1,251 @@
+{
+  "id": "8f8daff4-053c-4a34-815b-140f9cbd8881",
+  "version": "2.0",
+  "name": "My_Appointmets",
+  "url": "https://it-314-g34-healthcare-provider-comparison-platform-wb3k.vercel.app/my-appointments",
+  "tests": [{
+    "id": "96b10476-b713-49d4-bcd4-86af33381d79",
+    "name": "Redirect_Dashboard",
+    "commands": [{
+      "id": "6ff06285-58ec-41c0-83a1-cae0668100f8",
+      "comment": "",
+      "command": "open",
+      "target": "https://it-314-g34-healthcare-provider-comparison-platform-wb3k.vercel.app/my-appointments",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e9538a43-4ee6-4015-bdcd-6dc3efc074e6",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c253135b-30d0-4b97-8177-764540d76bba",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=DASHBOARD",
+      "targets": [
+        ["linkText=DASHBOARD", "linkText"],
+        ["css=.hover\\3Atext-blue-600:nth-child(1)", "css:finder"],
+        ["xpath=//a[contains(text(),'DASHBOARD')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/patient-dashboard')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'DASHBOARD')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "1473f120-9295-40cd-837f-c1a785e23d82",
+    "name": "Redirect_ALL_DOCTORS",
+    "commands": [{
+      "id": "3dbdf7d6-c4ad-48cc-be22-4ca4531b9d50",
+      "comment": "",
+      "command": "open",
+      "target": "https://it-314-g34-healthcare-provider-comparison-platform-wb3k.vercel.app/my-appointments",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "88027fdb-f177-4373-b54a-5a2e76249325",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "b9103b0f-bc1c-45b5-91ae-8ee517c7cd39",
+    "name": "Redirect_About",
+    "commands": [{
+      "id": "fedc7e54-e24a-4f8e-b823-c1cc91aa2265",
+      "comment": "",
+      "command": "open",
+      "target": "https://it-314-g34-healthcare-provider-comparison-platform-wb3k.vercel.app/my-appointments",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "24789d86-76d6-4dea-912a-37d1da4fe6d2",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "45dc00cb-58fd-4abf-9011-ac0e5ffe5f7f",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=ABOUT",
+      "targets": [
+        ["linkText=ABOUT", "linkText"],
+        ["css=.hover\\3Atext-blue-600:nth-child(3)", "css:finder"],
+        ["xpath=//a[contains(text(),'ABOUT')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[2]/a[3]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/about-us')]", "xpath:href"],
+        ["xpath=//a[3]", "xpath:position"],
+        ["xpath=//a[contains(.,'ABOUT')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "c293e560-5462-4206-bd05-78e9d55ebdd5",
+    "name": "Redirect_Our_Team",
+    "commands": [{
+      "id": "1545cba2-72f3-4bd7-984c-dea4aa135dd8",
+      "comment": "",
+      "command": "open",
+      "target": "https://it-314-g34-healthcare-provider-comparison-platform-wb3k.vercel.app/my-appointments",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e9551708-09fb-4508-88b4-3850891edc0d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8f056a6b-d0d7-41bc-a82b-362505dd6002",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=OUR-TEAM",
+      "targets": [
+        ["linkText=OUR-TEAM", "linkText"],
+        ["css=.hover\\3Atext-blue-600:nth-child(4)", "css:finder"],
+        ["xpath=//a[contains(text(),'OUR-TEAM')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[2]/a[4]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/team')]", "xpath:href"],
+        ["xpath=//a[4]", "xpath:position"],
+        ["xpath=//a[contains(.,'OUR-TEAM')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "0e09e4fe-5ed2-4e15-889d-7fb8fb8dafb6",
+    "name": "Redirect_My_Appointments",
+    "commands": [{
+      "id": "54d75616-5ee3-4c42-8a7d-20fc558eb4f3",
+      "comment": "",
+      "command": "open",
+      "target": "https://it-314-g34-healthcare-provider-comparison-platform-wb3k.vercel.app/my-appointments",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d03762fc-66b1-4de7-84df-534289859f0a",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2b3e4dfa-29bb-46f1-82be-2a2e2cdf9666",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=MyAppointments",
+      "targets": [
+        ["linkText=MyAppointments", "linkText"],
+        ["css=.bg-blue-600", "css:finder"],
+        ["xpath=//a[contains(text(),'MyAppointments')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/my-appointments')]", "xpath:href"],
+        ["xpath=//div[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'MyAppointments')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "f2d8bc6a-c2fe-41f4-b899-cf4dee6ddd4b",
+    "name": "Button_Logout",
+    "commands": [{
+      "id": "221b2544-48d4-4489-b1de-1b6cae2a32d9",
+      "comment": "",
+      "command": "open",
+      "target": "https://it-314-g34-healthcare-provider-comparison-platform-wb3k.vercel.app/my-appointments",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "57a8cd2e-ecb5-4014-ad24-148dc90a48bd",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "09362df5-259c-4081-b9e3-70b8efeb3417",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-red-600",
+      "targets": [
+        ["css=.bg-red-600", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "4d307d23-eeb1-476f-acc9-f2b33143dde8",
+    "name": "Redirect_Profile",
+    "commands": [{
+      "id": "97da8aeb-9d53-4704-a3cf-b9c8702eec1a",
+      "comment": "",
+      "command": "open",
+      "target": "https://it-314-g34-healthcare-provider-comparison-platform-wb3k.vercel.app/my-appointments",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e1af12a3-52e3-46cb-8822-b191505fd28d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a5e5711c-93e4-4090-bb55-1fba7abd27c7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.w-8",
+      "targets": [
+        ["css=.w-8", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "3e7c5dc9-fd30-41e7-b519-c58c34f60f32",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.w-8",
+      "targets": [
+        ["css=.w-8", "css:finder"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "1cef4ef7-f1c0-4d1e-9185-d3e667ca6867",
+    "name": "Cancle_Appointment",
+    "commands": [{
+      "id": "4b3466e3-a544-4149-bb1d-39a5913d25c6",
+      "comment": "",
+      "command": "open",
+      "target": "https://it-314-g34-healthcare-provider-comparison-platform-wb3k.vercel.app/my-appointments",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c93e54e3-fa38-4a1c-84e6-f8a44c24d75a",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x816",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "b445d154-fe8d-481c-ac38-bbcdb350d2a5",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["96b10476-b713-49d4-bcd4-86af33381d79"]
+  }],
+  "urls": ["https://it-314-g34-healthcare-provider-comparison-platform-wb3k.vercel.app/my-appointments"],
+  "plugins": []
+}
